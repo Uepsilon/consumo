@@ -11,19 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313090746) do
+ActiveRecord::Schema.define(version: 20140318152126) do
+
+  create_table "bookings", force: true do |t|
+    t.integer  "user_id",                               null: false
+    t.decimal  "amount",        precision: 5, scale: 2, null: false
+    t.integer  "bookable_id"
+    t.string   "bookable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bookings", ["bookable_id", "bookable_type"], name: "bookable"
+
+  create_table "deliveries", force: true do |t|
+    t.integer  "product_id",                         null: false
+    t.integer  "quantity",                           null: false
+    t.decimal  "unit_price", precision: 5, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "order_items", force: true do |t|
+    t.integer  "amount"
+    t.integer  "order_id",    null: false
+    t.integer  "delivery_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "products", force: true do |t|
     t.string   "name"
-    t.integer  "amount"
-    t.decimal  "size",                      precision: 0, scale: 2
-    t.decimal  "price",                     precision: 5, scale: 2
+    t.decimal  "size",                 precision: 5, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "brandpicture_file_name"
-    t.string   "brandpicture_content_type"
-    t.integer  "brandpicture_file_size"
-    t.datetime "brandpicture_updated_at"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   create_table "users", force: true do |t|

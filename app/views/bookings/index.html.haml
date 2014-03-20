@@ -1,0 +1,31 @@
+- model_class = Booking
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= User.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:bookable)
+      %th= model_class.human_attribute_name(:booking)
+      %th= model_class.human_attribute_name(:amount)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @bookings.each do |booking|
+      %tr
+        %td= booking.user.name
+        %td= booking.bookable_type or t('general.payment')
+        - if booking.bookable.is_a? Order
+          %td
+            - booking.bookable.order_items.each do |item|
+              #{item.amount}x #{item.delivery.product.title}
+              %br
+        - elsif booking.bookable.is_a? Delivery
+          %td= booking.bookable.product.title
+        - else
+          %td &nbsp;
+        %td= number_to_currency booking.amount, precision: 2
+        %td=l booking.created_at.localtime, format: :long
+        %td= link_to t('.destroy', :default => t("helpers.links.destroy")), booking_path(booking), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_booking_path, :class => 'btn btn-primary'

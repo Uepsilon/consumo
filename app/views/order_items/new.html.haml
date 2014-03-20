@@ -1,0 +1,12 @@
+= form_for @order_item, :html => { :class => 'form-horizontal' } do |f|
+  = f.hidden_field :amount, class: 'text_field', value: 1
+  = f.hidden_field :delivery_id, class: 'text_field'
+  - Product.all.each do |product|
+    - if product.remaining > 0
+      .pull-left{style: "margin: 20px"}
+        %button.btn.btn-default.picture{ onclick: "$('#order_item_delivery_id').val(#{product.current_delivery_id});" }
+          = image_tag product.picture.url(:medium), alt: product.name, title: product.name
+  / .form-actions
+  /   = f.submit nil, :class => 'btn btn-primary'
+  /   = link_to t('.cancel', :default => t("helpers.links.cancel")), order_items_path, :class => 'btn'
+

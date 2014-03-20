@@ -1,0 +1,8 @@
+= form_for @booking, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :amount, :class => 'control-label'
+    .controls
+      = f.text_field :amount, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), bookings_path, :class => 'btn'

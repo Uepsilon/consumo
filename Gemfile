@@ -6,6 +6,7 @@ gem 'rails'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'annotate'
 gem 'sqlite3'
 gem 'devise'
 gem 'paperclip'
@@ -15,7 +16,6 @@ gem "twitter-bootstrap-rails"
 gem "rails_email_validator"
 gem "cancan"
 gem "haml-rails"
-
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -32,6 +32,7 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'letter_opener'
+  gem "rails-erd"
 end
 
 gem 'jquery-rails'

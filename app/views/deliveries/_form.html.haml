@@ -1,0 +1,20 @@
+= form_for @delivery, :html => { :class => 'form-horizontal' } do |f|
+  - if @delivery.errors.any?
+    %ul.errors
+      - @delivery.errors.full_messages.each do |error|
+        %li= error
+  .control-group
+    = f.label :product_id, :class => 'control-label'
+    .controls
+      = f.select :product_id, options_from_collection_for_select(Product.all, 'id', 'title'), :class => 'select'
+  .control-group
+    = f.label :quantity, :class => 'control-label'
+    .controls
+      = f.text_field :quantity, :class => 'text_field'
+  .control-group
+    = f.label :price, :class => 'control-label'
+    .controls
+      = f.text_field :price, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), deliveries_path, :class => 'btn'

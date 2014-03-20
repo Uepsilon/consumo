@@ -26,24 +26,20 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="#") DrunkenBartender
+          = link_to "DrunkenBartender", :new_order_item, :class => :brand
           .container.nav-collapse
             %ul.nav
-              %li= link_to "Produktverwaltung", :management_products
+              %li= link_to Product.model_name.human, :products
+              %li= link_to Delivery.model_name.human, :deliveries
+              %li= link_to User.model_name.human, :users
+              %li= link_to Booking.model_name.human, :bookings
 
     .container-fluid
 
       .row-fluid
-        .span3
-          .well.sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
-        .span9
+        .span12
           = bootstrap_flash
           = yield
 
-      %footer
-        %p &copy; Company 2014
+      / %footer
+      /   %p &copy; Company 2014

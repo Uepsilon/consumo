@@ -15,7 +15,16 @@
 
 class Product < ActiveRecord::Base
 
-  has_attached_file :picture, :styles => { :medium => "200x200>", :thumb => "100x100>" }, :default_url => "/images/pictures/:style/missing.png"
+  has_attached_file :picture,
+    storage: :s3,
+    :s3_credentials => {
+      :bucket => ENV['DB_S3_BUCKET'],
+      :access_key_id => ENV['DB_S3_ID'],
+      :secret_access_key => ENV['DB_S3_KEY']
+    },
+    :path => "/images/:rails_env/products/:id/:style.:extension",
+    :url => ":s3_domain_url",
+    :styles => { :medium => "200x200>", :thumb => "100x100>" }
 
   has_many  :deliveries
 

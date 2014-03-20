@@ -17,7 +17,7 @@ gem "twitter-bootstrap-rails"
 gem "rails_email_validator"
 gem "cancan"
 gem "haml-rails"
-
+gem "aws-sdk"
 
 
 group :production, :staging do

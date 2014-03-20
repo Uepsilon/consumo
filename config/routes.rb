@@ -1,7 +1,7 @@
 DrunkenBartender::Application.routes.draw do
   devise_for :users
 
-    root to: "orders#index"
+    root to: "order_items#new"
 
     resources :products
     resources :deliveries, except: [:show, :edit, :update]

@@ -20,10 +20,14 @@ class DeliveriesController < ApplicationController
   end
 
   def destroy
-    @delivery = current_user.deliveries.find params[:id]
-    @delivery.destroy
+    begin
+      @delivery = current_user.deliveries.find params[:id]
+      @delivery.destroy
 
-    redirect_to :deliveries, notice: "Lieferung gelöscht."
+      redirect_to :deliveries, notice: "Lieferung gelöscht."
+    rescue ActiveRecord::RecordNotFound
+      redirect_to :deliveries, alert: "Spiel mit deinen eigenen Sachen!"
+    end
   end
 
   private

@@ -23,7 +23,7 @@
         - elsif booking.bookable.is_a? Delivery
           %td= booking.bookable.product.title
         - else
-          %td &nbsp;
+          %td= simple_format booking.infotext
         %td= number_to_currency booking.amount, precision: 2
         %td=l booking.created_at.localtime, format: :long
         %td= link_to t('.destroy', :default => t("helpers.links.destroy")), booking_path(booking), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'

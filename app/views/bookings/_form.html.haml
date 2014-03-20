@@ -2,7 +2,11 @@
   .control-group
     = f.label :amount, :class => 'control-label'
     .controls
-      = f.text_field :amount, :class => 'text_field'
+      = f.text_field :amount, :class => 'text_field', data: { behaviour: "format-number" }, placeholder: Booking.human_attribute_name(:amount)
+  .control-group
+    = f.label :info_text, :class => 'control-label'
+    .controls
+      = f.text_area :infotext, :class => 'text_area', placeholder: Booking.human_attribute_name(:infotext)
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), bookings_path, :class => 'btn'

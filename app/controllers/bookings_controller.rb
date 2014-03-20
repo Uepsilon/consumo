@@ -23,15 +23,19 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-    @booking = current_user.bookings.find params[:id]
-    @booking.destroy
+    begin
+      @booking = current_user.bookings.find params[:id]
+      @booking.destroy
 
-    redirect_to :bookings, notice: "Buchung gelöscht."
+      redirect_to :bookings, notice: "Buchung gelöscht."
+    rescue ActiveRecord::RecordNotFound
+      redirect_to :bookings, alert: "Spiel mit deinen eigenen Sachen!"
+    end
   end
 
   private
 
   def booking_params
-    params.require(:booking).permit(:amount)
+    params.require(:booking).permit(:amount, :infotext)
   end
 end

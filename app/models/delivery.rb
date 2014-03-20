@@ -17,7 +17,7 @@ class Delivery < ActiveRecord::Base
   has_one     :user,     through: :booking
 
   has_many    :order_items
-  has_many    :orders,  through: :order_items
+  has_many    :orders,  through: :order_items, dependent: :destroy
 
   validates   :product_id, presence: true
   validates   :quantity, presence: true, numericality: true

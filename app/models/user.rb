@@ -33,7 +33,12 @@ class User < ActiveRecord::Base
   end
 
   def ordered_products
-    self.order_items.joins(delivery: :product).select("SUM(order_items.amount) AS total_amount, *").group(:product_id).all.collect{|i| {product_title: i.delivery.product.title, amount: i.total_amount}}
+    products = {}
+    self.order_items.each do |oi|
+      products[oi.delivery.product.id] = {amount: 0, product_title: oi.delivery.product.title} unless products[oi.delivery.product.id].is_a? Hash
+      products[oi.delivery.product.id][:amount] += oi.amount
+    end
+    products
   end
 
   def balance

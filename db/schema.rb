@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140318152126) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "bookings", force: true do |t|
     t.integer  "user_id",                               null: false
     t.decimal  "amount",        precision: 5, scale: 2, null: false
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20140318152126) do
     t.datetime "updated_at"
   end
 
-  add_index "bookings", ["bookable_id", "bookable_type"], name: "bookable"
+  add_index "bookings", ["bookable_id", "bookable_type"], name: "bookable", using: :btree
 
   create_table "deliveries", force: true do |t|
     t.integer  "product_id",                         null: false
@@ -70,6 +73,6 @@ ActiveRecord::Schema.define(version: 20140318152126) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

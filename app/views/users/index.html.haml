@@ -14,7 +14,7 @@
         %td= user.email
         %td= user.name
         %td
-          - user.ordered_products.each do |order|
+          - user.ordered_products.each do |id, order|
             = "#{order[:amount]} x #{order[:product_title]}"
             %br
         %td= number_to_currency user.balance, presicion: 2

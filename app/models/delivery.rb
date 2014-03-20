@@ -13,7 +13,7 @@
 class Delivery < ActiveRecord::Base
   belongs_to  :product
 
-  has_one     :booking,  as: :bookable,     dependent: :destroy
+  has_one     :booking,  as: :bookable,       dependent: :destroy
   has_one     :user,     through: :booking
 
   has_many    :order_items

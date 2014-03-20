@@ -13,7 +13,7 @@
   %tbody
     - @bookings.each do |booking|
       %tr
-        %td= booking.user.name
+        %td= link_to booking.user.name, bookings_path(user_id: booking.user.id)
         %td= booking.bookable_type or t('general.payment')
         - if booking.bookable.is_a? Order
           %td

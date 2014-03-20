@@ -2,6 +2,10 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = Booking.all
+    if not params[:user_id].nil? and User.find(params[:user_id])
+      @bookings = @bookings.where(user_id: params[:user_id])
+      flash.now[:notice] = I18n.t "bookings.by", name: User.find(params[:user_id]).name
+    end
   end
 
   def new

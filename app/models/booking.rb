@@ -16,4 +16,6 @@ class Booking < ActiveRecord::Base
   belongs_to  :bookable, polymorphic: true
 
   validates :amount, presence: true, numericality: true
+
+  default_scope order("created_at DESC")
 end

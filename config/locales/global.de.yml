@@ -3,3 +3,5 @@ de:
     price: Preis
   product:
     remaining: Bestand
+  bookings:
+    by: Alle Buchungen von %{name}

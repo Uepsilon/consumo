@@ -14,7 +14,7 @@
   .control-group
     = f.label :price, :class => 'control-label'
     .controls
-      = f.text_field :price, :class => 'text_field'
+      = f.text_field :price, :class => 'text_field', data: { behaviour: "format-number" }
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), deliveries_path, :class => 'btn'

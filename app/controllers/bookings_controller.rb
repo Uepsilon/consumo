@@ -36,6 +36,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:amount, :infotext)
+    params.require(:booking).permit(:amount, :infotext, :receiver_id)
   end
 end

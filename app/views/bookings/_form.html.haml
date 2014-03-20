@@ -1,4 +1,8 @@
 = form_for @booking, :html => { :class => 'form-horizontal' } do |f|
+  - if @booking.errors.any?
+    %ul.list-unstyled
+      - @booking.errors.full_messages.each do |error|
+        %li= error
   .control-group
     = f.label :amount, :class => 'control-label'
     .controls
@@ -7,6 +11,10 @@
     = f.label :info_text, :class => 'control-label'
     .controls
       = f.text_area :infotext, :class => 'text_area', placeholder: Booking.human_attribute_name(:infotext)
+  .control-group
+    = f.label :receiver_id, :class => 'control-label'
+    .controls
+      = f.select :receiver_id, options_from_collection_for_select(User.where("id != ?", current_user.id).load, 'id', 'name', selected: @booking.receiver_id), include_blank: "Kein Empfänger"
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), bookings_path, :class => 'btn'

@@ -15,7 +15,22 @@ class Booking < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :bookable, polymorphic: true
 
+  has_one     :related_booking, class_name: "Booking", foreign_key: :booking_id, dependent: :destroy
+  belongs_to  :initial_booking, class_name: "Booking", foreign_key: :booking_id
+
   validates :amount, presence: true, numericality: true
 
-  default_scope order("created_at DESC")
+  attr_accessor :receiver_id
+
+  before_create :relate_booking, if: :booking_relation
+
+  def booking_relation
+    not self.receiver_id.nil?
+  end
+
+  private
+
+  def relate_booking
+    self.build_related_booking user: User.find(self.receiver_id), amount: (self.amount.to_f * -1.to_f), infotext: self.infotext
+  end
 end

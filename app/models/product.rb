@@ -42,9 +42,9 @@ class Product < ActiveRecord::Base
     self.deliveries.each.collect{|d| d.remaining}.sum
   end
 
-  def current_delivery_id
+  def current_delivery
     self.deliveries.order(:created_at).each do |delivery|
-      return delivery.id unless delivery.remaining.zero?
+      return delivery unless delivery.remaining.zero?
     end
   end
 end

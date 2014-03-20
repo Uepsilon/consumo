@@ -1,2 +1,0 @@
-module Management::ProductsHelper
-end

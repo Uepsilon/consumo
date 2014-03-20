@@ -6,10 +6,15 @@
     %tr
       %th= model_class.human_attribute_name(:email)
       %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:bookings)
       %th= model_class.human_attribute_name(:balance)
   %tbody
     - @users.each do |user|
       %tr
         %td= user.email
         %td= user.name
+        %td
+          - user.ordered_products.each do |order|
+            = "#{order[:amount]} x #{order[:product_title]}"
+            %br
         %td= number_to_currency user.balance, presicion: 2

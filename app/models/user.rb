@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def ordered_products
+    self.order_items.joins(delivery: :product).select("SUM(order_items.amount) AS total_amount, *").group(:product_id).all.collect{|i| {product_title: i.delivery.product.title, amount: i.total_amount}}
+  end
+
   def balance
     self.bookings.sum(:amount)
   end

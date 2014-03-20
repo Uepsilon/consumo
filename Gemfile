@@ -7,7 +7,6 @@ gem 'rails'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'annotate'
-gem 'sqlite3'
 gem 'devise'
 gem 'paperclip'
 gem "therubyracer"
@@ -16,6 +15,13 @@ gem "twitter-bootstrap-rails"
 gem "rails_email_validator"
 gem "cancan"
 gem "haml-rails"
+
+
+
+group :production, :staging do
+  gem 'rails_12factor'
+  gem 'pg'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,6 +39,7 @@ group :development do
   gem 'quiet_assets'
   gem 'letter_opener'
   gem "rails-erd"
+  gem 'sqlite3'
 end
 
 gem 'jquery-rails'

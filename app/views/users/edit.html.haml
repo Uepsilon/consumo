@@ -1,0 +1,20 @@
+= form_for @user, url: { action: "update_password" }, html: { class: 'form-horizontal' } do |f|
+  - if @user.errors.any?
+    %ul.list-unstyled
+      - @user.errors.full_messages.each do |error|
+        %li= error
+  .control-group
+    = f.label :current_password, class: 'control-label'
+    .controls
+      = f.password_field :current_password, class: 'text_field', placeholder: User.human_attribute_name(:current_password)
+  .control-group
+    = f.label :password, class: 'control-label'
+    .controls
+      = f.password_field :password, class: 'text_field', placeholder: User.human_attribute_name(:password)
+  .control-group
+    = f.label :password_confirmation, class: 'control-label'
+    .controls
+      = f.password_field :password_confirmation, class: 'text_field', placeholder: User.human_attribute_name(:password_confirmation)
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'
+    = link_to t('.cancel', default: t("helpers.links.cancel")), bookings_path, class: 'btn'

@@ -8,6 +8,7 @@
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:bookings)
       %th= model_class.human_attribute_name(:balance)
+      %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @users.each do |user|
       %tr
@@ -18,3 +19,8 @@
             = "#{order[:amount]} x #{order[:product_title]}"
             %br
         %td= number_to_currency user.balance, presicion: 2
+        %td
+          - if user == current_user
+            = link_to t('.edit', :default => t("helpers.links.update_password")), [:edit, user], :class => 'btn btn-mini'
+          - else
+            &nbsp;

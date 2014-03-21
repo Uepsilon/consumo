@@ -5,7 +5,11 @@ DrunkenBartender::Application.routes.draw do
 
     resources :products
     resources :deliveries, except: [:show, :edit, :update]
-    resources :users, only: :index
+    resources :users, only: [:index, :edit] do
+      collection do
+        patch 'update_password'
+      end
+    end
     resources :bookings, except: [:show, :edit, :update]
     resources :order_items, only: [:new, :create]
 end

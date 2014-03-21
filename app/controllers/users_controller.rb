@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find params[:id]
 
-    redirect_to :index, alert: "Nope!" unless @user == current_user
+    redirect_to :users, alert: "Nope!" unless @user == current_user
   end
 
   def update_password

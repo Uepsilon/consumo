@@ -7,12 +7,9 @@
         .title= category.title
         - category.products.all.each do |product|
           - if product.remaining > 0
-            .pull-left{style: "margin: 20px"}
+            .inline-block{style: "margin: 20px"}
               %button.btn.btn-default.picture{ onclick: "$('#order_item_delivery_id').val(#{product.current_delivery.id});" }
                 = image_tag product.picture.url(:medium), alt: product.name, title: product.name
                 .remaining= "#{t "product.remaining"}: #{product.remaining}"
                 .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery.unit_price, precision: 2}"
-  / .form-actions
-  /   = f.submit nil, class:'btn btn-primary'
-  /   = link_to t('.cancel', :default => t("helpers.links.cancel")), order_items_path, class:'btn'
 

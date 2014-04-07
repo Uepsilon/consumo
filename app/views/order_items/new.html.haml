@@ -1,6 +1,6 @@
-= form_for @order_item, :html => { :class => 'form-horizontal' } do |f|
-  = f.hidden_field :amount, class: 'text_field', value: 1
-  = f.hidden_field :delivery_id, class: 'text_field'
+= form_for @order_item, :html => { class:'form-horizontal' } do |f|
+  = f.hidden_field :amount, class: 'form-control', value: 1
+  = f.hidden_field :delivery_id, class: 'form-control'
   - Product.all.each do |product|
     - if product.remaining > 0
       .pull-left{style: "margin: 20px"}
@@ -9,6 +9,6 @@
           .remaining= "#{t "product.remaining"}: #{product.remaining}"
           .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery.unit_price, precision: 2}"
   / .form-actions
-  /   = f.submit nil, :class => 'btn btn-primary'
-  /   = link_to t('.cancel', :default => t("helpers.links.cancel")), order_items_path, :class => 'btn'
+  /   = f.submit nil, class:'btn btn-primary'
+  /   = link_to t('.cancel', :default => t("helpers.links.cancel")), order_items_path, class:'btn'
 

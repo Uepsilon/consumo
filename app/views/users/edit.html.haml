@@ -3,18 +3,18 @@
     %ul.list-unstyled
       - @user.errors.full_messages.each do |error|
         %li= error
-  .control-group
-    = f.label :current_password, class: 'control-label'
-    .controls
-      = f.password_field :current_password, class: 'text_field', placeholder: User.human_attribute_name(:current_password)
-  .control-group
-    = f.label :password, class: 'control-label'
-    .controls
-      = f.password_field :password, class: 'text_field', placeholder: User.human_attribute_name(:password)
-  .control-group
-    = f.label :password_confirmation, class: 'control-label'
-    .controls
-      = f.password_field :password_confirmation, class: 'text_field', placeholder: User.human_attribute_name(:password_confirmation)
+  .form-group
+    = f.label :current_password, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.password_field :current_password, class: 'form-control', placeholder: User.human_attribute_name(:current_password)
+  .form-group
+    = f.label :password, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name(:password)
+  .form-group
+    = f.label :password_confirmation, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name(:password_confirmation)
   .form-actions
     = f.submit nil, class: 'btn btn-primary'
     = link_to t('.cancel', default: t("helpers.links.cancel")), bookings_path, class: 'btn'

@@ -1,20 +1,21 @@
-= form_for @product, :html => { :class => 'form-horizontal' } do |f|
+= form_for @product, :html => { class:'form-horizontal' } do |f|
   - if @product.errors.any?
     %ul.errors
       - @product.errors.full_messages.each do |error|
         %li= error
-  .control-group
-    = f.label :name, :class => 'control-label'
-    .controls
-      = f.text_field :name, :class => 'text_field'
-  .control-group
-    = f.label :size, :class => 'control-label'
-    .controls
-      = f.text_field :size, :class => 'text_field', data: { behaviour: "format-number" }
-  .control-group
-    = f.label :picture, :class => 'control-label'
-    .controls
-      = f.file_field :picture, :class => 'text_field'
+  .form-group
+    = f.label :name, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :name, class:'form-control'
+  .form-group
+    = f.label :size, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :size, class:'form-control', data: { behaviour: "format-number" }
+  .form-group
+    = f.label :picture, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.file_field :picture
   .form-actions
-    = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), products_path, :class => 'btn'
+    .col-sm-offset-2.col-sm-10
+      = f.submit nil, class:'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), products_path, class:'btn'

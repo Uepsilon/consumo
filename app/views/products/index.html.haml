@@ -6,6 +6,7 @@
     %tr
       %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:category_id)
       %th= model_class.human_attribute_name(:size)
       %th= model_class.human_attribute_name(:remaining)
       %th= model_class.human_attribute_name(:picture)
@@ -15,6 +16,7 @@
       %tr
         %td= link_to product.id, product_path(product)
         %td= product.name
+        %td= product.category.title
         %td= product.size
         %td= product.remaining
         %td= image_tag product.picture.url(:thumb)

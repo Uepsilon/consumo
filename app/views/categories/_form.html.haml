@@ -1,0 +1,17 @@
+= form_for @category, html: { class:'form-horizontal' } do |f|
+  - if @category.errors.any?
+    %ul.errors
+      - @category.errors.full_messages.each do |error|
+        %li= error
+  .form-group
+    = f.label :title, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :title, class:'form-control'
+  .form-group
+    = f.label :position, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :position, class:'form-control'
+  .form-actions
+    .col-sm-offset-2.col-sm-10
+      = f.submit nil, class:'btn btn-primary'
+      = link_to t('.cancel', default: t("helpers.links.cancel")), categories_path, class:'btn'

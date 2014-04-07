@@ -34,6 +34,7 @@
 
         .navbar-collapse.collapse
           %ul.nav.navbar-nav
+            %li= link_to Category.model_name.human, :categories
             %li= link_to Product.model_name.human, :products
             %li= link_to Delivery.model_name.human, :deliveries
             %li= link_to User.model_name.human, :users

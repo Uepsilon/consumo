@@ -31,6 +31,7 @@ class Product < ActiveRecord::Base
       :styles => { :medium => "200x200>", :thumb => "100x100>" }
   end
 
+  belongs_to :category
   has_many  :deliveries
 
   validates_attachment_presence     :picture

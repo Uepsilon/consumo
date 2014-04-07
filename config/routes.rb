@@ -3,6 +3,7 @@ DrunkenBartender::Application.routes.draw do
 
     root to: "order_items#new"
 
+    resources :categories
     resources :products
     resources :deliveries, except: [:show, :edit, :update]
     resources :users, only: [:index, :edit] do

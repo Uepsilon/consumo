@@ -32,6 +32,7 @@ class Product < ActiveRecord::Base
   end
 
   belongs_to :category
+  belongs_to :sku
   has_many  :deliveries
 
   validates_attachment_presence     :picture
@@ -41,7 +42,11 @@ class Product < ActiveRecord::Base
   validates :size,    presence: true, numericality: true
 
   def title
-    "#{name} (#{size.to_s.gsub!('.', ',')}l)"
+    "#{name} (#{size.to_s.gsub!('.', ',')}#{sku.short})"
+  end
+
+  def size_with_unit
+    "#{size} #{sku.short}"
   end
 
   def remaining

@@ -1,0 +1,17 @@
+= form_for @sku, :html => { class:'form-horizontal' } do |f|
+  - if @sku.errors.any?
+    %ul.errors
+      - @sku.errors.full_messages.each do |error|
+        %li= error
+  .form-group
+    = f.label :title, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :title, class:'form-control'
+  .form-group
+    = f.label :short, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :short, class:'form-control'
+  .form-actions
+    .col-sm-offset-2.col-sm-10
+      = f.submit nil, class:'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), skus_path, class:'btn'

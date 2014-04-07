@@ -10,7 +10,11 @@
   .form-group
     = f.label :category_id, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'title'), class:'select'
+      = f.select :category_id, options_from_collection_for_select(Category.by_position.all, 'id', 'title'), class:'select'
+  .form-group
+    = f.label :sku_id, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.select :sku_id, options_from_collection_for_select(Sku.all, 'id', 'title'), class:'select'
   .form-group
     = f.label :size, class: 'col-sm-2 control-label'
     .col-sm-10

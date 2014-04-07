@@ -9,6 +9,7 @@
           - if product.remaining > 0
             .inline-block{style: "margin: 20px"}
               %button.btn.btn-default.picture{ onclick: "$('#order_item_delivery_id').val(#{product.current_delivery.id});" }
+                .title= product.title
                 = image_tag product.picture.url(:medium), alt: product.name, title: product.name
                 .remaining= "#{t "product.remaining"}: #{product.remaining}"
                 .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery.unit_price, precision: 2}"

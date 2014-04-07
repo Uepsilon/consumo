@@ -17,7 +17,7 @@
         %td= link_to product.id, product_path(product)
         %td= product.name
         %td= product.category.title
-        %td= product.size
+        %td= product.size_with_unit
         %td= product.remaining
         %td= image_tag product.picture.url(:thumb)
         %td

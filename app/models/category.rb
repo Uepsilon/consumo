@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  scope :by_position, order('categories.position ASC')
+  scope :by_position, -> {order('categories.position ASC')}
 
   has_many :products
 

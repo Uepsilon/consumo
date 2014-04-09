@@ -25,14 +25,15 @@
     .navbar.navbar-default.navbar-inverse
       .container-fluid
         .navbar-header
-          %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", type: "button"}
+          %button.navbar-toggle{"data-target" => "#navbar-collapse-1", "data-toggle" => "collapse", type: "button"}
             %span.sr-only Toggle navigation
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
           = link_to "DrunkenBartender", :new_order_item, class: "navbar-brand"
 
-        .navbar-collapse.collapse
+
+        #navbar-collapse-1.navbar-collapse.collapse
           %ul.nav.navbar-nav
             %li= link_to Category.model_name.human, :categories
             %li= link_to Sku.model_name.human, :skus

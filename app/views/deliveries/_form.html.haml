@@ -6,7 +6,7 @@
   .form-group
     = f.label :product_id, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.select :product_id, options_from_collection_for_select(Product.all, 'id', 'title'), class:'select'
+      = f.select :product_id, options_from_collection_for_select(Product.all, 'id', 'title'), {}, {class: "form-control"}
   .form-group
     = f.label :quantity, class: 'col-sm-2 control-label'
     .col-sm-10

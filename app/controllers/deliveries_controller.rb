@@ -1,7 +1,7 @@
 class DeliveriesController < ApplicationController
 
   def index
-    @deliveries = Delivery.all
+    @deliveries = Delivery.order('created_at DESC').all
   end
 
   def new

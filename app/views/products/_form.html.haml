@@ -14,7 +14,7 @@
   .form-group
     = f.label :sku_id, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.select :sku_id, options_from_collection_for_select(Sku.all, 'id', 'title', @product.sku_id), {}, {class: "form-control"}
+      = f.select :sku_id, options_from_collection_for_select(Sku.order('title ASC').all, 'id', 'title', @product.sku_id), {}, {class: "form-control"}
   .form-group
     = f.label :size, class: 'col-sm-2 control-label'
     .col-sm-10

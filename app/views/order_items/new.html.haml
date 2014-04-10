@@ -5,7 +5,7 @@
     - if category.products.any?
       .well.well-sm
         .title= category.title
-        - category.products.all.each do |product|
+        - category.products.order('name ASC').all.each do |product|
           - if product.remaining > 0
             .inline-block{style: "margin: 20px"}
               %button.btn.btn-default.picture{ onclick: "$('#order_item_delivery_id').val(#{product.current_delivery.id});" }

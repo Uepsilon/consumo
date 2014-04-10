@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
 
-  def index
+  def index  
     @bookings = Booking.all
     if not params[:user_id].nil? and User.find(params[:user_id])
       @bookings = @bookings.where(user_id: params[:user_id])

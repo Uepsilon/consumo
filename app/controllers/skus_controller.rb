@@ -1,6 +1,6 @@
 class SkusController < ApplicationController
   def index
-    @skus = Sku.all
+    @skus = Sku.order('title ASC').all
   end
 
   def new

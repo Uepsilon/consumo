@@ -1,0 +1,14 @@
+de:
+  helpers:
+    actions: "Aktionen"
+    links:
+      back: "Zurück"
+      cancel: "Abbrechen"
+      confirm: "Möchten Sie diese Aktion wirklich durchführen?"
+      destroy: "Löschen"
+      new: "Neu"
+    titles:
+      edit: "Bearbeiten"
+      save: "Speichern"
+      new: "Neu"
+      delete: "Löschen"

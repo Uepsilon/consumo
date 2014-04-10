@@ -1,0 +1,18 @@
+de:
+  navbar:
+    title: 'Consumo'
+    order: 'Buchen'
+    category: 'Kategorien'
+    sku: 'Einheiten'
+    product: 'Produkte'
+    delivery: 'Lieferungen'
+    user: 'Benutzer'
+    booking: 'Buchungen'
+    preferences: 'Verwaltung'
+    logout: 'Abmelden'
+  devise:
+    login:
+      email: 'E-Mail'
+      password: 'Passwort'
+      remember_me: 'Anmeldung merken'
+      submit: 'anmelden'

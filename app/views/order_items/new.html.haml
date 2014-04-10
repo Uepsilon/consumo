@@ -3,14 +3,19 @@
   = f.hidden_field :delivery_id, class: 'form-control'
   - Category.by_position.all.each do |category|
     - if category.products.any?
-      .well.well-sm
-        .title= category.title
-        - category.products.order('name ASC').all.each do |product|
-          - if product.remaining > 0
-            .inline-block{style: "margin: 20px"}
-              %button.btn.btn-default.picture{ onclick: "$('#order_item_delivery_id').val(#{product.current_delivery.id});" }
-                .title= product.title
-                = image_tag product.picture.url(:medium), alt: product.name, title: product.name
-                .remaining= "#{t "product.remaining"}: #{product.remaining}"
-                .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery.unit_price, precision: 2}"
+      .panel.panel-info
+        .panel-heading
+          %h2.panel-title= category.title
+        .panel-body
+          - category.products.order('name ASC').all.each do |product|
+            - if product.remaining > 0
+              .inline-block{style: "margin: 15px"}
+                %button.btn.btn-default.panel.panel-default{ style: "padding:0;min-width:232px;", onclick: "$('#order_item_delivery_id').val(#{product.current_delivery.id});"}
+                  .panel-heading
+                    = product.title
+                  .panel-body
+                    = image_tag product.picture.url(:medium), style: "max-height:133px;", alt: product.name, title: product.name
+                  .panel-footer
+                    .remaining= "#{t "product.remaining"}: #{product.remaining}"
+                    .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery.unit_price, precision: 2}"
 

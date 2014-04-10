@@ -1,6 +1,7 @@
 de:
   navbar:
-    title: 'Consumo'
+    title: 'consumo'
+    subtitle: 'get the goods!'
     order: 'Buchen'
     category: 'Kategorien'
     sku: 'Einheiten'

@@ -12,6 +12,7 @@ de:
     logout: 'Abmelden'
   devise:
     login:
+      title: 'Anmeldung'
       email: 'E-Mail'
       password: 'Passwort'
       remember_me: 'Anmeldung merken'

@@ -12,8 +12,19 @@
  *= require_tree .
  */
 
- body { padding-top: 70px; }
+ body { 
+   padding-top: 70px; 
+   background: white url(sumo_bg.png) no-repeat 50% 80px;
+ }
 
  .inline-block {
    display: inline-block;
+ }
+ 
+ .login-form {
+   max-width: 500px;
+   margin-top: auto;
+   margin-bottom: auto;
+   margin-left: auto;
+   margin-right: auto;
  }

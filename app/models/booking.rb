@@ -24,6 +24,8 @@ class Booking < ActiveRecord::Base
 
   before_create :relate_booking, if: :booking_relation
 
+  self.per_page = 10
+
   def booking_relation
     not self.receiver_id.nil?
   end

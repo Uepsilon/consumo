@@ -10,6 +10,7 @@ de:
     user: 'Benutzer'
     booking: 'Buchungen'
     orders: 'Bestellungen'
+    statistics: 'Statistik'
     preferences: 'Verwaltung'
     logout: 'Abmelden'
   devise:
@@ -46,3 +47,6 @@ de:
   users:
     index:
       title: 'Benutzer'
+  statistics:
+    index:
+      title: 'Statistik'

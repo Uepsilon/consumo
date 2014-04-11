@@ -10,6 +10,7 @@ de:
       new: "Anlegen"
       show: "Anzeigen"
       edit: "Bearbeiten"
+      update_password: "Passwort ändern"
     titles:
       edit: "Bearbeiten"
       save: "Speichern"

@@ -6,9 +6,9 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= Sku.human_attribute_name(:id)
-      %th= Sku.human_attribute_name(:title)
-      %th= Sku.human_attribute_name(:short)
+      %th=t '.column.id'
+      %th=t '.column.title'
+      %th=t '.column.short'
       %th=t '.actions', default: t("helpers.actions")
   %tbody
     - @skus.each do |sku|

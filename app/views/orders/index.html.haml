@@ -8,9 +8,9 @@
   %thead
     %tr
       %th= User.human_attribute_name(:name)
-      %th= model_class.human_attribute_name(:created_at)
-      %th= model_class.human_attribute_name(:created_at)
-      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.column.amount'
+      %th=t '.column.quantity'
+      %th=t '.created_at'
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @orders.each do |order|

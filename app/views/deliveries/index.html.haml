@@ -7,13 +7,13 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= Product.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:quantity)
-      %th= Booking.human_attribute_name(:amount)
-      %th= model_class.human_attribute_name(:unit_price)
-      %th= User.human_attribute_name(:name)
-      %th= model_class.human_attribute_name(:remaining)
-      %th= model_class.human_attribute_name(:created_at)
+      %th= t '.column.title'
+      %th=t '.column.quantity'
+      %th=t '.column.amount'
+      %th=t '.column.unit_price'
+      %th=t '.column.user_name'
+      %th=t '.column.remaining'
+      %th=t '.created_at'
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @deliveries.each do |delivery|

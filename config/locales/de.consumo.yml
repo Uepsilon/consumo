@@ -26,27 +26,58 @@ de:
   bookings:
     index:
       title: 'Buchungen'
+      column:
+          id: 'ID'
   orders:
     index:
       title: 'Bestellungen'
+      column:
+          id: 'ID'
+          name: 'Benutzer'
+          amount: 'Preis'
+          quantity: 'Produkt / Menge'
   skus:
     index:
       title: 'Einheiten'
+      column:
+          id: 'ID'
   categories:
     index:
       title: 'Kategorien'
+      column:
+        id: 'ID'
+        title: 'Titel'
   deliveries:
     index:
-      title: 'Lieferungen'#
+      title: 'Lieferungen'
+      column:
+          id: 'ID'
+          title: 'Produkte'
+          quantity: 'Menge'
+          amount: 'Kosten'
+          unit_price: 'Preis pro Einheit'
+          user_name: 'Benutzer'
+          remaining: 'Bestand'
   products:
     index:
       title: 'Produkte'
+      column:
+          id: 'ID'
+          name: 'Name'
+          category: 'Kategorie'
+          size: 'Kategorie'
+          remaining: 'Bestand'
+          picture: 'Bild'
   order_item:
     index:
       title: 'Buchen'
+      column:
+          id: 'ID'
   users:
     index:
       title: 'Benutzer'
+      column:
+          id: 'ID'
   statistics:
     index:
       title: 'Statistik'

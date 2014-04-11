@@ -33,4 +33,5 @@
         %td=l booking.created_at.localtime, format: :long
 
 %div.pagination-centered
-  = will_paginate @bookings, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level')}
+  %ul.pagination
+    = will_paginate @bookingsd, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), container: false}

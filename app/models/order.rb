@@ -13,6 +13,8 @@ class Order < ActiveRecord::Base
   has_one     :booking,  as: :bookable, dependent: :destroy
   has_one     :user,     through: :booking
 
+  self.per_page = 10
+  
   before_save :calculate_order_amount
 
   def update_amount(amount)

@@ -27,4 +27,5 @@
         %td= link_to t('.destroy', :default => t("helpers.links.destroy")), order_path(order), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, class:'btn btn-sm btn-danger'
 
 %div.pagination-centered
-  = will_paginate @orders, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level')}
+  %ul.pagination
+    = will_paginate @orders, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), container: false}

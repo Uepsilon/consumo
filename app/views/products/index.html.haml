@@ -1,6 +1,8 @@
 - model_class = Product
 .page-header
-  %h1=t '.title', default: model_class.model_name.human.pluralize.titleize
+  %h1
+    %span.glyphicon.glyphicon-barcode
+    =t '.title', default: model_class.model_name.human.pluralize.titleize
 
 %div
   = link_to t('.new', default: t("helpers.links.new")), new_product_path, class:'btn btn-primary'

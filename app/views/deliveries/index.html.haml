@@ -1,6 +1,8 @@
 - model_class = Delivery
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h1
+    %span.glyphicon.glyphicon-gift
+    =t '.title', :default => model_class.model_name.human.pluralize.titleize
 = link_to t('.new', :default => t("helpers.links.new")), new_delivery_path, class:'btn btn-primary'
 %table.table.table-striped
   %thead

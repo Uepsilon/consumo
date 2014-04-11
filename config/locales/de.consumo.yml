@@ -1,0 +1,48 @@
+de:
+  navbar:
+    title: 'consumo'
+    subtitle: 'get the goods!'
+    order: 'Buchen'
+    category: 'Kategorien'
+    sku: 'Einheiten'
+    product: 'Produkte'
+    delivery: 'Lieferungen'
+    user: 'Benutzer'
+    booking: 'Buchungen'
+    orders: 'Bestellungen'
+    preferences: 'Verwaltung'
+    logout: 'Abmelden'
+  devise:
+    login:
+      title: 'Anmeldung'
+      email: 'E-Mail'
+      password: 'Passwort'
+      remember_me: 'Anmeldung merken'
+      submit: 'anmelden'
+  will_paginate:
+    previous_level: 'zurück'
+    next_level: 'weiter'
+  bookings:
+    index:
+      title: 'Buchungen'
+  orders:
+    index:
+      title: 'Bestellungen'
+  skus:
+    index:
+      title: 'Einheiten'
+  categories:
+    index:
+      title: 'Kategorien'
+  deliveries:
+    index:
+      title: 'Lieferungen'#
+  products:
+    index:
+      title: 'Produkte'
+  order_item:
+    index:
+      title: 'Buchen'
+  users:
+    index:
+      title: 'Benutzer'

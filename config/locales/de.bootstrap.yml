@@ -6,9 +6,9 @@ de:
       cancel: "Abbrechen"
       confirm: "Möchten Sie diese Aktion wirklich durchführen?"
       destroy: "Löschen"
-      new: "Neu"
+      new: "Anlegen"
     titles:
       edit: "Bearbeiten"
       save: "Speichern"
-      new: "Neu"
+      new: "Anlegen"
       delete: "Löschen"

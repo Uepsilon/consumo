@@ -43,6 +43,20 @@
                   .panel-body
                     = image_tag product.picture.url(:medium), style: "max-height:133px;", alt: product.name, title: product.name
                   .panel-footer
-                    .remaining= "#{t "product.remaining"}: #{product.remaining}"
+                    - if product.remaining <= 5
+                      .remaining
+                        = "#{t "product.remaining"}: "
+                        %span.label.label-danger
+                          = product.remaining
+                    - elsif product.remaining <= 10
+                      .remaining
+                        = "#{t "product.remaining"}: "
+                        %span.label.label-warning
+                          = product.remaining
+                    - else
+                      .remaining
+                        = "#{t "product.remaining"}: "
+                        %span.label.label-info
+                          = product.remaining
                     .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery.unit_price, precision: 2}"
 

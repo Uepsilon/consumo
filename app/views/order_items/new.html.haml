@@ -22,9 +22,6 @@
         = number_to_currency @user.balance, presicion: 2
     
 
-
-
-
 = form_for @order_item, :html => { class:'form-horizontal' } do |f|
   = f.hidden_field :amount, class: 'form-control', value: 1
   = f.hidden_field :delivery_id, class: 'form-control'

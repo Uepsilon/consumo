@@ -14,3 +14,24 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+
+$('.alert-dismissable').ready(function(){sumo_action()})
+
+function sumo_action(){
+  if($('.alert-dismissable').length > 0)
+    $('#sumo_action').show();
+    $('#sumo_action').addClass("go").delay(500).queue(
+      function(next){
+        $('#sumo_action').removeClass("error");
+        $('#sumo_action').addClass("back").delay(600).queue(function(next){
+          $('#sumo_hai').show().delay(800).queue(function(next){
+            $('#sumo_action').fadeOut();
+            next();
+          });
+          next();
+        });
+        next();
+      }
+    );  
+}

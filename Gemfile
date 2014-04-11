@@ -47,6 +47,8 @@ group :development do
   gem 'letter_opener'
   gem "rails-erd"
   gem 'sqlite3'
+  gem 'binding_of_caller'
+  gem 'better_errors'
 end
 
 gem 'jquery-rails'

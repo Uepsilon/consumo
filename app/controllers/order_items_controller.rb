@@ -14,9 +14,9 @@ class OrderItemsController < ApplicationController
       @order.build_booking user: current_user
 
       if @order_item.save
-        redirect_to :new_order_item, notice: "PROST!"
+        redirect_to :new_order_item, notice: "Consumo sagt, #{@order_item.delivery.product.name} gebucht. Hai!"
       else
-        redirect_to :new_order_item, alert: "ALARM... ALAAAAAAAAAAAAAAAAAAAAAAARM!"
+        redirect_to :new_order_item, alert: "Consumo sagt nix gut"
       end
     end
   end

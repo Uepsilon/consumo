@@ -1,3 +1,30 @@
+
+
+%ul#dashboard.list-group{style: 'max-width:500px;'}
+  %li.list-group-item.list-group-item-info{ onclick: "$('.collapse').collapse({toggle: true})"}
+    %strong= @user.name
+    %span.glyphicon.glyphicon-stats
+  %li.list-group-item.collapse.in
+    = t 'order_item.bookings'
+    %span.label.label-info.pull-right
+      = @bookings_today.count
+  %li.list-group-item.collapse.in
+    = t 'order_item.bookings_amount'
+    %span.label.label-warning.pull-right
+      = number_to_currency @bookings_today.sum(:amount), presicion: 2
+  %li.list-group-item.collapse.in
+    = t 'order_item.balance'
+    - if @user.balance < 0
+      %span.label.label-danger.pull-right
+        = number_to_currency @user.balance, presicion: 2
+    -else 
+      %span.label.label-success.pull-right
+        = number_to_currency @user.balance, presicion: 2
+    
+
+
+
+
 = form_for @order_item, :html => { class:'form-horizontal' } do |f|
   = f.hidden_field :amount, class: 'form-control', value: 1
   = f.hidden_field :delivery_id, class: 'form-control'

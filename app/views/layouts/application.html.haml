@@ -22,8 +22,8 @@
       %img{alt: "Fork me on GitHub", "data-canonical-src" => "https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", src: "https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67", style: "position: fixed; top: 0; right: 0; border: 0; z-index: 9999;"}/
   
     .navbar.navbar-default.navbar-fixed-top
-      .container-fluid
-        .navbar-header
+      .container-fluid{style: 'padding-left: 0;'}
+        .navbar-header{style: 'margin-left:15px;'}
           - if user_signed_in?
             %button.navbar-toggle{"data-target" => "#navbar-collapse-1", "data-toggle" => "collapse", type: "button"}
               %span.sr-only Toggle navigation
@@ -31,8 +31,8 @@
               %span.icon-bar
               %span.icon-bar
           %span.pull-left
-            = image_tag 'sumo_head.png', style: 'margin-top:5px;margin-right:10px;'
-          = link_to :new_order_item, class: "navbar-brand" do
+            = image_tag 'sumo_head.png', style: 'margin-top:5px;margin-right:5px;'
+          = link_to :new_order_item, class: "navbar-brand", style: 'padding-left:0;margin:0' do
             = t('navbar.title')
             - if not user_signed_in?
               %small

@@ -2,6 +2,9 @@ class OrderItemsController < ApplicationController
 
   def new
     @order_item = OrderItem.new
+    @user = User.find(current_user.id)
+    @bookings = @user.bookings.all
+    @bookings_today = @user.bookings.where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
   def create

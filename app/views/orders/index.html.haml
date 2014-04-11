@@ -15,7 +15,7 @@
   %tbody
     - @orders.each do |order|
       %tr
-        %td= link_to order.user.name, orders_path(user_id: order.user.id)
+        %td= order.user.name
         %td
           = number_to_currency order.booking.amount, precision: 2
         %td

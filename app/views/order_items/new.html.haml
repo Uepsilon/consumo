@@ -5,25 +5,33 @@
   = image_tag 'sumo_big.png', size: '400x400'
 
 %ul#dashboard.list-group{style: 'max-width:500px;'}
-  %li.list-group-item.list-group-item-info{ onclick: "$('.collapse').collapse({toggle: true})"}
+  %li.list-group-item.list-group-item-info
     %strong= @user.name
     %span.glyphicon.glyphicon-stats
-  %li.list-group-item.collapse.in
-    = t 'order_item.bookings'
-    %span.label.label-info.pull-right
-      = @bookings_today.count
-  %li.list-group-item.collapse.in
-    = t 'order_item.bookings_amount'
-    %span.label.label-warning.pull-right
-      = number_to_currency @bookings_today.sum(:amount), presicion: 2
-  %li.list-group-item.collapse.in
-    = t 'order_item.balance'
-    - if @user.balance < 0
-      %span.label.label-danger.pull-right
-        = number_to_currency @user.balance, presicion: 2
-    -else 
-      %span.label.label-success.pull-right
-        = number_to_currency @user.balance, presicion: 2
+  %li.list-group-item
+    = link_to deliveries_path do
+      = t 'order_item.deliveries'
+      %span.label.label-info.pull-right
+        = @last_delivery
+  %li.list-group-item
+    = link_to orders_path do
+      = t 'order_item.bookings'
+      %span.label.label-info.pull-right
+        = @bookings_today.count
+  %li.list-group-item
+    = link_to orders_path do
+      = t 'order_item.bookings_amount'
+      %span.label.label-warning.pull-right
+        = number_to_currency @bookings_today.sum(:amount), presicion: 2
+  %li.list-group-item
+    = link_to users_path do
+      = t 'order_item.balance'
+      - if @user.balance < 0
+        %span.label.label-danger.pull-right
+          = number_to_currency @user.balance, presicion: 2
+      -else 
+        %span.label.label-success.pull-right
+          = number_to_currency @user.balance, presicion: 2
     
 
 = form_for @order_item, :html => { class:'form-horizontal' } do |f|

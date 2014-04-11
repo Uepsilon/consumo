@@ -10,13 +10,13 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:name)
-      %th= model_class.human_attribute_name(:category_id)
-      %th= model_class.human_attribute_name(:size)
-      %th= model_class.human_attribute_name(:remaining)
-      %th= model_class.human_attribute_name(:picture)
-      %th=t '.actions', default: t("helpers.actions")
+      %th=t '.column.id'  
+      %th=t '.column.name'
+      %th=t '.column.category'
+      %th=t '.column.size'
+      %th=t '.column.remaining'
+      %th=t '.column.picture'
+      %th=t '.actions'
   %tbody
     - @products.each do |product|
       %tr

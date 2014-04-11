@@ -6,8 +6,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= Category.human_attribute_name(:id)
-      %th= Category.human_attribute_name(:title)
+      %th=t '.column.id'# Category.human_attribute_name(:id)
+      %th=t '.column.title'#= Category.human_attribute_name(:title)
       %th=t '.actions', default: t("helpers.actions")
   %tbody
     - @categories.each do |category|

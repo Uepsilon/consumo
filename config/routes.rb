@@ -3,6 +3,7 @@ DrunkenBartender::Application.routes.draw do
 
     root to: "order_items#new"
 
+    resources :statistics
     resources :orders
     resources :skus
     resources :categories

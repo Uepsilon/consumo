@@ -13,7 +13,11 @@ gem 'devise'
 gem 'paperclip'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git', branch: "bootstrap3"
+
+# use uepsilon for this till commit #722 is merged
+gem 'twitter-bootstrap-rails', git: 'git://github.com/uepsilon/twitter-bootstrap-rails.git', branch: "bootstrap3"
+# gem 'twitter-bootstrap-rails', git: 'git://github.com/uepsilon/twitter-bootstrap-rails.git', branch: "bootstrap3"
+
 gem 'bootstrap_form'
 gem "rails_email_validator"
 gem "cancan"

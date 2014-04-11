@@ -27,15 +27,19 @@ de:
     index:
       title: 'Buchungen'
       column:
-          id: 'ID'
+        id: 'ID'
+        user_name: 'Benutzer'
+        amount: 'Preis'
+        bookable: 'Buchungstyp'
+        booking: 'Buchung'
   orders:
     index:
       title: 'Bestellungen'
       column:
-          id: 'ID'
-          name: 'Benutzer'
-          amount: 'Preis'
-          quantity: 'Produkt / Menge'
+        id: 'ID'
+        name: 'Benutzer'
+        amount: 'Preis'
+        quantity: 'Produkt / Menge'
   skus:
     index:
       title: 'Einheiten'

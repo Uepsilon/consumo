@@ -10,8 +10,8 @@
       %th= User.human_attribute_name(:name)
       %th=t '.column.amount'
       %th=t '.column.quantity'
-      %th=t '.created_at'
-      %th=t '.actions', :default => t("helpers.actions")
+      %th=t 'helpers.created_at'
+      %th=t 'actions', :default => t("helpers.actions")
   %tbody
     - @orders.each do |order|
       %tr

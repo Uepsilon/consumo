@@ -10,11 +10,11 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= User.human_attribute_name(:name)
-      %th= model_class.human_attribute_name(:bookable)
-      %th= model_class.human_attribute_name(:booking)
-      %th= model_class.human_attribute_name(:amount)
-      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.column.user_name'
+      %th=t '.column.bookable'
+      %th=t '.column.booking'
+      %th=t '.column.amount'
+      %th=t 'helpers.created_at'
   %tbody
     - @bookings.each do |booking|
       %tr

@@ -19,7 +19,8 @@
 $('.alert-dismissable').ready(function(){sumo_action()})
 
 function sumo_action(){
-  if($('.alert-dismissable').length > 0)
+  if($('#sumo_action') && 
+     $('.alert-dismissable').hasClass('alert-success')){
     $('#sumo_action').show();
     $('#sumo_action').addClass("go").delay(300).queue(
       function(next){
@@ -34,4 +35,5 @@ function sumo_action(){
         next();
       }
     );  
+  }
 }

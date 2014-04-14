@@ -8,13 +8,17 @@
 #
 
 class Order < ActiveRecord::Base
+  scope :today, lambda { 
+    where("\"orders\".created_at >= ? and \"orders\".created_at <= ?", 
+           Date.today.beginning_of_day.utc, Date.today.end_of_day.utc)
+  }  
+
   has_many    :order_items, dependent: :destroy
 
   has_one     :booking,  as: :bookable, dependent: :destroy
   has_one     :user,     through: :booking
 
   self.per_page = 10
-  
   before_save :calculate_order_amount
 
   def update_amount(amount)

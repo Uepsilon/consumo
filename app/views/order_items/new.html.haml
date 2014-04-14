@@ -15,14 +15,14 @@
         = @last_delivery
   %li.list-group-item
     = link_to orders_path do
-      = t 'order_item.bookings'
+      = t 'order_item.orders'
       %span.label.label-info.pull-right
-        = @bookings_today.count
+        = @user.orders.today.count
   %li.list-group-item
     = link_to orders_path do
-      = t 'order_item.bookings_amount'
+      = t 'order_item.orders_amount'
       %span.label.label-warning.pull-right
-        = number_to_currency @bookings_today.sum(:amount), presicion: 2
+        = number_to_currency @user.orders.today.sum(:amount), presicion: 2
   %li.list-group-item
     = link_to users_path do
       = t 'order_item.balance'

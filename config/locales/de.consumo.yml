@@ -82,9 +82,8 @@ de:
     logged_in_as: 'Angemeldet: '  
     balance: 'Mein Restguthaben'  
     deliveries: 'Meine letzte Lieferung'  
-    bookings: 'Heutige Buchungen'  
-    bookings_amount: 'Heutige Investition'  
-    bookings_amount_all: 'Gesamt Investition'  
+    orders: 'Heutige Bestellungen'  
+    orders_amount: 'Heutige Investition'  
   users:
     index:
       title: 'Benutzer'

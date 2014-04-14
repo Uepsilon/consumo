@@ -1,11 +1,14 @@
 .page-header
-  %h1=t '.title', default: Sku.model_name.human.pluralize.titleize
+  %h1
+    %span.glyphicon.glyphicon-usd
+    =t '.title', default: Sku.model_name.human.pluralize.titleize
+= link_to t('.new', default: t("helpers.links.new")), new_sku_path, class:'btn btn-primary'
 %table.table.table-striped
   %thead
     %tr
-      %th= Sku.human_attribute_name(:id)
-      %th= Sku.human_attribute_name(:title)
-      %th= Sku.human_attribute_name(:short)
+      %th=t '.column.id'
+      %th=t '.column.title'
+      %th=t '.column.short'
       %th=t '.actions', default: t("helpers.actions")
   %tbody
     - @skus.each do |sku|
@@ -16,5 +19,3 @@
         %td
           = link_to t('.edit', default: t("helpers.links.edit")), edit_sku_path(sku), class:'btn btn-warning'
           = link_to t('.destroy', default: t("helpers.links.destroy")), sku_path(sku), method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class:'btn btn-mini btn-danger'
-
-= link_to t('.new', default: t("helpers.links.new")), new_sku_path, class:'btn btn-primary'

@@ -1,13 +1,15 @@
 - model_class = User
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h1
+    %span.glyphicon.glyphicon-user
+    =t '.title', :default => model_class.model_name.human.pluralize.titleize
 %table.table.table-striped
   %thead
     %tr
-      %th= model_class.human_attribute_name(:email)
-      %th= model_class.human_attribute_name(:name)
-      %th= model_class.human_attribute_name(:bookings)
-      %th= model_class.human_attribute_name(:balance)
+      %th=t '.column.email'
+      %th=t '.column.name'
+      %th=t '.column.bookings'
+      %th=t '.column.balance'
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @users.each do |user|

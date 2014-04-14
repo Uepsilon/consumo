@@ -1,0 +1,21 @@
+= form_for @order, :html => { class:'form-horizontal' } do |f|
+  - if @order.errors.any?
+    %ul.list-unstyled
+      - @order.errors.full_messages.each do |error|
+        %li= error
+  .form-group
+    = f.label :amount, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :amount, class:'form-control', data: { behaviour: "format-number" }, placeholder: Order.human_attribute_name(:amount)
+  .form-group
+    = f.label :info_text, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_area :infotext, class:'form-control', placeholder: Order.human_attribute_name(:infotext)
+  .form-group
+    = f.label :receiver_id, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.select :receiver_id, options_from_collection_for_select(User.where("id != ?", current_user.id).load, 'id', 'name', selected: @order.receiver_id), {include_blank: "Kein Empfänger"}, {class: "form-control"}
+  .form-actions
+    .col-sm-offset-2.col-sm-10
+      = f.submit nil, class:'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), orders_path, class:'btn'

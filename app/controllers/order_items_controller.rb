@@ -2,6 +2,10 @@ class OrderItemsController < ApplicationController
 
   def new
     @order_item = OrderItem.new
+    @user = User.find(current_user.id)
+    @last_delivery = Delivery.order('created_at ASC').last.product.name
+    @bookings = @user.bookings.all
+    @bookings_today = @user.bookings.where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
   def create
@@ -11,9 +15,9 @@ class OrderItemsController < ApplicationController
       @order.build_booking user: current_user
 
       if @order_item.save
-        redirect_to :new_order_item, notice: "PROST!"
+        redirect_to :new_order_item, notice: "Consumo sagt, #{@order_item.delivery.product.name} gebucht. Hai!"
       else
-        redirect_to :new_order_item, alert: "ALARM... ALAAAAAAAAAAAAAAAAAAAAAAARM!"
+        redirect_to :new_order_item, alert: "Consumo sagt nix gut"
       end
     end
   end

@@ -4,7 +4,7 @@
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    %title= content_for?(:title) ? yield(:title) : "DrunkenBartender"
+    %title= content_for?(:title) ? yield(:title) : "#{t('navbar.title')} - #{t('navbar.subtitle')}"
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
@@ -17,39 +17,82 @@
     = favicon_link_tag '/favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
 
-
   %body
     %a.hidden-sm.hidden-xs{href: "https://github.com/Uepsilon/drunken-bartender"}
-      %img{alt: "Fork me on GitHub", "data-canonical-src" => "https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", src: "https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67", style: "position: absolute; top: 0; right: 0; border: 0; z-index: 999;"}/
+      %img{alt: "Fork me on GitHub", "data-canonical-src" => "https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", src: "https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67", style: "position: fixed; top: 0; right: 0; border: 0; z-index: 9999;"}/
 
-    .navbar.navbar-default.navbar-inverse
-      .container-fluid
-        .navbar-header
-          %button.navbar-toggle{"data-target" => "#navbar-collapse-1", "data-toggle" => "collapse", type: "button"}
-            %span.sr-only Toggle navigation
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          = link_to "DrunkenBartender", :new_order_item, class: "navbar-brand"
-
-
-        #navbar-collapse-1.navbar-collapse.collapse
-          %ul.nav.navbar-nav
-            %li= link_to Category.model_name.human, :categories
-            %li= link_to Sku.model_name.human, :skus
-            %li= link_to Product.model_name.human, :products
-            %li= link_to Delivery.model_name.human, :deliveries
-            %li= link_to User.model_name.human, :users
-            %li= link_to Booking.model_name.human, :bookings
-            - if user_signed_in?
-              %li= link_to "Logout", :destroy_user_session, method: :delete
-
+    .navbar.navbar-default.navbar-fixed-top
+      .container-fluid{style: 'padding-left: 0;'}
+        .navbar-header{style: 'margin-left:15px;'}
+          - if user_signed_in?
+            %button.navbar-toggle{"data-target" => "#navbar-collapse-1", "data-toggle" => "collapse", type: "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+          %span.pull-left
+            = image_tag 'sumo_head.png', style: 'margin-top:5px;margin-right:5px;'
+          = link_to :new_order_item, class: "navbar-brand", style: 'padding-left:0;margin:0' do
+            = t('navbar.title')
+            - if not user_signed_in?
+              %small
+                =t('navbar.subtitle')
+        - if user_signed_in?
+          #navbar-collapse-1.navbar-collapse.collapse
+            %ul.nav.navbar-nav
+              %li
+                = link_to :new_order_item do
+                  %span.glyphicon.glyphicon-ok-circle
+                  = t("navbar.order")
+              %li
+                = link_to :statistics do
+                  %span.glyphicon.glyphicon-stats
+                  = t("navbar.statistics")
+              %li.dropdown
+                = link_to '#', { "data-toggle" => 'dropdown', :class => 'dropdown-toggle'} do
+                  %span.glyphicon.glyphicon-cog
+                  = t("navbar.preferences")
+                  %b.caret
+                %ul.dropdown-menu
+                  
+                  %li
+                    = link_to :products do
+                      %span.glyphicon.glyphicon-barcode
+                      = t("navbar.product")
+                  %li
+                    = link_to :deliveries do
+                      %span.glyphicon.glyphicon-gift
+                      = t("navbar.delivery") 
+                  %li.divider
+                  %li
+                    = link_to :orders do
+                      %span.glyphicon.glyphicon-ok
+                      = t("navbar.orders")
+                  %li
+                    = link_to :bookings do
+                      %span.glyphicon.glyphicon-save
+                      = t("navbar.booking")
+                  %li.divider
+                  %li
+                    = link_to :categories do
+                      %span.glyphicon.glyphicon-inbox
+                      = t("navbar.category")
+                  %li
+                    = link_to :skus do
+                      %span.glyphicon.glyphicon-usd
+                      = t("navbar.sku")
+                  %li.divider
+                  %li
+                    = link_to :users do
+                      %span.glyphicon.glyphicon-user
+                      = t("navbar.user")
+              - if user_signed_in?
+                %li
+                  = link_to :destroy_user_session, method: :delete do
+                    %span.glyphicon.glyphicon-off
+                    = t("navbar.logout")
     .container-fluid
-
       .row-fluid
         .span12
           = bootstrap_flash
           = yield
-
-      / %footer
-      /   %p &copy; Company 2014

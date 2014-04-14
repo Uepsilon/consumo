@@ -1,0 +1,78 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+body { 
+ padding-top: 70px; 
+ background: white  no-repeat 50% 80px;
+ background-image: url(image_path('sumo_bg.png'));
+ background-attachment: fixed;
+}
+
+.inline-block {
+ display: inline-block;
+}
+
+.login-form {
+ max-width: 500px;
+ margin-top: auto;
+ margin-bottom: auto;
+ margin-left: auto;
+ margin-right: auto;
+}
+
+.pagination-centered {
+ text-align: center;
+}
+
+#sumo_action { 
+  display: none;
+  position: absolute;
+  left:50%;
+  top:50%;
+  margin-left:-200px;
+  margin-top:-200px;
+  z-index: 3000;
+  width:400px;
+  height:400px; 
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+}
+
+#sumo_hai {
+  display: none;
+  position:absolute;
+  width:300px;
+  height:300px;
+  font-size:60px;
+}
+
+.go {
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+    -webkit-transform:rotate(40deg);
+    transform:rotate(40deg);
+}
+
+.back {
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    -webkit-transform:rotate(0deg);
+    transform:rotate(0deg);
+}

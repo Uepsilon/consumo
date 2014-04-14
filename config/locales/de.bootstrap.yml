@@ -1,0 +1,19 @@
+de:
+  helpers:
+    actions: "Aktionen"
+    created_at: "Erstellt am"
+    links:
+      back: "Zurück"
+      cancel: "Abbrechen"
+      confirm: "Möchten Sie diese Aktion wirklich durchführen?"
+      destroy: "Löschen"
+      new: "Anlegen"
+      show: "Anzeigen"
+      edit: "Bearbeiten"
+      update_password: "Passwort ändern"
+    titles:
+      edit: "Bearbeiten"
+      save: "Speichern"
+      new: "Anlegen"
+      delete: "Löschen"
+      show: "Anzeigen"

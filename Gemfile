@@ -47,9 +47,15 @@ group :development do
   gem 'letter_opener'
   gem "rails-erd"
   gem 'sqlite3'
+  gem 'binding_of_caller'
+  gem 'better_errors'
 end
 
 gem 'jquery-rails'
+
+#gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

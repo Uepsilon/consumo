@@ -1,0 +1,99 @@
+de:
+  navbar:
+    title: 'consumo'
+    subtitle: 'get the goods!'
+    order: 'Buchen'
+    category: 'Kategorien'
+    sku: 'Einheiten'
+    product: 'Produkte'
+    delivery: 'Lieferungen'
+    user: 'Benutzer'
+    booking: 'Buchungen'
+    orders: 'Bestellungen'
+    statistics: 'Statistik'
+    preferences: 'Verwaltung'
+    logout: 'Abmelden'
+  devise:
+    login:
+      title: 'Anmeldung'
+      email: 'E-Mail'
+      password: 'Passwort'
+      remember_me: 'Anmeldung merken'
+      submit: 'anmelden'
+  will_paginate:
+    previous_level: 'zurück'
+    next_level: 'weiter'
+  bookings:
+    index:
+      title: 'Buchungen'
+      column:
+        id: 'ID'
+        user_name: 'Benutzer'
+        amount: 'Preis'
+        bookable: 'Buchungstyp'
+        booking: 'Buchung'
+  orders:
+    index:
+      title: 'Bestellungen'
+      column:
+        id: 'ID'
+        name: 'Benutzer'
+        amount: 'Preis'
+        quantity: 'Produkt / Menge'
+  skus:
+    index:
+      title: 'Einheiten'
+      column:
+          id: 'ID'
+          title: 'Name'
+          short: 'Kürzel'
+  categories:
+    index:
+      title: 'Kategorien'
+      column:
+        id: 'ID'
+        title: 'Titel'
+  deliveries:
+    index:
+      title: 'Lieferungen'
+      column:
+          id: 'ID'
+          title: 'Produkte'
+          quantity: 'Menge'
+          amount: 'Kosten'
+          unit_price: 'Preis pro Einheit'
+          user_name: 'Benutzer'
+          remaining: 'Bestand'
+  products:
+    index:
+      title: 'Produkte'
+      column:
+          id: 'ID'
+          name: 'Name'
+          category: 'Kategorie'
+          size: 'Kategorie'
+          remaining: 'Bestand'
+          picture: 'Bild'
+  order_item:
+    index:
+      title: 'Buchen'
+      column:
+          id: 'ID'
+    logged_in_as: 'Angemeldet: '  
+    balance: 'Restguthaben'  
+    deliveries: 'Letzte Lieferung'  
+    bookings: 'Heutige Buchungen'  
+    bookings_amount: 'Heutige Investition'  
+    bookings_amount_all: 'Gesamt Investition'  
+  users:
+    index:
+      title: 'Benutzer'
+      column:
+          id: 'ID'
+          email: 'E-Mail-Adresse'
+          name: 'Name'
+          bookings: 'Buchungen'
+          balance: 'Guthaben'
+  statistics:
+    index:
+      title: 'Statistik'

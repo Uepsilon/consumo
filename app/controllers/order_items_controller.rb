@@ -3,7 +3,7 @@ class OrderItemsController < ApplicationController
   def new
     @order_item = OrderItem.new
     @user = User.find(current_user.id)
-    @last_delivery = Delivery.order('created_at ASC').last.product.name
+    @last_delivery = User.find(current_user.id).deliveries.order('created_at DESC').first.product.title#Delivery.order('created_at ASC').last.product.name
     @bookings = @user.bookings.all
     @bookings_today = @user.bookings.where("created_at >= ?", Time.zone.now.beginning_of_day)
   end

@@ -53,6 +53,9 @@ end
 
 gem 'jquery-rails'
 
+gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
+gem "polyamorous", github: "activerecord-hackery/polyamorous"
+
 #gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
 

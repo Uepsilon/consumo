@@ -9,8 +9,9 @@ Consumo::Application.routes.draw do
     resources :categories
     resources :products
     resources :deliveries, except: [:show, :edit, :update]
-    resources :users, only: [:index, :edit] do
+    resources :users, only: [:index, :edit], via: [:get, :post] do
       collection do
+        match 'search' => 'users#search', via: [:get, :post], as: :search  
         patch 'update_password'
       end
     end

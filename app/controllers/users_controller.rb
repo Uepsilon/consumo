@@ -1,7 +1,15 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all
+    #@users = User.all
+
+    if params[:id].nil?        
+      @q = User.search(params[:q])
+      @users = @q.result(distinct: true)
+    else
+      @q = User.find(current_user.id).search(params[:q])
+      @users = @q.result(distinct: true)
+    end
   end
 
   def edit
@@ -19,6 +27,11 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def search
+    index
+    render :index
   end
 
   private

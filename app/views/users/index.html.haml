@@ -3,6 +3,20 @@
   %h1
     %span.glyphicon.glyphicon-user
     =t '.title', :default => model_class.model_name.human.pluralize.titleize
+.panel.panel-default{style:'max-width: 600px'}
+  .panel-heading
+    %span.panel-title
+      Filter
+  .panel-body
+    = search_form_for @q, url: search_users_path, html: {method: :post } do |f|
+      .form-group
+        = f.select :id_eq, options_from_collection_for_select(User.all,"id","name", @q.id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
+      .input-group
+        = f.text_field :email_or_first_name_or_last_name_start, placeholder: 'Suche', class:'form-control'
+        %span.input-group-btn
+          %button.btn.btn-default{type: "submit"}
+            %span.glyphicon.glyphicon-search
+
 %table.table.table-striped
   %thead
     %tr

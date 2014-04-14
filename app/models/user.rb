@@ -19,9 +19,9 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :trackable, :validatable
 
-  validates :first_name,  presence: true
-  validates :last_name,   presence: true
-  validates :email,       email: true
+  # validates :first_name,  presence: true
+  # validates :last_name,   presence: true
+  # validates :email,       email: true
 
   has_many  :bookings
   has_many  :orders,      through: :bookings, source: :bookable, source_type: "Order"

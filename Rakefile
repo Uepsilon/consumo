@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-DrunkenBartender::Application.load_tasks
+Consumo::Application.load_tasks

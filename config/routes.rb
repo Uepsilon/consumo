@@ -1,4 +1,4 @@
-DrunkenBartender::Application.routes.draw do
+Consumo::Application.routes.draw do
   devise_for :users
 
     root to: "order_items#new"

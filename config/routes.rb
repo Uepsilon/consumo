@@ -4,7 +4,12 @@ Consumo::Application.routes.draw do
     root to: "order_items#new"
 
     resources :statistics
-    resources :orders
+    resources :orders, via: [:get, :post] do
+      collection do
+        match 'search' => 'orders#search', via: [:get, :post], as: :search  
+        patch 'update_password'
+      end
+    end
     resources :skus
     resources :categories
     resources :products

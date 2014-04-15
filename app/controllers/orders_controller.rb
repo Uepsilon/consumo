@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
 
-  def index  
-    @orders = Order.page(params[:page]).order('created_at DESC').all
+  def index 
+    @q = Order.search(params[:q])
+    @orders = @q.result(distinct: true)
   end
 
   def destroy
@@ -15,5 +16,9 @@ class OrdersController < ApplicationController
     end
   end
 
+  def search
+    index
+    render :index
+  end
   private
 end

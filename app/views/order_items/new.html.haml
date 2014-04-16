@@ -8,16 +8,22 @@
   %li.list-group-item.list-group-item-info
     %strong= @user.name
     %span.glyphicon.glyphicon-stats
-  %li.list-group-item
-    = link_to deliveries_path do
-      = t 'order_item.deliveries'
-      %span.label.label-info.pull-right
-        = @last_delivery
+  - if not @last_delivery.nil?  
+    %li.list-group-item
+      = link_to deliveries_path do
+        = t 'order_item.last_delivery'
+        %span.label.label-info.pull-right
+          = @last_delivery
   %li.list-group-item
     = link_to orders_path do
       = t 'order_item.orders'
       %span.label.label-info.pull-right
         = @user.orders.today.count
+  %li.list-group-item
+    = link_to orders_path do
+      = t 'order_item.last_order'
+      %span.label.label-info.pull-right
+        = @last_order
   %li.list-group-item
     = link_to orders_path do
       = t 'order_item.orders_amount'

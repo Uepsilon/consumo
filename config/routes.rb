@@ -7,7 +7,6 @@ Consumo::Application.routes.draw do
     resources :orders, via: [:get, :post] do
       collection do
         match 'search' => 'orders#search', via: [:get, :post], as: :search  
-        patch 'update_password'
       end
     end
     resources :skus

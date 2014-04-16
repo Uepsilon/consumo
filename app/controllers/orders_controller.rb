@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 
   def index 
     @q = Order.search(params[:q])
-    @orders = @q.result(distinct: true)
+    @orders = @q.result(:distinct => true).paginate(:page => params[:page]) 
   end
 
   def destroy

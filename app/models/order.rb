@@ -12,7 +12,6 @@ class Order < ActiveRecord::Base
     where("\"orders\".created_at >= ? and \"orders\".created_at <= ?", 
            Date.today.beginning_of_day.utc, Date.today.end_of_day.utc)
   }  
-
   has_many    :order_items, dependent: :destroy
 
   has_one     :booking,  as: :bookable, dependent: :destroy

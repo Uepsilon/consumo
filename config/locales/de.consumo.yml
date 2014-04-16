@@ -81,7 +81,9 @@ de:
           id: 'ID'
     logged_in_as: 'Angemeldet: '  
     balance: 'Mein Restguthaben'  
-    deliveries: 'Meine letzte Lieferung'  
+    last_delivery: 'Letzte Lieferung'  
+    last_order: 'Letzte Bestellung'  
+    last_order_empty: 'n/a'  
     orders: 'Heutige Bestellungen'  
     orders_amount: 'Heutige Investition'  
   users:

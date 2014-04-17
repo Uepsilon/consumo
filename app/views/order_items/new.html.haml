@@ -1,8 +1,6 @@
-#sumo_action{onclick:'sumo_action()'}
-  #sumo_hai
-    %span.label.label-info
-      Hai!
-  = image_tag 'sumo_big.png', size: '400x400'
+= content_for :javascript do
+  :javascript
+    sumo_action();
 
 %ul#dashboard.list-group{style: 'max-width:500px;'}
   %li.list-group-item.list-group-item-info
@@ -74,4 +72,7 @@
                         %span.label.label-info
                           = product.remaining
                     .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery.unit_price, precision: 2}"
+
+%audio#chatAudio
+  %source{src: "/assets/sumo_shout.mp3", type: "audio/mpeg"}
 

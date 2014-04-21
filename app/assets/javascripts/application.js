@@ -21,6 +21,7 @@ function sumo_action(){
   if($('#sumo_action') && $('.alert-dismissable').hasClass('alert-success')) {
     
     $('<audio id="sumo_stomp"><source src="/assets/sumo_stomp.mp3" type="audio/mpeg"></audio>').appendTo('body');
+    
     $('#sumo_stomp')[0].play();
    
     $('#sumo_action').show();

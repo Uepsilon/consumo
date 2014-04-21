@@ -10,21 +10,25 @@
       Filter
   .panel-body
     = search_form_for @q, url: search_orders_path, html: {method: :post } do |f|
-      .form-group
-        = f.select :user_id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @q.user_id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
-      .form-group
-        = f.select :created_at_eq, options_for_select(@periods, @period_value), {include_blank: "Zeitraum..."}, {class: "form-control", onchange: "this.form.submit();"}
-      .input-group
-        = f.text_field :user_first_name_or_user_last_name_cont, placeholder: 'Suche', class:'form-control'
-        %span.input-group-btn
-          %button.btn.btn-default{type: "submit"}
-            %span.glyphicon.glyphicon-search
+      .row
+        .col-xs-4
+          .form-group
+            = f.select :user_id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @q.user_id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
+        .col-xs-4
+          .form-group
+            = f.select :created_at_eq, options_for_select(@periods, @period_value), {include_blank: "Zeitraum..."}, {class: "form-control", onchange: "this.form.submit();"}
+        .col-xs-12  
+          .input-group
+            = f.text_field :user_first_name_or_user_last_name_cont, placeholder: 'Suche', class:'form-control'
+            %span.input-group-btn
+              %button.btn.btn-default{type: "submit"}
+                %span.glyphicon.glyphicon-search
 
 %table.table.table-striped
   %thead
     %tr
-      %th= sort_link @q, :user_first_name, User.human_attribute_name(:name)#User.human_attribute_name(:name)
-      %th= sort_link @q, :booking_amount, "test"#t (".column.amount")
+      %th=User.human_attribute_name(:name)
+      %th=t (".column.amount")
       %th=t '.column.quantity'
       %th=t 'helpers.created_at'
       %th=t 'actions', :default => t("helpers.actions")

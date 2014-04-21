@@ -9,6 +9,11 @@ Consumo::Application.routes.draw do
         match 'search' => 'orders#search', via: [:get, :post], as: :search  
       end
     end
+    resources :bookings, via: [:get, :post] do
+      collection do
+        match 'search' => 'bookings#search', via: [:get, :post], as: :search  
+      end
+    end
     resources :skus
     resources :categories
     resources :products
@@ -19,6 +24,5 @@ Consumo::Application.routes.draw do
         patch 'update_password'
       end
     end
-    resources :bookings, except: [:show, :edit, :update]
     resources :order_items, only: [:new, :create]
 end

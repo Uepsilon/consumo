@@ -4,6 +4,30 @@
     %span.glyphicon.glyphicon-save
     =t '.title', :default => model_class.model_name.human.pluralize.titleize
 
+
+.panel.panel-default{style:'max-width: 600px'}
+  .panel-heading
+    %span.panel-title
+      Filter
+  .panel-body
+    = search_form_for @q, url: search_bookings_path, html: {method: :post } do |f|
+      .row
+        .col-xs-4
+          .form-group
+            = f.select :user_id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @q.user_id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
+        .col-xs-4
+          .form-group
+            = f.select :bookable_type_eq, options_from_collection_for_select(Booking.where('bookable_type IS NOT NULL').select(:bookable_type).distinct.group(:bookable_type).all,"bookable_type","bookable_type", @q.bookable_type_eq), {include_blank: "Buchungstyp..."}, {class: "form-control", onchange: "this.form.submit();"}
+        .col-xs-4
+          .form-group
+            = f.select :created_at_eq, options_for_select(@periods, @period_value), {include_blank: "Zeitraum..."}, {class: "form-control", onchange: "this.form.submit();"}
+        .col-xs-12
+          .input-group
+            = f.text_field :user_first_name_or_user_last_name_cont, placeholder: 'Suche', class:'form-control'
+            %span.input-group-btn
+              %button.btn.btn-default{type: "submit"}
+                %span.glyphicon.glyphicon-search
+
 .btn-toolbar
   = link_to t('.new', :default => t("helpers.links.new")), new_booking_path, class:'btn btn-primary'
 

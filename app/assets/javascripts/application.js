@@ -17,6 +17,12 @@
 //= require_tree .
 
 
+function clear_form()
+{
+    $(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
+    $(':checkbox, :radio').prop('checked', false);
+}
+
 function sumo_action(){
   if($('#sumo_action') && $('.alert-dismissable').hasClass('alert-success')) {
     

@@ -7,6 +7,9 @@
   .panel-heading
     %span.panel-title
       Filter
+      = link_to url_for() do
+        %span.pull-right{style: 'cursor: pointer'}
+          %span.glyphicon.glyphicon-remove-circle
   .panel-body
     = search_form_for @q, url: search_users_path, html: {method: :post } do |f|
       .form-group

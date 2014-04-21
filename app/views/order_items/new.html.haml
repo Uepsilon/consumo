@@ -8,27 +8,27 @@
     %span.glyphicon.glyphicon-stats
   - if not @last_delivery.nil?  
     %li.list-group-item
-      = link_to deliveries_path do
+      = link_to deliveries_path(:q => {user_id_eq: current_user.id}) do
         = t 'order_item.last_delivery'
         %span.label.label-info.pull-right
           = @last_delivery
   %li.list-group-item
-    = link_to orders_path do
+    = link_to orders_path(:q => {user_id_eq: current_user.id}) do
       = t 'order_item.orders'
       %span.label.label-info.pull-right
         = @user.orders.today.count
   %li.list-group-item
-    = link_to orders_path do
+    = link_to orders_path(:q => {user_id_eq: current_user.id}) do
       = t 'order_item.last_order'
       %span.label.label-info.pull-right
         = @last_order
   %li.list-group-item
-    = link_to orders_path do
+    = link_to orders_path(:q => {user_id_eq: current_user.id}) do
       = t 'order_item.orders_amount'
       %span.label.label-warning.pull-right
         = number_to_currency @user.orders.today.sum(:amount), presicion: 2
   %li.list-group-item
-    = link_to users_path do
+    = link_to users_path(:q => {id_eq: current_user.id}) do
       = t 'order_item.balance'
       - if @user.balance < 0
         %span.label.label-danger.pull-right

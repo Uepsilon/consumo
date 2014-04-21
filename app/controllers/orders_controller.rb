@@ -2,11 +2,11 @@ class OrdersController < ApplicationController
 
   def index 
     if not params[:q].nil? and not params[:q][:created_at_eq].nil? and not params[:q][:created_at_eq].empty?
-      @q = Order.search(params[:q])   
+      @q = Order.order('created_at DESC').search(params[:q])   
       @orders = @q.result(:distinct => true).paginate(:page => params[:page]).send(params[:q][:created_at_eq])
       @period_value = params[:q][:created_at_eq]
     else
-      @q = Order.search(params[:q])
+      @q = Order.order('created_at DESC').search(params[:q])
       @orders = @q.result(:distinct => true).paginate(:page => params[:page]) 
       @period_value = ""
     end

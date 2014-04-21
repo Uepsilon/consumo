@@ -35,6 +35,8 @@ class Product < ActiveRecord::Base
   belongs_to :sku
   has_many  :deliveries
 
+  self.per_page = 10
+
   validates_attachment_presence     :picture
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 

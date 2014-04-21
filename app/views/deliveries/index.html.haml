@@ -3,7 +3,32 @@
   %h1
     %span.glyphicon.glyphicon-gift
     =t '.title', :default => model_class.model_name.human.pluralize.titleize
+
+.panel.panel-default{style:'max-width: 600px'}
+  .panel-heading
+    %span.panel-title
+      Filter
+      = link_to url_for() do
+        %span.pull-right{style: 'cursor: pointer'}
+          %span.glyphicon.glyphicon-remove-circle
+  .panel-body
+    = search_form_for @q, url: search_deliveries_path, html: {method: :get } do |f|
+      .row
+        .col-xs-4
+          .form-group
+            = f.select :user_id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @q.user_id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
+        .col-xs-4
+          .form-group
+            = f.select :created_at_eq, options_for_select(@periods, @period_value), {include_blank: "Zeitraum..."}, {class: "form-control", onchange: "this.form.submit();"}
+        .col-xs-12  
+          .input-group
+            = f.text_field :user_first_name_or_user_last_name_cont, placeholder: 'Suche', class:'form-control'
+            %span.input-group-btn
+              %button.btn.btn-default{type: "submit"}
+                %span.glyphicon.glyphicon-search
+
 = link_to t('.new', :default => t("helpers.links.new")), new_delivery_path, class:'btn btn-primary'
+
 %table.table.table-striped
   %thead
     %tr
@@ -27,3 +52,6 @@
         %td=l delivery.created_at.localtime, format: :long
         %td
           = link_to t('.destroy', :default => t("helpers.links.destroy")), delivery_path(delivery), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, class:'btn btn-mini btn-danger'
+
+%div.pagination-centered
+  = will_paginate @deliveries, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), renderer: BootstrapPagination::Rails}

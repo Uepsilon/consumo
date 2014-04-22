@@ -53,5 +53,5 @@
         %td
           = link_to t('.destroy', :default => t("helpers.links.destroy")), delivery_path(delivery), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, class:'btn btn-mini btn-danger'
 
-%div.pagination-centered
+.pagination-centered
   = will_paginate @deliveries, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), renderer: BootstrapPagination::Rails}

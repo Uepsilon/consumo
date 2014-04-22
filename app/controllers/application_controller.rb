@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!, unless: :devise_controller?
   before_filter :periods
+  before_filter :clean_search_filter
 
   private
 
@@ -17,5 +18,11 @@ class ApplicationController < ActionController::Base
       @period_value = ''
     end
     @period_value
+  end
+
+  def clean_search_filter
+    if not params[:q].present?
+      params[:q] = nil
+    end
   end
 end

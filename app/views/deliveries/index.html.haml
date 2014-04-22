@@ -12,11 +12,11 @@
         %span.pull-right{style: 'cursor: pointer'}
           %span.glyphicon.glyphicon-remove-circle
   .panel-body
-    = search_form_for @q, url: search_deliveries_path, html: {method: :get } do |f|
+    = search_form_for @filters, url: search_deliveries_path, html: {method: :get } do |f|
       .row
         .col-xs-4
           .form-group
-            = f.select :user_id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @q.user_id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
+            = f.select :user_id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @filters.user_id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
         .col-xs-4
           .form-group
             = f.select :created_at_eq, options_for_select(@periods, @period_value), {include_blank: "Zeitraum..."}, {class: "form-control", onchange: "this.form.submit();"}

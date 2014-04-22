@@ -12,11 +12,11 @@
         %span.pull-right{style: 'cursor: pointer'}
           %span.glyphicon.glyphicon-remove-circle
   .panel-body
-    = search_form_for @q, url: search_products_path, html: {method: :get} do |f|
+    = search_form_for @filters, url: search_products_path, html: {method: :get} do |f|
       .row
         .col-xs-4
           .form-group
-            = f.select :category_id_eq, options_from_collection_for_select(Category.order(title: :asc).all,"id","title", @q.category_id_eq), {include_blank: "Kategorie..."}, {class: "form-control", onchange: "this.form.submit();"}
+            = f.select :category_id_eq, options_from_collection_for_select(Category.order(title: :asc).all,"id","title", @filters.category_id_eq), {include_blank: "Kategorie..."}, {class: "form-control", onchange: "this.form.submit();"}
         .col-xs-8
           .input-group
             = f.text_field :name_or_category_title_cont, placeholder: 'Suche', class:'form-control'

@@ -11,9 +11,9 @@
         %span.pull-right{style: 'cursor: pointer'}
           %span.glyphicon.glyphicon-remove-circle
   .panel-body
-    = search_form_for @q, url: search_users_path, html: {method: :post } do |f|
+    = search_form_for @filters, url: search_users_path, html: {method: :post } do |f|
       .form-group
-        = f.select :id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @q.id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
+        = f.select :id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @filters.id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
       .input-group
         = f.text_field :email_or_first_name_or_last_name_start, placeholder: 'Suche', class:'form-control'
         %span.input-group-btn

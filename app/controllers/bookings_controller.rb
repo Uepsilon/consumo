@@ -1,14 +1,14 @@
 class BookingsController < ApplicationController
 
   def index  
-    #@bookings = Booking.page(params[:page]).order('created_at DESC').all
+
+    @filters = Booking.order('created_at DESC').search(params[:q])
+    
     if not params[:q].nil? and not params[:q][:created_at_eq].nil? and not params[:q][:created_at_eq].empty?
-      @q = Booking.order('created_at DESC').search(params[:q])
-      @bookings = @q.result(:distinct => true).paginate(:page => params[:page]).send(params[:q][:created_at_eq])
+      @bookings = @filters.result(:distinct => true).paginate(:page => params[:page]).send(params[:q][:created_at_eq])
       @period_value = params[:q][:created_at_eq]
     else
-      @q = Booking.order('created_at DESC').search(params[:q])
-      @bookings = @q.result(:distinct => true).paginate(:page => params[:page]) 
+      @bookings = @filters.result(:distinct => true).paginate(:page => params[:page]) 
       @period_value = ""
     end
 

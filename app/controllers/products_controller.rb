@@ -2,8 +2,8 @@ class ProductsController < ApplicationController
   def index
     #@products = Product.order('category_id ASC').order('name ASC').all
 
-    @q = Product.order('category_id ASC').order('name ASC').search(params[:q])
-    @products = @q.result(:distinct => true).paginate(:page => params[:page])
+    @filters = Product.order('category_id ASC').order('name ASC').search(params[:q])
+    @products = @filters.result(:distinct => true).paginate(:page => params[:page])
 
   end
 

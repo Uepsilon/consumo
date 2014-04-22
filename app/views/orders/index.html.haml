@@ -12,11 +12,11 @@
         %span.pull-right{style: 'cursor: pointer'}
           %span.glyphicon.glyphicon-remove-circle
   .panel-body
-    = search_form_for @q, url: search_orders_path, html: {method: :get } do |f|
+    = search_form_for @filters, url: search_orders_path, html: {method: :get } do |f|
       .row
         .col-xs-4
           .form-group
-            = f.select :user_id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @q.user_id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
+            = f.select :user_id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @filters.user_id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
         .col-xs-4
           .form-group
             = f.select :created_at_eq, options_for_select(@periods, @period_value), {include_blank: "Zeitraum..."}, {class: "form-control", onchange: "this.form.submit();"}
@@ -50,5 +50,4 @@
         %td= link_to t('.destroy', :default => t("helpers.links.destroy")), order_path(order), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, class:'btn btn-sm btn-danger'
 
 .pagination-centered
-  - if not @orders.empty?
-    = will_paginate @orders, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), renderer: BootstrapPagination::Rails}
+  = will_paginate @orders, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), renderer: BootstrapPagination::Rails}

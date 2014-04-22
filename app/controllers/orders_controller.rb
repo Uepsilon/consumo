@@ -1,13 +1,14 @@
 class OrdersController < ApplicationController
 
   def index 
+
+    @filters = Order.order('created_at DESC').search(params[:q])   
+    
     if not params[:q].nil? and not params[:q][:created_at_eq].nil? and not params[:q][:created_at_eq].empty?
-      @q = Order.order('created_at DESC').search(params[:q])   
-      @orders = @q.result(:distinct => true).paginate(:page => params[:page]).send(params[:q][:created_at_eq])
+      @orders = @filters.result(:distinct => true).paginate(:page => params[:page]).send(params[:q][:created_at_eq])
       @period_value = params[:q][:created_at_eq]
     else
-      @q = Order.order('created_at DESC').search(params[:q])
-      @orders = @q.result(:distinct => true).paginate(:page => params[:page]) 
+      @orders = @filters.result(:distinct => true).paginate(:page => params[:page]) 
       @period_value = ""
     end
     @periods = {"Heute" => "today", "Gestern" => "yesterday", "Die letzten 7 Tage" => "past_week", "Die letzten 14 Tage" => "past_fortnight"}

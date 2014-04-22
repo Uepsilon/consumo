@@ -1,3 +1,4 @@
+[![Code Climate](https://codeclimate.com/github/Uepsilon/consumo.png)](https://codeclimate.com/github/Uepsilon/consumo)
 # Consumo
 Productmanagement and -tracking-Tool.
 

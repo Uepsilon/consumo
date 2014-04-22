@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   def index
-    @q = User.search(params[:q])
-    @users = @q.result(distinct: true)
+    @filters = User.search(params[:q])
+    @users = @filters.result(distinct: true)
   end
 
   def edit

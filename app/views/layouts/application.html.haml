@@ -37,8 +37,8 @@
               %span.icon-bar
               %span.icon-bar
               %span.icon-bar
-          = link_to :new_order_item, class: "navbar-brand" do
-            = image_tag 'sumo_head.png', style: 'position:relative;top:-5px;'
+          = link_to :new_order_item, class: "navbar-brand", style: 'margin-top:-4px;' do
+            = image_tag 'sumo_head.png', style: 'position:relative;margin-top:-5px;'
             = t('navbar.title')
             - if not user_signed_in?
               %small

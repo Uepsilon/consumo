@@ -9,15 +9,22 @@
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
-    = stylesheet_link_tag "application", :media => "all"
-    = favicon_link_tag 'favicons/sumo-144.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
-    = favicon_link_tag 'favicons/sumo-114.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
-    = favicon_link_tag 'favicons/sumo-72.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
-    = favicon_link_tag 'favicons/sumo-128.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
-    = favicon_link_tag 'favicons/favicon.ico', :rel => 'shortcut icon'
-    = javascript_include_tag "application"
+    = stylesheet_link_tag "application", media:  "all"
+    = favicon_link_tag 'favicons/sumo-144.png', rel:  'apple-touch-icon-precomposed', type:  'image/png', sizes:  '144x144'
+    = favicon_link_tag 'favicons/sumo-114.png', rel:  'apple-touch-icon-precomposed', type:  'image/png', sizes:  '114x114'
+    = favicon_link_tag 'favicons/sumo-72.png', rel:  'apple-touch-icon-precomposed', type:  'image/png', sizes:  '72x72'
+    = favicon_link_tag 'favicons/sumo-128.png', rel:  'apple-touch-icon-precomposed', type:  'image/png'
+    = favicon_link_tag 'favicons/favicon.ico', rel:  'shortcut icon'
+
     / <link href="/assets/mb-icon.png" rel="apple-touch-icon" type="image/png" />
   %body
+    #sumo_action
+      #sumo_hai
+        %span.label.label-info
+          Hai!
+      = image_tag 'sumo_big.png', size: '400x400'
+
+
     %a.hidden-sm.hidden-xs{href: "https://github.com/Uepsilon/consumo"}
       %img{alt: "Fork me on GitHub", "data-canonical-src" => "https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png", src: "https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67", style: "position: fixed; top: 0; right: 0; border: 0; z-index: 9999;"}/
 
@@ -49,7 +56,7 @@
                   %span.glyphicon.glyphicon-stats
                   = t("navbar.statistics")
               %li.dropdown
-                = link_to '#', { "data-toggle" => 'dropdown', :class => 'dropdown-toggle'} do
+                = link_to '#', { "data-toggle" => 'dropdown', class:  'dropdown-toggle'} do
                   %span.glyphicon.glyphicon-cog
                   = t("navbar.preferences")
                   %b.caret
@@ -91,8 +98,11 @@
                   = link_to :destroy_user_session, method: :delete do
                     %span.glyphicon.glyphicon-off
                     = t("navbar.logout")
-    .container-fluid
+    .container-fluid#container
       .row-fluid
         .span12
           = bootstrap_flash
           = yield
+
+    = javascript_include_tag "application"
+    = content_for(:javascript)

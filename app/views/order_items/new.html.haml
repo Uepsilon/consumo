@@ -1,8 +1,6 @@
-#sumo_action{onclick:'sumo_action()'}
-  #sumo_hai
-    %span.label.label-info
-      Hai!
-  = image_tag 'sumo_big.png', size: '400x400'
+= content_for :javascript do
+  :javascript
+    sumo_action();
 
 %ul#dashboard.list-group{style: 'max-width:500px;'}
   %li.list-group-item.list-group-item-info
@@ -10,27 +8,27 @@
     %span.glyphicon.glyphicon-stats
   - if not @last_delivery.nil?  
     %li.list-group-item
-      = link_to deliveries_path do
+      = link_to deliveries_path(q: {user_id_eq: current_user.id}) do
         = t 'order_item.last_delivery'
         %span.label.label-info.pull-right
           = @last_delivery
   %li.list-group-item
-    = link_to orders_path do
+    = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.orders'
       %span.label.label-info.pull-right
         = @user.orders.today.count
   %li.list-group-item
-    = link_to orders_path do
+    = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.last_order'
       %span.label.label-info.pull-right
         = @last_order
   %li.list-group-item
-    = link_to orders_path do
+    = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.orders_amount'
       %span.label.label-warning.pull-right
         = number_to_currency @user.orders.today.sum(:amount), presicion: 2
   %li.list-group-item
-    = link_to users_path do
+    = link_to users_path(q: {id_eq: current_user.id}) do
       = t 'order_item.balance'
       - if @user.balance < 0
         %span.label.label-danger.pull-right
@@ -40,7 +38,7 @@
           = number_to_currency @user.balance, presicion: 2
     
 
-= form_for @order_item, :html => { class:'form-horizontal' } do |f|
+= form_for @order_item, html:{ class:'form-horizontal' } do |f|
   = f.hidden_field :amount, class: 'form-control', value: 1
   = f.hidden_field :delivery_id, class: 'form-control'
   - Category.by_position.all.each do |category|
@@ -74,4 +72,7 @@
                         %span.label.label-info
                           = product.remaining
                     .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery.unit_price, precision: 2}"
+
+%audio#chatAudio
+  %source{src: "/assets/sumo_shout.mp3", type: "audio/mpeg"}
 

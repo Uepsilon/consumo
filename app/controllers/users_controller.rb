@@ -1,15 +1,8 @@
 class UsersController < ApplicationController
 
   def index
-    #@users = User.all
-
-    if params[:id].nil?        
-      @q = User.search(params[:q])
-      @users = @q.result(distinct: true)
-    else
-      @q = User.find(current_user.id).search(params[:q])
-      @users = @q.result(distinct: true)
-    end
+    @filters = User.search(params[:q])
+    @users = @filters.result(distinct: true)
   end
 
   def edit
@@ -22,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     if @user.update_with_password(user_params)
       # Sign in the user by passing validation in case his password changed
-      sign_in @user, :bypass => true
+      sign_in @user, bypass: true
       redirect_to :users, notice: "Passwort geändert"
     else
       render :edit

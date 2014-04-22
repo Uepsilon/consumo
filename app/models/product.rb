@@ -18,25 +18,27 @@ class Product < ActiveRecord::Base
   if Rails.env.production?
     has_attached_file :picture,
       storage: :s3,
-      :s3_credentials => {
-        :bucket => ENV['DB_S3_BUCKET'],
-        :access_key_id => ENV['DB_S3_ID'],
-        :secret_access_key => ENV['DB_S3_KEY']
+      s3_credentials:  {
+        bucket:  ENV['DB_S3_BUCKET'],
+        access_key_id:  ENV['DB_S3_ID'],
+        secret_access_key:  ENV['DB_S3_KEY']
       },
-      :path => "/images/:rails_env/products/:id/:style.:extension",
-      :url => ":s3_domain_url",
-      :styles => { :medium => "200x200>", :thumb => "100x100>" }
+      path:  "/images/:rails_env/products/:id/:style.:extension",
+      url:  ":s3_domain_url",
+      styles:  { medium:  "200x200>", thumb:  "100x100>" }
   else
     has_attached_file :picture,
-      :styles => { :medium => "200x200>", :thumb => "100x100>" }
+      styles:  { medium:  "200x200>", thumb:  "100x100>" }
   end
 
   belongs_to :category
   belongs_to :sku
   has_many  :deliveries
 
+  self.per_page = 10
+
   validates_attachment_presence     :picture
-  validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :picture, content_type:  /\Aimage\/.*\Z/
 
   validates :name,    presence: true
   validates :size,    presence: true, numericality: true

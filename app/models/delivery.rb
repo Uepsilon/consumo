@@ -26,6 +26,8 @@ class Delivery < ActiveRecord::Base
   before_save :calculate_booking_amount
   before_save :calculate_unit_price
 
+  self.per_page = 10
+
   attr_accessor :price
 
   def remaining

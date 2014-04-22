@@ -52,9 +52,13 @@ group :development do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 gem "polyamorous", github: "activerecord-hackery/polyamorous"
+
+gem 'by_star'
+
 
 #gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'

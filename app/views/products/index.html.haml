@@ -4,6 +4,27 @@
     %span.glyphicon.glyphicon-barcode
     =t '.title', default: model_class.model_name.human.pluralize.titleize
 
+.panel.panel-default{style:'max-width: 600px'}
+  .panel-heading
+    %span.panel-title
+      Filter
+      = link_to url_for() do
+        %span.pull-right{style: 'cursor: pointer'}
+          %span.glyphicon.glyphicon-remove-circle
+  .panel-body
+    = search_form_for @filters, url: search_products_path, html: {method: :get} do |f|
+      .row
+        .col-xs-4
+          .form-group
+            = f.select :category_id_eq, options_from_collection_for_select(Category.order(title: :asc).all,"id","title", @filters.category_id_eq), {include_blank: "Kategorie..."}, {class: "form-control", onchange: "this.form.submit();"}
+        .col-xs-8
+          .input-group
+            = f.text_field :name_or_category_title_cont, placeholder: 'Suche', class:'form-control'
+            %span.input-group-btn
+              %button.btn.btn-default{type: "submit"}
+                %span.glyphicon.glyphicon-search
+
+
 %div
   = link_to t('.new', default: t("helpers.links.new")), new_product_path, class:'btn btn-primary'
 
@@ -31,3 +52,5 @@
           = link_to t('.destroy', default: t("helpers.links.destroy")), product_path(product), method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class:'btn btn-mini btn-danger'
 
 
+.pagination-centered
+  = will_paginate @products, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), renderer: BootstrapPagination::Rails}

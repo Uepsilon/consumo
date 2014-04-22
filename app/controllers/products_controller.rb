@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
     #@products = Product.order('category_id ASC').order('name ASC').all
 
     @filters = Product.order('category_id ASC').order('name ASC').search(params[:q])
-    @products = @filters.result(:distinct => true).paginate(:page => params[:page])
+    @products = @filters.result(distinct: true).paginate(page: params[:page])
 
   end
 

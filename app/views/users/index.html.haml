@@ -2,7 +2,7 @@
 .page-header
   %h1
     %span.glyphicon.glyphicon-user
-    =t '.title', :default => model_class.model_name.human.pluralize.titleize
+    =t '.title', default: model_class.model_name.human.pluralize.titleize
 .panel.panel-default{style:'max-width: 600px'}
   .panel-heading
     %span.panel-title
@@ -27,7 +27,7 @@
       %th=t '.column.name'
       %th=t '.column.bookings'
       %th=t '.column.balance'
-      %th=t '.actions', :default => t("helpers.actions")
+      %th=t '.actions', default: t("helpers.actions")
   %tbody
     - @users.each do |user|
       %tr
@@ -40,6 +40,6 @@
         %td= number_to_currency user.balance, presicion: 2
         %td
           - if user == current_user
-            = link_to t('.edit', :default => t("helpers.links.update_password")), [:edit, user], class:'btn btn-danger'
+            = link_to t('.edit', default: t("helpers.links.update_password")), [:edit, user], class:'btn btn-danger'
           - else
             &nbsp;

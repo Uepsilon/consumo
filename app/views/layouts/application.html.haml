@@ -9,12 +9,12 @@
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
-    = stylesheet_link_tag "application", :media => "all"
-    = favicon_link_tag 'favicons/sumo-144.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
-    = favicon_link_tag 'favicons/sumo-114.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
-    = favicon_link_tag 'favicons/sumo-72.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
-    = favicon_link_tag 'favicons/sumo-128.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
-    = favicon_link_tag 'favicons/favicon.ico', :rel => 'shortcut icon'
+    = stylesheet_link_tag "application", media:  "all"
+    = favicon_link_tag 'favicons/sumo-144.png', rel:  'apple-touch-icon-precomposed', type:  'image/png', sizes:  '144x144'
+    = favicon_link_tag 'favicons/sumo-114.png', rel:  'apple-touch-icon-precomposed', type:  'image/png', sizes:  '114x114'
+    = favicon_link_tag 'favicons/sumo-72.png', rel:  'apple-touch-icon-precomposed', type:  'image/png', sizes:  '72x72'
+    = favicon_link_tag 'favicons/sumo-128.png', rel:  'apple-touch-icon-precomposed', type:  'image/png'
+    = favicon_link_tag 'favicons/favicon.ico', rel:  'shortcut icon'
 
     / <link href="/assets/mb-icon.png" rel="apple-touch-icon" type="image/png" />
   %body
@@ -56,7 +56,7 @@
                   %span.glyphicon.glyphicon-stats
                   = t("navbar.statistics")
               %li.dropdown
-                = link_to '#', { "data-toggle" => 'dropdown', :class => 'dropdown-toggle'} do
+                = link_to '#', { "data-toggle" => 'dropdown', class:  'dropdown-toggle'} do
                   %span.glyphicon.glyphicon-cog
                   = t("navbar.preferences")
                   %b.caret

@@ -2,7 +2,7 @@
 .page-header
   %h1
     %span.glyphicon.glyphicon-ok
-    =t '.title', :default => model_class.model_name.human.pluralize.titleize
+    =t '.title', default: model_class.model_name.human.pluralize.titleize
 
 .panel.panel-default{style:'max-width: 600px'}
   .panel-heading
@@ -34,7 +34,7 @@
       %th=t (".column.amount")
       %th=t '.column.quantity'
       %th=t 'helpers.created_at'
-      %th=t 'actions', :default => t("helpers.actions")
+      %th=t 'actions', default: t("helpers.actions")
   %tbody
     - @orders.each do |order|
       %tr
@@ -47,7 +47,7 @@
             %br
 
         %td=l order.created_at.localtime, format: :long
-        %td= link_to t('.destroy', :default => t("helpers.links.destroy")), order_path(order), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, class:'btn btn-sm btn-danger'
+        %td= link_to t('.destroy', default: t("helpers.links.destroy")), order_path(order), method:  :delete, data:  { confirm:  t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class:'btn btn-sm btn-danger'
 
 .pagination-centered
   = will_paginate @orders, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), renderer: BootstrapPagination::Rails}

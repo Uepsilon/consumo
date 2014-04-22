@@ -15,36 +15,3 @@
 //= require jquery.ui.all
 //= require twitter/bootstrap
 //= require_tree .
-
-
-function clear_form()
-{
-    $(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
-    $(':checkbox, :radio').prop('checked', false);
-}
-
-function sumo_action(){
-  if($('#sumo_action') && $('.alert-dismissable').hasClass('alert-success')) {
-    
-    $('<audio id="sumo_stomp"><source src="/assets/sumo_stomp.mp3" type="audio/mpeg"></audio>').appendTo('body');
-    
-    $('#sumo_stomp')[0].play();
-   
-    $('#sumo_action').show();
-
-    $('#sumo_action').addClass("go").delay(300).queue(
-      function(next) {
-        $('#sumo_action').removeClass("error");
-        $('#sumo_action').addClass("back").delay(400).queue(function(next){
-          $('#container').effect( "shake", {direction: 'down', distance:'10'}  )
-          $('#sumo_hai').show().delay(700).queue(function(next){
-            $('#sumo_action').fadeOut();
-            next();
-          });
-          next();
-        });
-        next();
-      }
-    );  
-  }
-}

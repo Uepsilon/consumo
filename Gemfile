@@ -59,6 +59,9 @@ gem "polyamorous", github: "activerecord-hackery/polyamorous"
 
 gem 'by_star'
 
+gem 'morrisjs-rails'
+gem 'raphael-rails'
+
 
 #gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'

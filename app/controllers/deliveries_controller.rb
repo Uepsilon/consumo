@@ -1,9 +1,7 @@
 class DeliveriesController < ApplicationController
 
   def index
-    @filters = Delivery.order('created_at DESC').search(params[:q])
-    @deliveries = @filters.result(distinct: true).paginate(page: params[:page])
-    @deliveries = @deliveries.send(created_at_eq) unless created_at_eq.blank?
+    @deliveries = filter_and_pagination Delivery
   end
 
   def new

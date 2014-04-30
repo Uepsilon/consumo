@@ -7,6 +7,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def filter_and_pagination(model_class)
+    @filters = model_class.order('created_at DESC').search(params[:q])
+    result = @filters.result(distinct: true).paginate(page: params[:page])
+    result = result.send(created_at_eq) unless created_at_eq.blank?
+
+    result
+  end
+
   def periods
     @periods = {"Heute" => "today", "Gestern" => "yesterday", "Die letzten 7 Tage" => "past_week", "Die letzten 14 Tage" => "past_fortnight"}
   end

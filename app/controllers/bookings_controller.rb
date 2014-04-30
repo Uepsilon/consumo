@@ -1,9 +1,7 @@
 class BookingsController < ApplicationController
 
   def index
-    @filters = Booking.order('created_at DESC').search(params[:q])
-    @bookings = @filters.result(distinct: true).paginate(page: params[:page])
-    @bookings = @bookings.send(created_at_eq) unless created_at_eq.blank?
+    @bookings = filter_and_pagination Booking
   end
 
   def new

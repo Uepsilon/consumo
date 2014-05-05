@@ -33,7 +33,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :category
   belongs_to :sku
-  has_many  :deliveries
+  has_many :deliveries
 
   self.per_page = 10
 
@@ -57,7 +57,7 @@ class Product < ActiveRecord::Base
 
   def current_delivery
     self.deliveries.order(:created_at).each do |delivery|
-      return delivery unless delivery.remaining.zero?
+      return delivery if delivery.remaining > 0
     end
   end
 end

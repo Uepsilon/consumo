@@ -1,9 +1,7 @@
 class OrdersController < ApplicationController
 
   def index
-    @filters = Order.order('created_at DESC').search(params[:q])
-    @orders = @filters.result(distinct: true).paginate(page: params[:page])
-    @orders = @orders.send(created_at_eq) unless created_at_eq.blank?
+    @orders = filter_and_pagination Order
   end
 
   def destroy

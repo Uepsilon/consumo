@@ -79,4 +79,4 @@
                           = product.remaining
                     .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery.unit_price, precision: 2}"
                     .calories
-                      = "#{t "products.calories"}: #{product.calories_with_unit} "
+                      = "#{t "products.calories"}: #{product.calories} #{t 'products.calories_short'}"

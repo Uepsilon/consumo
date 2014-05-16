@@ -46,7 +46,7 @@
         %td= product.name
         %td= product.category.title
         %td= product.size_with_unit
-        %td= product.calories_with_unit
+        %td= "#{product.calories} #{t 'products.calories_short'}"
         %td= product.remaining
         %td= image_tag product.picture.url(:thumb)
         %td

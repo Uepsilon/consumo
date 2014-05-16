@@ -42,6 +42,7 @@ class Product < ActiveRecord::Base
 
   validates :name,    presence: true
   validates :size,    presence: true, numericality: true
+  validates :calories, numericality: true
 
   def title
     "#{name} (#{size.to_s.gsub!('.', ',')}#{sku.short})"

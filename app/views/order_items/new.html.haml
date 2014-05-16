@@ -24,9 +24,15 @@
         = @last_order
   %li.list-group-item
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
+      = t 'order_item.calories_amount'
+      %span.label.label-info.pull-right
+        = @calories_today
+        = t'products.calories_short'  
+  %li.list-group-item
+    = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.orders_amount'
       %span.label.label-warning.pull-right
-        = number_to_currency @user.orders.today.sum(:amount), presicion: 2
+        = number_to_currency @user.orders.today.sum(:amount), presicion: 2 
   %li.list-group-item
     = link_to users_path(q: {id_eq: current_user.id}) do
       = t 'order_item.balance'
@@ -72,3 +78,5 @@
                         %span.label.label-info
                           = product.remaining
                     .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery.unit_price, precision: 2}"
+                    .calories
+                      = "#{t "products.calories"}: #{product.calories} #{t 'products.calories_short'}"

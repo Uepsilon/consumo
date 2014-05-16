@@ -1,10 +1,8 @@
 class ProductsController < ApplicationController
   def index
     #@products = Product.order('category_id ASC').order('name ASC').all
-
     @filters = Product.order('category_id ASC').order('name ASC').search(params[:q])
     @products = @filters.result(distinct: true).paginate(page: params[:page])
-
   end
 
   def new
@@ -47,9 +45,10 @@ class ProductsController < ApplicationController
     redirect_to :products, notice: "Produkt gelöscht."
   end
 
+
   private
 
   def product_params
-    params.require(:product).permit(:name, :category_id, :sku_id, :size, :picture)
+    params.require(:product).permit(:name, :category_id, :sku_id, :size, :calories, :picture)
   end
 end

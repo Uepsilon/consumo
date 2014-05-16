@@ -95,6 +95,12 @@ de:
               ? "title'\n\n%div\n  Coming Soon, Hai!\n\n  "
               : ssss
       title: Statistik
+      headlines:
+        year: 'Jahr'
+        month: 'Monat'
+        week: 'Woche'
+        day: 'Tag'
+        hour: 'Stunde'
   users:
     index:
       column:

@@ -1,100 +1,109 @@
 de:
-  navbar:
-    title: 'consumo'
-    subtitle: 'get the goods!'
-    order: 'Buchen'
-    category: 'Kategorien'
-    sku: 'Einheiten'
-    product: 'Produkte'
-    delivery: 'Lieferungen'
-    user: 'Benutzer'
-    booking: 'Buchungen'
-    orders: 'Bestellungen'
-    statistics: 'Statistik'
-    preferences: 'Verwaltung'
-    logout: 'Abmelden'
-  devise:
-    login:
-      title: 'Anmeldung'
-      email: 'E-Mail'
-      password: 'Passwort'
-      remember_me: 'Anmeldung merken'
-      submit: 'anmelden'
-  will_paginate:
-    previous_level: 'zurück'
-    next_level: 'weiter'
   bookings:
     index:
-      title: 'Buchungen'
       column:
-        id: 'ID'
-        user_name: 'Benutzer'
-        amount: 'Preis'
-        bookable: 'Buchungstyp'
-        booking: 'Buchung'
-  orders:
-    index:
-      title: 'Bestellungen'
-      column:
-        id: 'ID'
-        name: 'Benutzer'
-        amount: 'Preis'
-        quantity: 'Produkt / Menge'
-  skus:
-    index:
-      title: 'Einheiten'
-      column:
-          id: 'ID'
-          title: 'Name'
-          short: 'Kürzel'
+        amount: Preis
+        bookable: Buchungstyp
+        booking: Buchung
+        id: ID
+        user_name: Benutzer
+      title: Buchungen
   categories:
     index:
-      title: 'Kategorien'
       column:
-        id: 'ID'
-        title: 'Titel'
+        id: ID
+        title: Titel
+      title: Kategorien
   deliveries:
     index:
-      title: 'Lieferungen'
       column:
-          id: 'ID'
-          title: 'Produkte'
-          quantity: 'Menge'
-          amount: 'Kosten'
-          unit_price: 'Preis pro Einheit'
-          user_name: 'Benutzer'
-          remaining: 'Bestand'
-  products:
-    index:
-      title: 'Produkte'
-      column:
-          id: 'ID'
-          name: 'Name'
-          category: 'Kategorie'
-          size: 'Kategorie'
-          remaining: 'Bestand'
-          picture: 'Bild'
+        amount: Kosten
+        id: ID
+        quantity: Menge
+        remaining: Bestand
+        title: Produkte
+        unit_price: Preis pro Einheit
+        user_name: Benutzer
+      title: Lieferungen
+  devise:
+    login:
+      email: E-Mail
+      password: Passwort
+      remember_me: Anmeldung merken
+      submit: anmelden
+      title: Anmeldung
+  navbar:
+    booking: Buchungen
+    category: Kategorien
+    delivery: Lieferungen
+    logout: Abmelden
+    order: Buchen
+    orders: Bestellungen
+    preferences: Verwaltung
+    product: Produkte
+    sku: Einheiten
+    statistics: Statistik
+    subtitle: get the goods!
+    title: consumo
+    user: Benutzer
   order_item:
+    balance: Mein Restguthaben
+    calories_amount: Heutige Kalorien
     index:
-      title: 'Buchen'
       column:
-          id: 'ID'
-    logged_in_as: 'Angemeldet: '  
-    balance: 'Mein Restguthaben'  
-    last_delivery: 'Letzte Lieferung'  
-    last_order: 'Letzte Bestellung'  
-    last_order_empty: 'n/a'  
-    orders: 'Heutige Bestellungen'  
-    orders_amount: 'Heutige Investition'  
-  users:
+        id: ID
+      title: Buchen
+    last_delivery: Letzte Lieferung
+    last_order: Letzte Bestellung
+    last_order_empty: n/a
+    logged_in_as: 'Angemeldet: '
+    orders: Heutige Bestellungen
+    orders_amount: Heutige Investition
+  orders:
     index:
-      title: 'Benutzer'
       column:
-          id: 'ID'
-          email: 'E-Mail-Adresse'
-          name: 'Name'
-          bookings: 'Buchungen'
-          balance: 'Guthaben'
+        amount: Preis
+        id: ID
+        name: Benutzer
+        quantity: Produkt / Menge
+      title: Bestellungen
+  products:
+    calories: Kalorien
+    calories_short: kcal
+    index:
+      column:
+        category: Kategorie
+        id: ID
+        name: Name
+        picture: Bild
+        remaining: Bestand
+        size: Kategorie
+      title: Produkte
+  skus:
+    index:
+      column:
+        id: ID
+        short: Kürzel
+        title: Name
+      title: Einheiten
   statistics:
     index:
-      title: 'Statistik'
+      ? "page-header\n  %h1\n    %span"
+      : glyphicon:
+          ? "glyphicon-stats\n    =t 'statistics"
+          : index:
+              ? "title'\n\n%div\n  Coming Soon, Hai!\n\n  "
+              : ssss
+      title: Statistik
+  users:
+    index:
+      column:
+        balance: Guthaben
+        bookings: Buchungen
+        email: E-Mail-Adresse
+        id: ID
+        name: Name
+      title: Benutzer
+  will_paginate:
+    next_level: weiter
+    previous_level: zurück

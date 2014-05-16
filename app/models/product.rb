@@ -42,9 +42,18 @@ class Product < ActiveRecord::Base
 
   validates :name,    presence: true
   validates :size,    presence: true, numericality: true
+  validates :calories, numericality: true
 
   def title
     "#{name} (#{size.to_s.gsub!('.', ',')}#{sku.short})"
+  end
+
+  def calories_with_unit
+    if not calories.nil?
+      "#{calories} #{I18n.t('products.calories_short')}"
+    else
+      "n/a"
+    end
   end
 
   def size_with_unit

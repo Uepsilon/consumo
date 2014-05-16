@@ -1,5 +1,7 @@
 class OrderItemsController < ApplicationController
 
+  rescue_from OrderItem::NotEnoughInventory, with: :not_enough_inventory
+
   def new
     @order_item = OrderItem.new
     @user = User.find(current_user.id)
@@ -24,7 +26,7 @@ class OrderItemsController < ApplicationController
       if @order_item.save
         redirect_to :new_order_item, notice: "Consumo sagt, #{@order_item.delivery.product.name} gebucht. Hai!"
       else
-        redirect_to :new_order_item, alert: "Consumo sagt nix gut"
+        redirect_to :new_order_item, alert: 'Consumo sagt, nix gut.'
       end
     end
   end
@@ -33,5 +35,11 @@ class OrderItemsController < ApplicationController
 
   def order_item_params
     params.require(:order_item).permit(:delivery_id, :amount)
+  end
+
+  private
+
+  def not_enough_inventory
+    redirect_to :new_order_item, alert: 'Consumo sagt, wir nix genug Zeug da!'
   end
 end

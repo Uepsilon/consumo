@@ -3,12 +3,13 @@
     %span.glyphicon.glyphicon-stats
     =t 'statistics.index.title'
 
+%h2 Bestellungen
 - @date_formats.each do |date_format|
-  .panel.panel-info{style:"float:left; margin:20px;"}
+  .panel.panel-info.pull-left{style:"margin:20px;"}
     .panel-heading
       %h2.panel-title= t("statistics.index.headlines.#{date_format}")
     .panel-body
-      %div{id: "orders_by_#{date_format}", style: "width:500px; height:250px;"}
+      %div{id: "orders_by_#{date_format}", style: "width:400px; height:200px;"}
 
       = content_for :javascript do
         :javascript

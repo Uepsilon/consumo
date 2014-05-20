@@ -3,7 +3,15 @@ Consumo::Application.routes.draw do
 
     root to: "order_items#new"
 
-    resources :statistics
+    namespace :statistics do
+      resources :orders do
+        collection do
+          match 'search' => 'statistics_orders#search', via: [:get, :post], as: :search  
+        end
+      end
+    end
+
+
     resources :orders, via: [:get, :post] do
       collection do
         match 'search' => 'orders#search', via: [:get, :post], as: :search  

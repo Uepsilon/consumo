@@ -12,7 +12,6 @@ class OrderItemsController < ApplicationController
     else
       @last_order = t 'order_item.last_order_empty'
     end
-
     @bookings = @user.bookings.all
     @bookings_today = @user.bookings.where("created_at >= ?", Time.zone.now.beginning_of_day)
   end

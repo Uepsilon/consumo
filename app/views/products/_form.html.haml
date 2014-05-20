@@ -20,6 +20,10 @@
     .col-sm-10
       = f.text_field :size, class:'form-control', data: { behaviour: "format-number" }
   .form-group
+    = f.label :calories, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :calories, class:'form-control', data: { behaviour: "format-number" }
+  .form-group
     = f.label :picture, class: 'col-sm-2 control-label'
     .col-sm-10
       = f.file_field :picture

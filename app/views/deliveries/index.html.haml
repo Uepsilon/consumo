@@ -49,9 +49,10 @@
         %td= number_to_currency delivery.unit_price, precision: 2
         %td= delivery.user.name
         %td= delivery.remaining
-        %td=l delivery.created_at.localtime, format: :long
+        %td=l delivery.created_at.localtime, format: :short
         %td
-          = link_to t('.destroy', default: t("helpers.links.destroy")), delivery_path(delivery), method:  :delete, data:  { confirm:  t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class:'btn btn-mini btn-danger'
+          = link_to delivery_path(delivery), method:  :delete, data:  { confirm:  t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class:'btn btn-mini btn-danger' do
+            %span.glyphicon.glyphicon-trash
 
 .pagination-centered
   = will_paginate @deliveries, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), renderer: BootstrapPagination::Rails}

@@ -57,7 +57,7 @@
         - else
           %td= simple_format booking.infotext
         %td= number_to_currency booking.amount, precision: 2
-        %td=l booking.created_at.localtime, format: :long
+        %td=l booking.created_at.localtime, format: :short
 
 .pagination-centered
   = will_paginate @bookings, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), renderer: BootstrapPagination::Rails}

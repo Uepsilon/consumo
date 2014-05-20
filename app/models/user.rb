@@ -44,4 +44,8 @@ class User < ActiveRecord::Base
   def balance
     self.bookings.sum(:amount)
   end
+
+  def todays_calories
+    order_items.today.inject(0) { |sum, order_item| sum + order_item.delivery.product.calories }
+  end
 end

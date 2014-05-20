@@ -6,7 +6,7 @@
   %li.list-group-item.list-group-item-info
     %strong= @user.name
     %span.glyphicon.glyphicon-stats
-  - if not @last_delivery.nil?  
+  - if not @last_delivery.nil?
     %li.list-group-item
       = link_to deliveries_path(q: {user_id_eq: current_user.id}) do
         = t 'order_item.last_delivery'
@@ -26,23 +26,23 @@
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.calories_amount'
       %span.label.label-info.pull-right
-        = @calories_today
-        = t'products.calories_short'  
+        = current_user.todays_calories
+        = t'products.calories_short'
   %li.list-group-item
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.orders_amount'
       %span.label.label-warning.pull-right
-        = number_to_currency @user.orders.today.sum(:amount), presicion: 2 
+        = number_to_currency @user.orders.today.sum(:amount), presicion: 2
   %li.list-group-item
     = link_to users_path(q: {id_eq: current_user.id}) do
       = t 'order_item.balance'
       - if @user.balance < 0
         %span.label.label-danger.pull-right
           = number_to_currency @user.balance, presicion: 2
-      -else 
+      -else
         %span.label.label-success.pull-right
           = number_to_currency @user.balance, presicion: 2
-    
+
 
 = form_for @order_item, html:{ class:'form-horizontal' } do |f|
   = f.hidden_field :amount, class: 'form-control', value: 1

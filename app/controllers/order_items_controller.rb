@@ -12,12 +12,12 @@ class OrderItemsController < ApplicationController
     else
       @last_order = t 'order_item.last_order_empty'
     end
-    get_calories_today
+    calories
     @bookings = @user.bookings.all
     @bookings_today = @user.bookings.where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
-  def get_calories_today
+  def calories
     @calories_today = 0
     current_user.orders.today.each do |order| 
       order.order_items.each do |order_item| 

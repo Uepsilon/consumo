@@ -6,8 +6,9 @@ Productmanagement and -tracking-Tool.
 See who took which products from your office kitchen and keep track of their accounting.
 Also be aware of stocking count of products so you will know when to order new stuff.
 
-## Upcoming
-Statistics Baby
+## Usage
+Copy/Rename the `config/secrets.yml.example` to `config/secrets.yml` and generate your own secret keys (which should be
+longer than 30 chars, and so on and so on).
 
 ## License
 The MIT License (MIT)

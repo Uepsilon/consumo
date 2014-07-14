@@ -42,7 +42,10 @@ de:
     preferences: Verwaltung
     product: Produkte
     sku: Einheiten
-    statistics: Statistik
+    statistics:
+      statistics: 'Statistik'
+      orders: 'Bestellungen'
+      popularity: 'Tops und Flops' 
     subtitle: get the goods!
     title: consumo
     user: Benutzer
@@ -87,14 +90,10 @@ de:
         title: Name
       title: Einheiten
   statistics:
-    index:
-      ? "page-header\n  %h1\n    %span"
-      : glyphicon:
-          ? "glyphicon-stats\n    =t 'statistics"
-          : index:
-              ? "title'\n\n%div\n  Coming Soon, Hai!\n\n  "
-              : ssss
-      title: Statistik
+    popularity: 
+      title: 'Tops und Flops' 
+    orders:
+      title: Bestellungen
       headlines:
         year: 'Jahr'
         month: 'Monat'

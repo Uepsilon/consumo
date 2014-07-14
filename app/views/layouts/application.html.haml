@@ -50,17 +50,26 @@
                 = link_to :new_order_item do
                   %span.glyphicon.glyphicon-ok-circle
                   = t("navbar.order")
-              %li
-                / = link_to :statistics_orders_path do
-                /  %span.glyphicon.glyphicon-stats
-                /   = t("navbar.statistics")
+              %li.dropdown
+                = link_to '#', { "data-toggle" => 'dropdown', class:  'dropdown-toggle'} do
+                  %span.glyphicon.glyphicon-stats
+                  = t("navbar.statistics.statistics")
+                  %b.caret
+                %ul.dropdown-menu
+                  %li
+                    = link_to :statistics_popularity_index do
+                      %span.glyphicon.glyphicon-sort
+                      = t("navbar.statistics.popularity")
+                  / %li
+                  /   = link_to "#" do
+                  /     %span.glyphicon.glyphicon-stats
+                  /     = t("navbar.statistics.orders")
               %li.dropdown
                 = link_to '#', { "data-toggle" => 'dropdown', class:  'dropdown-toggle'} do
                   %span.glyphicon.glyphicon-cog
                   = t("navbar.preferences")
                   %b.caret
                 %ul.dropdown-menu
-                  
                   %li
                     = link_to :products do
                       %span.glyphicon.glyphicon-barcode
@@ -102,6 +111,5 @@
         .span12
           = bootstrap_flash
           = yield
-
     = javascript_include_tag "application"
     = content_for(:javascript)

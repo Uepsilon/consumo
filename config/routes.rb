@@ -9,6 +9,11 @@ Consumo::Application.routes.draw do
           match 'search' => 'statistics_orders#search', via: [:get, :post], as: :search  
         end
       end
+      resources :popularity do
+        collection do
+          match 'search' => 'statistics_popularity#search', via: [:get, :post], as: :search  
+        end
+      end
     end
 
 

@@ -1,50 +1,40 @@
+#Booking.select('created_at::date','COUNT(id) as counter').group('created_at::date')
+#Booking.select('created_at::date','COUNT(id) as counter').between_times(Time.zone.now - 31.days, Time.zone.now).group('created_at::date').to_yaml
 class Statistics::OrdersController < ApplicationController
+  def index
 
-  ######################################
-  # IN DEVELOPMENT / NOT IN USE
-  ######################################
-
-  def index  
-    @orders = filter_and_pagination Order
-    
-    @orders   = Order.all
-
-    @date_formats = [:year, :month, :week, :day, :hour]
-    @orders_by_date_format = {}
-    @date_formats.each do |date_format|
-      @orders_by_date_format[date_format] = orders_by(date_format)
-      @test = @orders_by_date_format[date_format]
-    end
-
-    @bookings = Booking.all
   end
 
-  def orders_by_product
+  def search
     
   end
 
-  def orders_by(date_format)
-    orders = Order.all.order('created_at, id')
+  def bookings_by_date_and_product()
 
-    case date_format
-      when :year
-        orders = orders.group_by { |order| l(order.created_at.beginning_of_year) }
-      when :month
-        orders = orders.group_by { |order| l(order.created_at.beginning_of_month, format: '%B') }
-      when :week
-        orders = orders.group_by { |order| l(order.created_at.beginning_of_week, format: '%W') }
-      when :day
-        orders = orders.group_by { |order| l(order.created_at.beginning_of_day, format: '%A') }
-      when :hour
-        orders = orders.group_by { |order| l(order.created_at.beginning_of_hour) }
+    # SELECT
+    #   "order_items".created_at :: DATE AS datecol,
+    #   COUNT(order_items.id) AS counter
+    # FROM
+    #   "order_items"
+    # INNER JOIN deliveries ON order_items.delivery_id = deliveries.id
+    # WHERE product_id = 1
+    # GROUP BY
+    #   "order_items".created_at :: DATE
+
+    date_from = Time.zone.now - 31.days
+    date_to   = Time.zone.now
+
+    if params['product_id'].present?
+      bookings = OrderItem.select('order_items.created_at::date as date','COUNT(order_items.id) as counter').joins(:delivery).where("deliveries.product_id = '#{params['product_id']}'").between_times(date_from, date_to).group('order_items.created_at::date')
+    else
+      bookings = OrderItem.select('order_items.created_at::date as date','COUNT(order_items.id) as counter').joins(:delivery).between_times(date_from, date_to).group('order_items.created_at::date')
     end
 
-    order_count_by_date_key = []
-
-    orders.each do |date_key, values|
-      order_count_by_date_key.push({date_key: date_key, value: values.count})
-    end 
-
-    order_count_by_date_key
+    graph_data = []
+    bookings.each do |booking|
+      graph_data.push({date_key: booking.date, value: booking.counter})
+    end
+    graph_data
   end
+  helper_method :bookings_by_date_and_product
 end

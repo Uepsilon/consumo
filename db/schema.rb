@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20140505131305) do
     t.datetime "picture_updated_at"
     t.integer  "category_id"
     t.integer  "sku_id"
-    t.integer  "calories",                                     default: 0
+    t.integer  "calories",                                     default: 0, null: false
   end
 
   create_table "skus", force: true do |t|

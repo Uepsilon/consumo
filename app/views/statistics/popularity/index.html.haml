@@ -1,0 +1,212 @@
+.page-header{style: 'border:none'}
+  %h1
+    %span.glyphicon.glyphicon-sort
+    =t 'statistics.popularity.title'
+  %ul.nav.nav-tabs.nav-justified{role: "tablist"}
+    %li.active
+      %a{"data-toggle" => "tab", href: "#tab1", role: "tab"} Produkte nach Beliebtheit
+    %li
+      %a{"data-toggle" => "tab", href: "#tab2", role: "tab"} Kategorien nach Beliebtheit
+    %li
+      %a{"data-toggle" => "tab", href: "#tab3", role: "tab"} Nutzer nach Bestellungen
+    %li
+      %a{"data-toggle" => "tab", href: "#tab4", role: "tab"} Nutzer nach Lieferungen
+
+/ Tab panes
+.tab-content
+  / Products by Popularity
+  #tab1.tab-pane.active
+    .panel.panel-default
+      .panel-body
+        .row
+          .col-md-6
+            %h4 Top 5
+            %table.table.table-responsive.table-striped
+              %thead
+                %tr
+                  %th
+                    Position
+                  %th
+                    Produkt
+                  %th
+                    Bestellungen
+              %tbody
+              - counter = 0
+              - products_by_popularity.first(5).each do |product|
+                %tr
+                  %td
+                    = counter += 1
+                  %td
+                    = product.name
+                  %td
+                    = product.counter
+          .col-md-6
+            %h4 Flop 5
+            %table.table.table-responsive.table-striped
+              %thead
+                %tr
+                  %th
+                    Position
+                  %th
+                    Produkt
+                  %th
+                    Bestellungen
+              %tbody
+              - counter = 0
+              - products_by_popularity.last(5).reverse.each do |product|
+                %tr
+                  %td
+                    = counter += 1
+                  %td
+                    = product.name
+                  %td
+                    = product.counter
+
+
+
+  / Category by Popularity
+  #tab2.tab-pane
+    .panel.panel-default
+      .panel-body
+        .row
+          .col-md-6
+            %h4 Top 5
+            %table.table.table-responsive.table-striped
+              %thead
+                %tr
+                  %th
+                    Position
+                  %th
+                    Kategorie
+                  %th
+                    Bestellungen
+              %tbody
+              - counter = 0
+              - categories_by_popularity.first(5).each do |category|
+                %tr
+                  %td
+                    = counter += 1
+                  %td
+                    = category.title
+                  %td
+                    = category.counter
+          .col-md-6
+            %h4 Flop 5
+            %table.table.table-responsive.table-striped
+              %thead
+                %tr
+                  %th
+                    Position
+                  %th
+                    Kategorie
+                  %th
+                    Bestellungen
+              %tbody
+              - counter = 0
+              - categories_by_popularity.last(5).reverse.each do |category|
+                %tr
+                  %td
+                    = counter += 1
+                  %td
+                    = category.title
+                  %td
+                    = category.counter
+
+
+  / Users by order value
+  #tab3.tab-pane
+    .panel.panel-default
+      .panel-body
+        .row
+          .col-md-6
+            %h4 Top 5
+            %table.table.table-responsive.table-striped
+              %thead
+                %tr
+                  %th
+                    Position
+                  %th
+                    Benutzer
+                  %th
+                    Bestellungen
+              %tbody
+              - counter = 0
+              - users_by_bookings.first(5).each do |user|
+                %tr
+                  %td
+                    = counter += 1
+                  %td
+                    = "#{user.first_name} #{user.last_name}"
+                  %td
+                    = user.counter
+          .col-md-6
+            %h4 Flop 5
+            %table.table.table-responsive.table-striped
+              %thead
+                %tr
+                  %th
+                    Position
+                  %th
+                    Benutzer
+                  %th
+                    Bestellungen
+              %tbody
+              - counter = 0
+              - users_by_bookings.last(5).reverse.each do |user|
+                %tr
+                  %td
+                    = counter += 1
+                  %td
+                    = "#{user.first_name} #{user.last_name}"
+                  %td
+                    = user.counter
+
+
+
+  / Users by delivery value
+  #tab4.tab-pane
+    .panel.panel-default
+      .panel-body
+        .row
+          .col-md-6
+            %h4 Top 5
+            %table.table.table-responsive.table-striped
+              %thead
+                %tr
+                  %th
+                    Position
+                  %th
+                    Lieferant
+                  %th
+                    Lieferungen
+              %tbody
+              - counter = 0
+              - users_by_deliveries.first(5).each do |user|
+                %tr
+                  %td
+                    = counter += 1
+                  %td
+                    = "#{user.first_name} #{user.last_name}"
+                  %td
+                    = user.counter
+          .col-md-6
+            %h4 Flop 5
+            %table.table.table-responsive.table-striped
+              %thead
+                %tr
+                  %th
+                    Position
+                  %th
+                    Lieferant
+                  %th
+                    Lieferungen
+              %tbody
+              - counter = 0
+              - users_by_deliveries.last(5).reverse.each do |user|
+                %tr
+                  %td
+                    = counter += 1
+                  %td
+                    = "#{user.first_name} #{user.last_name}"
+                  %td
+                    = user.counter

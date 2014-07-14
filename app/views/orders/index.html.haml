@@ -46,10 +46,8 @@
             #{item.amount}x #{item.delivery.product.title}
             %br
 
-        %td=l order.created_at.localtime, format: :short
-        %td
-          = link_to order_path(order), method:  :delete, data:  { confirm:  t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class:'btn btn-sm btn-danger' do
-            %span.glyphicon.glyphicon-trash
+        %td=l order.created_at.localtime, format: :long
+        %td= link_to t('.destroy', default: t("helpers.links.destroy")), order_path(order), method:  :delete, data:  { confirm:  t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class:'btn btn-sm btn-danger'
 
 .pagination-centered
   = will_paginate @orders, {next_label: t('will_paginate.next_level'), previous_label: t('will_paginate.previous_level'), renderer: BootstrapPagination::Rails}

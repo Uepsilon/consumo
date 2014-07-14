@@ -17,7 +17,5 @@
         %td= sku.title
         %td= sku.short
         %td
-          = link_to edit_sku_path(sku), class:'btn btn-warning' do
-            %span.glyphicon.glyphicon-pencil
-          = link_to sku_path(sku), method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class:'btn btn-mini btn-danger' do
-            %span.glyphicon.glyphicon-trash
+          = link_to t('.edit', default: t("helpers.links.edit")), edit_sku_path(sku), class:'btn btn-warning'
+          = link_to t('.destroy', default: t("helpers.links.destroy")), sku_path(sku), method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class:'btn btn-mini btn-danger'

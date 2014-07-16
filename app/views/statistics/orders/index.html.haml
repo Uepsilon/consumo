@@ -5,7 +5,7 @@
 
 
 .row
-  .col-md-5
+  .col-lg-10
     .panel.panel-default
       .panel-heading
         %span.panel-title
@@ -14,12 +14,23 @@
             %span.pull-right{style: 'cursor: pointer'}
               %span.glyphicon.glyphicon-remove-circle
       .panel-body
-        = form_tag(statistics_orders_path, method: "get") do
+        = form_tag(search_statistics_orders_path, method: "post", class: 'form-inline', role: 'form') do
           .row
-            .col-xs-4
-              .form-group
-                = select_tag(:product_id, options_from_collection_for_select(Product.order(name: :asc).all,"id","name", params['product_id']), {include_blank: true, class: 'form-control', onchange: "this.form.submit();" })
-
+            .col-md-4
+              = select_tag(:product_id, options_from_collection_for_select(Product.order(name: :asc).all,"id","name", params['product_id']), {prompt: 'Produkt wählen...', class: 'form-control' })        
+            .col-md-1
+            = label_tag(:date_from, 'Datum von', class: 'control-label col-md-1') do
+              %span.glyphicon.glyphicon-calendar 
+              Datum von
+            .col-md-2
+              = date_field(:date_from, nil, { value: @date_from.to_date, class: 'form-control date'})
+            .col-md-1
+              %span.glyphicon.glyphicon-calendar
+              = label_tag(:date_to, 'Datum bis')
+            .col-md-2
+              = date_field(:date_to, nil, { value: @date_to.to_date ,class: 'form-control date'})
+            .col-md-1
+              = submit_tag('filtern',  class: 'form-control btn-info')
 .row
   .col-md-10
     .panel.panel-info

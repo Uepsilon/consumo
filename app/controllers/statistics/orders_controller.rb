@@ -2,7 +2,16 @@
 #Booking.select('created_at::date','COUNT(id) as counter').between_times(Time.zone.now - 31.days, Time.zone.now).group('created_at::date').to_yaml
 class Statistics::OrdersController < ApplicationController
   def index
+    @date_from = Time.zone.now - 31.days
+    @date_to   = Time.zone.now
 
+    if params['date_from'].present?
+      @date_from = DateTime.parse("#{params['date_from']} 00:00:00 GMT+1")
+    end
+
+    if params['date_to'].present?
+      @date_to = DateTime.parse("#{params['date_to']} 23:59:59 GMT+1")
+    end
   end
 
   def search
@@ -21,14 +30,14 @@ class Statistics::OrdersController < ApplicationController
     # GROUP BY
     #   "order_items".created_at :: DATE
 
-    date_from = Time.zone.now - 31.days
-    date_to   = Time.zone.now
-
     if params['product_id'].present?
-      bookings = OrderItem.select('order_items.created_at::date as date','COUNT(order_items.id) as counter').joins(:delivery).where("deliveries.product_id = '#{params['product_id']}'").between_times(date_from, date_to).group('order_items.created_at::date')
+      product_condition = "deliveries.product_id = '#{params['product_id']}'"  
     else
-      bookings = OrderItem.select('order_items.created_at::date as date','COUNT(order_items.id) as counter').joins(:delivery).between_times(date_from, date_to).group('order_items.created_at::date')
+      product_condition = ""
     end
+
+    bookings = OrderItem.select('order_items.created_at::date as date','COUNT(order_items.id) as counter').joins(:delivery).where(product_condition).between_times(@date_from, @date_to).group('order_items.created_at::date')
+
 
     graph_data = []
     bookings.each do |booking|

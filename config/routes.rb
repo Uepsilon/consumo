@@ -6,12 +6,12 @@ Consumo::Application.routes.draw do
     namespace :statistics do
       resources :orders do
         collection do
-          match 'search' => 'statistics_orders#index', via: [:get, :post]
+          match 'search' => 'orders#index', via: [:get, :post]
         end
       end
       resources :popularity do
         collection do
-          match 'search' => 'statistics_popularity#search', via: [:get, :post], as: :search  
+          match 'search' => 'popularity#search', via: [:get, :post] 
         end
       end
     end

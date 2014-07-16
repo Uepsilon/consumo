@@ -15,8 +15,6 @@
     = favicon_link_tag 'favicons/sumo-72.png', rel:  'apple-touch-icon-precomposed', type:  'image/png', sizes:  '72x72'
     = favicon_link_tag 'favicons/sumo-128.png', rel:  'apple-touch-icon-precomposed', type:  'image/png'
     = favicon_link_tag 'favicons/favicon.ico', rel:  'shortcut icon'
-
-    / <link href="/assets/mb-icon.png" rel="apple-touch-icon" type="image/png" />
   %body
     - if user_signed_in?
       #sumo_action
@@ -60,10 +58,10 @@
                     = link_to :statistics_popularity_index do
                       %span.glyphicon.glyphicon-sort
                       = t("navbar.statistics.popularity")
-                  / %li
-                  /   = link_to "#" do
-                  /     %span.glyphicon.glyphicon-stats
-                  /     = t("navbar.statistics.orders")
+                  %li
+                    = link_to statistics_orders_path do
+                      %span.glyphicon.glyphicon-stats
+                      = t("navbar.statistics.orders")
               %li.dropdown
                 = link_to '#', { "data-toggle" => 'dropdown', class:  'dropdown-toggle'} do
                   %span.glyphicon.glyphicon-cog

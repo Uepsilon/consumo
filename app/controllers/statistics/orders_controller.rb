@@ -36,12 +36,12 @@ class Statistics::OrdersController < ApplicationController
       product_condition = ""
     end
 
-    bookings = OrderItem.select('order_items.created_at::date as date','COUNT(order_items.id) as counter').joins(:delivery).where(product_condition).between_times(@date_from, @date_to).group('order_items.created_at::date')
+    bookings = OrderItem.select('order_items.created_at::date as date','COUNT(order_items.id) as counter').joins(:delivery).where(product_condition).between_times(@date_from, @date_to).group('order_items.created_at::date').order('order_items.created_at::date ASC')
 
-
+    # timestamp * 1000 = js special
     graph_data = []
     bookings.each do |booking|
-      graph_data.push({date_key: booking.date, value: booking.counter})
+      graph_data.push({x: (booking.date.to_time.to_i * 1000), y: booking.counter.to_i})
     end
     graph_data
   end

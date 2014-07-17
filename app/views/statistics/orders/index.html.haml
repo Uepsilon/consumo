@@ -17,7 +17,7 @@
         = form_tag(search_statistics_orders_path, method: "post", class: 'form-inline', role: 'form') do
           .row
             .col-md-4
-              = select_tag(:product_id, options_from_collection_for_select(Product.order(name: :asc).all,"id","name", params['product_id']), {prompt: 'Produkt wählen...', class: 'form-control' })        
+              = select_tag(:product_id, options_from_collection_for_select(Product.order(name: :asc).all,"id","name", params['product_id']), {prompt: 'Produkt wählen...', class: 'form-control', onchange: "this.form.submit();" })        
             .col-md-1
             = label_tag(:date_from, 'Datum von', class: 'control-label col-md-1') do
               %span.glyphicon.glyphicon-calendar 
@@ -34,17 +34,44 @@
 .row
   .col-md-10
     .panel.panel-info
-      .panel-heading
-        %h2.panel-title Test
       .panel-body
-        #orders
+        #orders{style: 'height:500px'}
         = content_for :javascript do
           :javascript
-            new Morris.Line({
-              element: 'orders',
-              data: #{bookings_by_date_and_product.to_json},
-              xkey: 'date_key',
-              ykeys: ['value'],
-              labels: ['Bestellungen'],
-              resize: true
+            var chart = new CanvasJS.Chart("orders",
+            {
+              theme: "theme1",
+              zoomEnabled:true,
+              animationEnabled: true,
+              axisX:{      
+                valueFormatString: "DD. MMM YY"  ,
+                labelAngle: -50
+              },
+              axisY:{
+                includeZero: true,
+                gridThickness: 1
+              },
+              data: [
+              {
+                type: "line",
+                color: "#d9edf7",
+                toolTipContent: "<p style='\"'color: black;'\"'>{x}: <br/>{y} Bestellungen</p>",
+                markerSize: 8,
+                markerType: 'circle',
+                markerColor: "#a0cce2",
+                xValueType: "dateTime",
+                xValueFormatString: "DD. MMMM YYYY",
+                bevelEnabled: false,
+                lineThickness: 4,
+                dataPoints: #{bookings_by_date_and_product.to_json}
+              }
+              ]
             });
+
+            chart.render();
+      .panel-footer
+        .row
+          .col-md-1.pull-right
+            %span.glyphicon.glyphicon-stats
+            %span.glyphicons.glass
+

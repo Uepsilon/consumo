@@ -17,7 +17,7 @@
         = form_tag(search_statistics_orders_path, method: "post", class: 'form-inline', role: 'form') do
           .row
             .col-md-4
-              = select_tag(:product_id, options_from_collection_for_select(Product.order(name: :asc).all,"id","name", params['product_id']), {prompt: 'Produkt wählen...', class: 'form-control', onchange: "this.form.submit();" })        
+              = select_tag(:product_id, options_from_collection_for_select(Product.order(name: :asc).all,"id","name", params['product_id']), {prompt: '- Alle Produkte -', class: 'form-control', onchange: "this.form.submit();" })        
             .col-md-1
             = label_tag(:date_from, 'Datum von', class: 'control-label col-md-1') do
               %span.glyphicon.glyphicon-calendar 
@@ -38,40 +38,9 @@
         #orders{style: 'height:500px'}
         = content_for :javascript do
           :javascript
-            var chart = new CanvasJS.Chart("orders",
-            {
-              theme: "theme1",
-              zoomEnabled:true,
-              animationEnabled: true,
-              axisX:{      
-                valueFormatString: "DD. MMM YY"  ,
-                labelAngle: -50
-              },
-              axisY:{
-                includeZero: true,
-                gridThickness: 1
-              },
-              data: [
-              {
-                type: "line",
-                color: "#d9edf7",
-                toolTipContent: "<p style='\"'color: black;'\"'>{x}: <br/>{y} Bestellungen</p>",
-                markerSize: 8,
-                markerType: 'circle',
-                markerColor: "#a0cce2",
-                xValueType: "dateTime",
-                xValueFormatString: "DD. MMMM YYYY",
-                bevelEnabled: false,
-                lineThickness: 4,
-                dataPoints: #{bookings_by_date_and_product.to_json}
-              }
-              ]
-            });
-
-            chart.render();
+            //render_chart.call('orders', 'line', #{bookings_by_date_and_product.to_json})
       .panel-footer
         .row
           .col-md-1.pull-right
             %span.glyphicon.glyphicon-stats
-            %span.glyphicons.glass
 

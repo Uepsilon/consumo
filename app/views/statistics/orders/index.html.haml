@@ -17,10 +17,10 @@
         = form_tag(search_statistics_orders_path, method: "post", class: 'form-inline', role: 'form') do
           .row
             .col-md-4
-              = select_tag(:product_id, options_from_collection_for_select(Product.order(name: :asc).all,"id","name", params['product_id']), {prompt: '- Alle Produkte -', class: 'form-control', onchange: "this.form.submit();" })        
+              = select_tag(:product_id, options_from_collection_for_select(Product.order(name: :asc).all,"id","name", params['product_id']), {prompt: '- Alle Produkte -', class: 'form-control', onchange: "this.form.submit();" })
             .col-md-1
             = label_tag(:date_from, 'Datum von', class: 'control-label col-md-1') do
-              %span.glyphicon.glyphicon-calendar 
+              %span.glyphicon.glyphicon-calendar
               Datum von
             .col-md-2
               = date_field(:date_from, nil, { value: @date_from.to_date, class: 'form-control date'})
@@ -38,7 +38,7 @@
         #orders{style: 'height:500px'}
         = content_for :javascript do
           :javascript
-            //render_chart.call('orders', 'line', #{bookings_by_date_and_product.to_json})
+            window.render_chart('orders', 'line', #{bookings_by_date_and_product.to_json})
       .panel-footer
         .row
           .col-md-1.pull-right

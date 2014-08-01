@@ -22,6 +22,7 @@ class Delivery < ActiveRecord::Base
   validates   :product_id, presence: true
   validates   :quantity, presence: true, numericality: true
   validates   :price, presence: true, numericality: true
+  before_create :calculate_booking_amount
 
   self.per_page = 10
 

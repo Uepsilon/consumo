@@ -30,7 +30,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def unit_price
-    price / quantity.to_f
+    price.to_f / quantity
   end
 
   private

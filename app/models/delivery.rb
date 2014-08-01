@@ -15,6 +15,7 @@ class Delivery < ActiveRecord::Base
 
   has_one     :booking,  as: :bookable,       dependent: :destroy
   has_one     :user,     through: :booking
+  belongs_to  :realm
 
   has_many    :order_items, dependent: :destroy
   has_many    :orders,  through: :order_items, dependent: :destroy
@@ -22,7 +23,9 @@ class Delivery < ActiveRecord::Base
   validates   :product_id, presence: true
   validates   :quantity, presence: true, numericality: true
   validates   :price, presence: true, numericality: true
-  before_create :calculate_booking_amount
+  validates   :realm, presence: true
+
+  scope :current_realm, -> (realm_id) { where(realm_id: realm_id) }
 
   self.per_page = 10
 
@@ -32,11 +35,5 @@ class Delivery < ActiveRecord::Base
 
   def unit_price
     price.to_f / quantity
-  end
-
-  private
-
-  def calculate_booking_amount
-    self.booking.amount = self.price.to_f
   end
 end

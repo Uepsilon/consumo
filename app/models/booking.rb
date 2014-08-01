@@ -4,19 +4,25 @@
 #
 #  id            :integer          not null, primary key
 #  user_id       :integer          not null
-#  amount        :decimal(5, 2)
+#  amount        :decimal(5, 2)    not null
 #  bookable_id   :integer
 #  bookable_type :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  infotext      :string(255)
+#  booking_id    :integer
+#  realm_id      :integer
 #
 
 class Booking < ActiveRecord::Base
   belongs_to  :user
+  belongs_to  :realm
   belongs_to  :bookable, polymorphic: true
 
   has_one     :related_booking, class_name: "Booking", foreign_key: :booking_id, dependent: :destroy
   belongs_to  :initial_booking, class_name: "Booking", foreign_key: :booking_id
+
+  scope :current_realm, -> (realm_id) { where(realm_id: realm_id) }
 
   validates :amount, presence: true, numericality: true
 

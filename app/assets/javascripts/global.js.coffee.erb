@@ -1,0 +1,6 @@
+$ ->
+  $('[data-behaviour=format-number]').blur ->
+    $(this).val($(this).val().replace(',', '.'))
+
+  $('select#realm').change ->
+    window.location.href = '/'+ $(this).val()

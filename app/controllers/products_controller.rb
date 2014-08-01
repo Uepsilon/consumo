@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+
   def index
     #@products = Product.order('category_id ASC').order('name ASC').all
     @filters = Product.order('category_id ASC').order('name ASC').search(params[:q])
@@ -32,7 +33,7 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
-  
+
   def search
     index
     render :index

@@ -16,15 +16,16 @@ class Delivery < ActiveRecord::Base
   has_one     :booking,  as: :bookable,       dependent: :destroy
   has_one     :user,     through: :booking
 
-  has_many    :order_items
+  has_many    :order_items, dependent: :destroy
   has_many    :orders,  through: :order_items, dependent: :destroy
 
   validates   :product_id, presence: true
   validates   :quantity, presence: true, numericality: true
   validates   :price, presence: true, numericality: true
 
-  before_save :calculate_booking_amount
-  before_save :calculate_unit_price
+
+  before_create :calculate_booking_amount
+  before_create :calculate_unit_price
 
   self.per_page = 10
 

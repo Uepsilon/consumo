@@ -23,23 +23,17 @@ class Delivery < ActiveRecord::Base
   validates   :quantity, presence: true, numericality: true
   validates   :price, presence: true, numericality: true
 
-
-  before_create :calculate_booking_amount
-  before_create :calculate_unit_price
-
   self.per_page = 10
-
-  attr_accessor :price
 
   def remaining
     quantity - self.orders.sum(:amount)
   end
 
-  private
-
-  def calculate_unit_price
-    self.unit_price = self.price.to_f / self.quantity.to_f
+  def unit_price
+    price.to_f / quantity
   end
+
+  private
 
   def calculate_booking_amount
     self.booking.amount = self.price.to_f

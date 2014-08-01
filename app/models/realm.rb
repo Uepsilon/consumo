@@ -36,7 +36,7 @@ class Realm < ActiveRecord::Base
         end
       end
       slug.gsub!(/\s/, '-')
-      slug.gsub!(/[\w-]/, '')
+      slug.gsub!(/[^\w-]/, '')
       slug.downcase!
 
       self.slug = slug

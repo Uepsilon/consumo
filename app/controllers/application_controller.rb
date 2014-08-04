@@ -38,18 +38,18 @@ class ApplicationController < ActionController::Base
   def load_realm!
     # try loading realm from param
     if params.has_key? :selected_realm
-      @current_realm = Realm.find_by_slug params[:selected_realm]
+      @current_realm = Realm.active.find_by_slug params[:selected_realm]
       head :not_acceptable if @current_realm.nil?
     end
 
     # if realm not loaded and realm in session available
     if @current_realm.nil? and session.has_key?(:selected_realm)
-      @current_realm = Realm.find_by_slug session[:selected_realm]
+      @current_realm = Realm.active.find_by_slug session[:selected_realm]
     end
 
     # if still nil, try loading default
     if @current_realm.nil?
-      @current_realm = Realm.first
+      @current_realm = Realm.active.first
       head :service_unavailable if @current_realm.nil?
     end
 

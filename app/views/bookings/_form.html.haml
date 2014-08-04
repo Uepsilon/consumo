@@ -1,4 +1,4 @@
-= form_for :booking, html: { class:'form-horizontal' } do |f|
+= form_for @booking, url: @booking, html: { class:'form-horizontal' } do |f|
   - if @booking.errors.any?
     %ul.list-unstyled
       - @booking.errors.full_messages.each do |error|

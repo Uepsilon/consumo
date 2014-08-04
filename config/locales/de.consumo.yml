@@ -90,6 +90,13 @@ de:
         short: Kürzel
         title: Name
       title: Einheiten
+  realms:
+    index:
+      column:
+        id: ID
+        name: Name
+        active_flag: Aktiv
+      title: Mandant
   statistics:
     popularity:
       title: 'Tops und Flops'
@@ -109,6 +116,9 @@ de:
         email: E-Mail-Adresse
         id: ID
         name: Name
+        current_password: Aktuelles Passwort
+        password: Neues Passwort
+        password_confirmation: Neues Passwort wiederholen
       title: Benutzer
   will_paginate:
     next_level: weiter

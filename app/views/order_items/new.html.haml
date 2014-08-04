@@ -41,7 +41,7 @@
         = number_to_currency balance, presicion: 2
 
 
-= form_for :order_item, html:{ class:'form-horizontal' } do |f|
+= form_for @order_item, url: @order_item, html:{ class:'form-horizontal' } do |f|
   = f.hidden_field :amount, class: 'form-control', value: 1
   = f.hidden_field :delivery_id, class: 'form-control'
   - Category.by_position.all.each do |category|

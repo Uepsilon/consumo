@@ -1,4 +1,4 @@
-= form_for :realm, html: { class: 'form-horizontal' } do |f|
+= form_for @realm, url: @realm, html: { class: 'form-horizontal' } do |f|
   - if @realm.errors.any?
     %ul.errors
       - @realm.errors.full_messages.each do |error|
@@ -6,7 +6,13 @@
   .form-group
     = f.label :name, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.text_field :name, class:'form-control'
+      = f.text_field :name, class: 'form-control'
+  .form-group
+    .col-sm-10.col-sm-offset-2
+      .checkbox
+        %label
+          = f.check_box :active_flag
+          Aktiv
   .form-actions
     .col-sm-offset-2.col-sm-10
       = f.submit nil, class:'btn btn-primary'

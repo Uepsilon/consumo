@@ -38,6 +38,6 @@ class RealmsController < ApplicationController
   private
 
   def realm_params
-    params.require(:realm).permit(:name)
+    params.require(:realm).permit(:name, :active_flag)
   end
 end

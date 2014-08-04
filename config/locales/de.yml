@@ -34,6 +34,34 @@ de:
       format: '%{attribute} %{message}'
       messages: *id001
       template: *id002
+    models:
+      product:
+        one: Produkt
+        other: Produkte
+      user: Benutzer
+      booking:
+        one: Buchung
+        other: Buchungen
+      delivery:
+        one: Lieferung
+        others: Lieferungen
+      category:
+        one: Kategorie
+        other: Kategorien
+      sku:
+        one: Einheit
+        other: Einheiten
+      realm:
+        one: Mandant
+        other: Mandanten
+      order:
+        one: Bestellung
+        other: Bestellungen
+    attributes:
+      user:
+        password: Neues Passwort
+        password_confirmation: Neues Passwort wiederholen
+        current_password: Aktuelles Passwort
   date:
     abbr_day_names:
     - So

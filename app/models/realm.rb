@@ -20,6 +20,13 @@ class Realm < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :slug, presence: true, uniqueness: true
 
+  scope :active, -> { where(active_flag: true) }
+  scope :inactive, -> { where(active_flag: false) }
+
+  def active?
+    active_flag?
+  end
+
   private
 
   def slugify

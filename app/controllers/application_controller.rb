@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   private
 
   def filter_and_pagination(model_class)
-    @filters = model_class.order('created_at DESC').current_realm(@realm.id).search(params[:q])
+    @filters = model_class.order('created_at DESC').current_realm(@current_realm.id).search(params[:q])
     result = @filters.result(distinct: true).paginate(page: params[:page])
     result = result.send(created_at_eq) unless created_at_eq.blank?
 
@@ -37,25 +37,25 @@ class ApplicationController < ActionController::Base
 
   def load_realm!
     # try loading realm from param
-    if params.has_key? :realm
-      @realm = Realm.find_by_slug params[:realm]
-      head :not_acceptable if @realm.nil?
+    if params.has_key? :selected_realm
+      @current_realm = Realm.find_by_slug params[:selected_realm]
+      head :not_acceptable if @current_realm.nil?
     end
 
     # if realm not loaded and realm in session available
-    if @realm.nil? and session.has_key?(:realm)
-      @realm = Realm.find_by_slug session[:realm]
+    if @current_realm.nil? and session.has_key?(:selected_realm)
+      @current_realm = Realm.find_by_slug session[:selected_realm]
     end
 
     # if still nil, try loading default
-    if @realm.nil?
-      @realm = Realm.first
-      head :service_unavailable if @realm.nil?
+    if @current_realm.nil?
+      @current_realm = Realm.first
+      head :service_unavailable if @current_realm.nil?
     end
 
-    unless @realm.nil?
-      session[:realm] = @realm.slug
-      logger.debug " -- REALM: #{@realm.inspect}"
+    unless @current_realm.nil?
+      session[:selected_realm] = @current_realm.slug
+      logger.debug " -- REALM: #{@current_realm.inspect}"
     end
   end
 end

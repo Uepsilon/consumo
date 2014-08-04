@@ -42,10 +42,11 @@ de:
     preferences: Verwaltung
     product: Produkte
     sku: Einheiten
+    realm: Mandant
     statistics:
       statistics: 'Statistik'
       orders: 'Bestellungen'
-      popularity: 'Tops und Flops' 
+      popularity: 'Tops und Flops'
     subtitle: get the goods!
     title: consumo
     user: Benutzer
@@ -90,8 +91,8 @@ de:
         title: Name
       title: Einheiten
   statistics:
-    popularity: 
-      title: 'Tops und Flops' 
+    popularity:
+      title: 'Tops und Flops'
     orders:
       title: Bestellungen
       headlines:

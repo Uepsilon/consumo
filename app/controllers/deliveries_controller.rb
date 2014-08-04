@@ -10,7 +10,7 @@ class DeliveriesController < ApplicationController
 
   def create
     @delivery = Delivery.new delivery_params
-    @delivery.build_booking user: current_user, realm: @realm, amount: @delivery.price
+    @delivery.build_booking user: current_user, realm: @current_realm, amount: @delivery.price
 
     if @delivery.save
       redirect_to :deliveries, notice: "Lieferung angelegt."

@@ -20,7 +20,7 @@
         .col-xs-4
           .form-group
             = f.select :created_at_eq, options_for_select(@periods, @period_value), {include_blank: "Zeitraum..."}, {class: "form-control", onchange: "this.form.submit();"}
-        .col-xs-12  
+        .col-xs-12
           .input-group
             = f.text_field :user_first_name_or_user_last_name_cont, placeholder: 'Suche', class:'form-control'
             %span.input-group-btn

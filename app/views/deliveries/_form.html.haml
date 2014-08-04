@@ -1,5 +1,5 @@
-= form_for @delivery, html:{ class:'form-horizontal' } do |f|
-  = f.hidden_field :realm_id, value: @realm.id
+= form_for :delivery, html:{ class:'form-horizontal' } do |f|
+  = f.hidden_field :realm_id, value: @current_realm.id
   - if @delivery.errors.any?
     %ul.errors
       - @delivery.errors.full_messages.each do |error|

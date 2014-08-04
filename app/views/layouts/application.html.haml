@@ -93,6 +93,10 @@
                       %span.glyphicon.glyphicon-inbox
                       = t("navbar.category")
                   %li
+                    = link_to :realms do
+                      %span.glyphicon.glyphicon-th-large
+                      = t("navbar.realm")
+                  %li
                     = link_to :skus do
                       %span.glyphicon.glyphicon-usd
                       = t("navbar.sku")
@@ -104,7 +108,7 @@
                 %li
                   %form.navbar-form
                     .form-group
-                      = select_tag :realm, options_from_collection_for_select(Realm.all, 'slug', 'name', @realm.slug), class: 'form-control'
+                      = select_tag :realm, options_from_collection_for_select(Realm.all, 'slug', 'name', @current_realm.slug), class: 'form-control'
               - if user_signed_in?
                 %li
                   = link_to :destroy_user_session, method: :delete do

@@ -1,0 +1,13 @@
+= form_for :realm, html: { class: 'form-horizontal' } do |f|
+  - if @realm.errors.any?
+    %ul.errors
+      - @realm.errors.full_messages.each do |error|
+        %li= error
+  .form-group
+    = f.label :name, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :name, class:'form-control'
+  .form-actions
+    .col-sm-offset-2.col-sm-10
+      = f.submit nil, class:'btn btn-primary'
+      = link_to t('.cancel', default: t("helpers.links.cancel")), realms_path, class:'btn'

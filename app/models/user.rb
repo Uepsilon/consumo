@@ -19,9 +19,9 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :trackable, :validatable
 
-  # validates :first_name,  presence: true
-  # validates :last_name,   presence: true
-  # validates :email,       email: true
+  validates :first_name,  presence: true
+  validates :last_name,   presence: true
+  validates :email,       email: true
 
   has_many  :bookings
   has_many  :orders,      through: :bookings, source: :bookable, source_type: "Order"
@@ -34,15 +34,17 @@ class User < ActiveRecord::Base
 
   def ordered_products
     products = {}
-    self.order_items.each do |oi|
-      products[oi.delivery.product.id] = {amount: 0, product_title: oi.delivery.product.title} unless products[oi.delivery.product.id].is_a? Hash
-      products[oi.delivery.product.id][:amount] += oi.amount
+    self.order_items.each do |item|
+      products[item.delivery.product.id] = {amount: 0, product_title: item.delivery.product.title} unless products[item.delivery.product.id].is_a? Hash
+      products[item.delivery.product.id][:amount] += item.amount
     end
     products
   end
 
-  def balance
-    self.bookings.sum(:amount)
+  def balance(realm_id = nil)
+    sumable_bookings = self.bookings
+    sumable_bookings = sumable_bookings.current_realm(realm_id) unless realm_id.nil?
+    sumable_bookings.sum(:amount)
   end
 
   def todays_calories

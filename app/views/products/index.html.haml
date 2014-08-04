@@ -31,7 +31,7 @@
 %table.table.table-striped
   %thead
     %tr
-      %th=t '.column.id'  
+      %th=t '.column.id'
       %th=t '.column.name'
       %th=t '.column.category'
       %th=t '.column.size'
@@ -47,7 +47,7 @@
         %td= product.category.title
         %td= product.size_with_unit
         %td= "#{product.calories} #{t 'products.calories_short'}"
-        %td= product.remaining
+        %td= product.remaining(@current_realm.id)
         %td= image_tag product.picture.url(:thumb)
         %td
           = link_to t('.edit', default: t("helpers.links.edit")), edit_product_path(product), class:'btn btn-warning'

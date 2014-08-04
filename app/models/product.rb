@@ -11,6 +11,9 @@
 #  picture_content_type :string(255)
 #  picture_file_size    :integer
 #  picture_updated_at   :datetime
+#  category_id          :integer
+#  sku_id               :integer
+#  calories             :integer          default(0)
 #
 
 class Product < ActiveRecord::Base
@@ -35,6 +38,8 @@ class Product < ActiveRecord::Base
   belongs_to :sku
   has_many :deliveries
 
+  scope :current_realm, -> (realm_id) { joins(:deliveries).where('deliveries.realm_id = ?', realm_id) }
+
   self.per_page = 10
 
   validates_attachment_presence     :picture
@@ -52,12 +57,12 @@ class Product < ActiveRecord::Base
     "#{size} #{sku.short}"
   end
 
-  def remaining
-    self.deliveries.each.collect{|d| d.remaining}.sum
+  def remaining(realm_id)
+    self.deliveries.current_realm(realm_id).collect{|d| d.remaining}.sum
   end
 
-  def current_delivery
-    self.deliveries.order(:created_at).each do |delivery|
+  def current_delivery(realm_id)
+    self.deliveries.current_realm(realm_id).order(:created_at).each do |delivery|
       return delivery if delivery.remaining > 0
     end
   end

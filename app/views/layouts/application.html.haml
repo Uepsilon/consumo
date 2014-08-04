@@ -32,7 +32,7 @@
       .container-fluid{style: 'padding-left: 0;'}
         .navbar-header{style: 'margin-left:15px;'}
           - if user_signed_in?
-            %button.navbar-toggle{"data-target" => "#navbar-collapse-1", "data-toggle" => "collapse", type: "button"}
+            %button.navbar-toggle{"data-target" => "#navbar-collapse-main-menue", "data-toggle" => "collapse", type: "button"}
               %span.sr-only Toggle navigation
               %span.icon-bar
               %span.icon-bar
@@ -44,7 +44,7 @@
               %small
                 =t('navbar.subtitle')
         - if user_signed_in?
-          #navbar-collapse-1.navbar-collapse.collapse
+          #navbar-collapse-main-menue.navbar-collapse.collapse
             %ul.nav.navbar-nav
               %li
                 = link_to :new_order_item do
@@ -77,7 +77,7 @@
                   %li
                     = link_to :deliveries do
                       %span.glyphicon.glyphicon-gift
-                      = t("navbar.delivery") 
+                      = t("navbar.delivery")
                   %li.divider
                   %li
                     = link_to :orders do
@@ -93,6 +93,10 @@
                       %span.glyphicon.glyphicon-inbox
                       = t("navbar.category")
                   %li
+                    = link_to :realms do
+                      %span.glyphicon.glyphicon-th-large
+                      = t("navbar.realm")
+                  %li
                     = link_to :skus do
                       %span.glyphicon.glyphicon-usd
                       = t("navbar.sku")
@@ -101,11 +105,16 @@
                     = link_to :users do
                       %span.glyphicon.glyphicon-user
                       = t("navbar.user")
+                %li
+                  %form.navbar-form
+                    .form-group
+                      = select_tag :realm, options_from_collection_for_select(Realm.active, 'slug', 'name', @current_realm.slug), class: 'form-control'
               - if user_signed_in?
                 %li
                   = link_to :destroy_user_session, method: :delete do
                     %span.glyphicon.glyphicon-off
                     = t("navbar.logout")
+
     .container-fluid#container
       .row-fluid
         .span12

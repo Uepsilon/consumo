@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  position   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Category < ActiveRecord::Base
   scope :by_position, -> {order('categories.position ASC')}
 

@@ -10,6 +10,7 @@ class BookingsController < ApplicationController
 
   def create
     @booking = current_user.bookings.new booking_params
+    @booking.realm = @current_realm
 
     if @booking.save
       redirect_to :bookings, notice: "Buchung erfolgreich."

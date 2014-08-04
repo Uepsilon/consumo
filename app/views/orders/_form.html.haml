@@ -1,4 +1,4 @@
-= form_for @order, html:{ class:'form-horizontal' } do |f|
+= form_for @order, url: @order, html:{ class:'form-horizontal' } do |f|
   - if @order.errors.any?
     %ul.list-unstyled
       - @order.errors.full_messages.each do |error|

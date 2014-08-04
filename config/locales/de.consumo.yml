@@ -42,10 +42,11 @@ de:
     preferences: Verwaltung
     product: Produkte
     sku: Einheiten
+    realm: Mandant
     statistics:
       statistics: 'Statistik'
       orders: 'Bestellungen'
-      popularity: 'Tops und Flops' 
+      popularity: 'Tops und Flops'
     subtitle: get the goods!
     title: consumo
     user: Benutzer
@@ -89,9 +90,16 @@ de:
         short: Kürzel
         title: Name
       title: Einheiten
+  realms:
+    index:
+      column:
+        id: ID
+        name: Name
+        active_flag: Aktiv
+      title: Mandant
   statistics:
-    popularity: 
-      title: 'Tops und Flops' 
+    popularity:
+      title: 'Tops und Flops'
     orders:
       title: Bestellungen
       headlines:
@@ -108,6 +116,9 @@ de:
         email: E-Mail-Adresse
         id: ID
         name: Name
+        current_password: Aktuelles Passwort
+        password: Neues Passwort
+        password_confirmation: Neues Passwort wiederholen
       title: Benutzer
   will_paginate:
     next_level: weiter

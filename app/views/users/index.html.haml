@@ -3,6 +3,7 @@
   %h1
     %span.glyphicon.glyphicon-user
     =t '.title', default: model_class.model_name.human.pluralize.titleize
+
 .panel.panel-default{style:'max-width: 600px'}
   .panel-heading
     %span.panel-title
@@ -11,7 +12,7 @@
         %span.pull-right{style: 'cursor: pointer'}
           %span.glyphicon.glyphicon-remove-circle
   .panel-body
-    = search_form_for @filters, url: search_users_path, html: {method: :post } do |f|
+    = search_form_for @filters, url: search_users_path, html: { method: :post } do |f|
       .form-group
         = f.select :id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @filters.id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
       .input-group
@@ -37,7 +38,7 @@
           - user.ordered_products.each do |id, order|
             = "#{order[:amount]} x #{order[:product_title]}"
             %br
-        %td= number_to_currency user.balance, presicion: 2
+        %td= number_to_currency user.balance(@current_realm.id), presicion: 2
         %td
           - if user == current_user
             = link_to t('.edit', default: t("helpers.links.update_password")), [:edit, user], class:'btn btn-danger'

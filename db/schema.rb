@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140801125508) do
+ActiveRecord::Schema.define(version: 20140804083929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140801125508) do
     t.datetime "updated_at"
     t.string   "infotext"
     t.integer  "booking_id"
+    t.integer  "realm_id"
   end
 
   add_index "bookings", ["bookable_id", "bookable_type"], name: "bookable", using: :btree
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 20140801125508) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "price",      precision: 7, scale: 2
+    t.integer  "realm_id"
   end
 
   create_table "order_items", force: true do |t|
@@ -69,6 +71,14 @@ ActiveRecord::Schema.define(version: 20140801125508) do
     t.integer  "category_id"
     t.integer  "sku_id"
     t.integer  "calories",                                     default: 0, null: false
+  end
+
+  create_table "realms", force: true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "active_flag", default: false
   end
 
   create_table "skus", force: true do |t|

@@ -5,7 +5,7 @@ module OrderItemsHelper
     if remaining > 10
       label_class = 'info'
     elsif remaining > 5
-      label_class = 'warn'
+      label_class = 'warning'
     else
       label_class = 'danger'
     end

@@ -38,7 +38,7 @@
           - user.ordered_products.each do |id, order|
             = "#{order[:amount]} x #{order[:product_title]}"
             %br
-        %td= number_to_currency user.balance(@current_realm.id), presicion: 2
+        %td= number_to_currency user.balance, presicion: 2
         %td
           - if user == current_user
             = link_to t('.edit', default: t("helpers.links.update_password")), [:edit, user], class:'btn btn-danger'

@@ -29,6 +29,7 @@ class Booking < ActiveRecord::Base
   attr_accessor :receiver_id
 
   before_create :relate_booking, if: :booking_relation
+  before_create :ensure_realm
 
   self.per_page = 10
 
@@ -37,6 +38,10 @@ class Booking < ActiveRecord::Base
   end
 
   private
+
+  def ensure_realm
+    self.realm = self.user.current_realm unless self.realm.present?
+  end
 
   def relate_booking
     self.build_related_booking user: User.find(self.receiver_id), amount: (self.amount.to_f * -1.to_f), infotext: self.infotext

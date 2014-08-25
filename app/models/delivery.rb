@@ -5,9 +5,10 @@
 #  id         :integer          not null, primary key
 #  product_id :integer          not null
 #  quantity   :integer          not null
-#  unit_price :decimal(5, 2)
 #  created_at :datetime
 #  updated_at :datetime
+#  price      :decimal(7, 2)
+#  realm_id   :integer
 #
 
 class Delivery < ActiveRecord::Base
@@ -25,6 +26,7 @@ class Delivery < ActiveRecord::Base
   validates   :price, presence: true, numericality: true
   validates   :realm, presence: true
 
+  before_validation :ensure_realm
   scope :current_realm, -> (realm_id) { where(realm_id: realm_id) }
 
   self.per_page = 10
@@ -35,5 +37,11 @@ class Delivery < ActiveRecord::Base
 
   def unit_price
     price.to_f / quantity
+  end
+
+  private
+
+  def ensure_realm
+    self.realm = self.user.current_realm_id unless self.realm.present?
   end
 end

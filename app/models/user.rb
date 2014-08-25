@@ -14,6 +14,7 @@
 #  last_name          :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
+#  current_realm_id   :integer
 #
 
 class User < ActiveRecord::Base
@@ -22,6 +23,8 @@ class User < ActiveRecord::Base
   validates :first_name,  presence: true
   validates :last_name,   presence: true
   validates :email,       email: true
+
+  belongs_to :current_realm, class_name: 'Realm'
 
   has_many  :bookings
   has_many  :orders,      through: :bookings, source: :bookable, source_type: "Order"
@@ -34,20 +37,20 @@ class User < ActiveRecord::Base
 
   def ordered_products
     products = {}
-    self.order_items.each do |item|
+    self.order_items.current_realm(self.current_realm_id).each do |item|
       products[item.delivery.product.id] = {amount: 0, product_title: item.delivery.product.title} unless products[item.delivery.product.id].is_a? Hash
       products[item.delivery.product.id][:amount] += item.amount
     end
     products
   end
 
-  def balance(realm_id = nil)
+  def balance
     sumable_bookings = self.bookings
-    sumable_bookings = sumable_bookings.current_realm(realm_id) unless realm_id.nil?
+    sumable_bookings = sumable_bookings.current_realm(current_realm_id)
     sumable_bookings.sum(:amount)
   end
 
   def todays_calories
-    order_items.today.inject(0) { |sum, order_item| sum + order_item.delivery.product.calories }
+    order_items.current_realm(self.current_realm_id).today.inject(0) { |sum, order_item| sum + order_item.delivery.product.calories }
   end
 end

@@ -108,7 +108,7 @@
                 %li
                   %form.navbar-form
                     .form-group
-                      = select_tag :realm, options_from_collection_for_select(Realm.active, 'slug', 'name', @current_realm.slug), class: 'form-control'
+                      = select_tag :realm, options_from_collection_for_select(Realm.active, 'slug', 'name', @current_user.current_realm.slug), class: 'form-control'
               - if user_signed_in?
                 %li
                   = link_to :destroy_user_session, method: :delete do

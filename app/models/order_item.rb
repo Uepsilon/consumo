@@ -20,6 +20,8 @@ class OrderItem < ActiveRecord::Base
   before_validation :validate_order_item_amount
   before_save :update_order_amount
 
+  scope :current_realm, -> (current_realm_id) { joins(order: :booking).where('bookings.realm_id = ?', current_realm_id) }
+
   private
 
   def validate_order_item_amount

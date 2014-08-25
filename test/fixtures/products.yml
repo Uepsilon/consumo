@@ -13,7 +13,7 @@
 #  picture_updated_at   :datetime
 #  category_id          :integer
 #  sku_id               :integer
-#  calories             :integer          default(0)
+#  calories             :integer          default(0), not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

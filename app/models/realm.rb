@@ -2,11 +2,12 @@
 #
 # Table name: realms
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  slug       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  slug        :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  active_flag :boolean          default(FALSE)
 #
 
 class Realm < ActiveRecord::Base
@@ -14,6 +15,8 @@ class Realm < ActiveRecord::Base
 
   has_many :deliveries, through: :booking
   has_many :orders, through: :booking
+
+  has_many :users, foreign_key: :current_realm_id, class_name: 'User'
 
   before_validation :slugify
 

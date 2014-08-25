@@ -11,66 +11,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804083929) do
+ActiveRecord::Schema.define(version: 20140825093413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bookings", force: true do |t|
-    t.integer   "user_id",                                           null: false
-    t.decimal   "amount",        precision: 5, scale: 2,             null: false
-    t.integer   "bookable_id"
-    t.string    "bookable_type"
-    t.timestamp "created_at",    precision: 6
-    t.timestamp "updated_at",    precision: 6
-    t.string    "infotext"
-    t.integer   "booking_id"
-    t.integer   "realm_id",                              default: 1
+    t.integer  "user_id",                               null: false
+    t.decimal  "amount",        precision: 5, scale: 2, null: false
+    t.integer  "bookable_id"
+    t.string   "bookable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "infotext"
+    t.integer  "booking_id"
+    t.integer  "realm_id"
   end
 
   add_index "bookings", ["bookable_id", "bookable_type"], name: "bookable", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string    "title"
-    t.integer   "position"
-    t.timestamp "created_at", precision: 6
-    t.timestamp "updated_at", precision: 6
+    t.string   "title"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "deliveries", force: true do |t|
-    t.integer   "product_id",                                     null: false
-    t.integer   "quantity",                                       null: false
-    t.timestamp "created_at", precision: 6
-    t.timestamp "updated_at", precision: 6
-    t.integer   "realm_id",                           default: 1
-    t.decimal   "price",      precision: 7, scale: 2
+    t.integer  "product_id",                         null: false
+    t.integer  "quantity",                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "price",      precision: 7, scale: 2
+    t.integer  "realm_id"
   end
 
   create_table "order_items", force: true do |t|
-    t.integer   "amount"
-    t.integer   "order_id",                  null: false
-    t.integer   "delivery_id",               null: false
-    t.timestamp "created_at",  precision: 6
-    t.timestamp "updated_at",  precision: 6
+    t.integer  "amount"
+    t.integer  "order_id",    null: false
+    t.integer  "delivery_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "orders", force: true do |t|
-    t.timestamp "created_at", precision: 6
-    t.timestamp "updated_at", precision: 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "products", force: true do |t|
-    t.string    "name"
-    t.decimal   "size",                 precision: 5, scale: 2
-    t.timestamp "created_at",           precision: 6
-    t.timestamp "updated_at",           precision: 6
-    t.string    "picture_file_name"
-    t.string    "picture_content_type"
-    t.integer   "picture_file_size"
-    t.timestamp "picture_updated_at",   precision: 6
-    t.integer   "category_id"
-    t.integer   "sku_id"
-    t.integer   "calories",                                     default: 0, null: false
+    t.string   "name"
+    t.decimal  "size",                 precision: 5, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.integer  "category_id"
+    t.integer  "sku_id"
+    t.integer  "calories",                                     default: 0, null: false
   end
 
   create_table "realms", force: true do |t|
@@ -78,28 +78,29 @@ ActiveRecord::Schema.define(version: 20140804083929) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active_flag", default: true
+    t.boolean  "active_flag", default: false
   end
 
   create_table "skus", force: true do |t|
-    t.string    "title"
-    t.string    "short"
-    t.timestamp "created_at", precision: 6
-    t.timestamp "updated_at", precision: 6
+    t.string   "title"
+    t.string   "short"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
-    t.string    "email",                            default: "", null: false
-    t.string    "encrypted_password",               default: "", null: false
-    t.integer   "sign_in_count",                    default: 0,  null: false
-    t.timestamp "current_sign_in_at", precision: 6
-    t.timestamp "last_sign_in_at",    precision: 6
-    t.string    "current_sign_in_ip"
-    t.string    "last_sign_in_ip"
-    t.string    "first_name"
-    t.string    "last_name"
-    t.timestamp "created_at",         precision: 6
-    t.timestamp "updated_at",         precision: 6
+    t.string   "email",              default: "", null: false
+    t.string   "encrypted_password", default: "", null: false
+    t.integer  "sign_in_count",      default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "current_realm_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

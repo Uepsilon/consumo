@@ -6,11 +6,10 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.new
     @user = User.find(current_user.id)
 
+    @last_delivery = @user.deliveries.current_realm(@current_user.current_realm_id).order('created_at DESC').first.product.title unless @user.deliveries.current_realm(@current_user.current_realm_id).empty?
 
-    @last_delivery = @user.deliveries.current_realm(@current_realm.id).order('created_at DESC').first.product.title unless @user.deliveries.current_realm(@current_realm.id).empty?
-
-    unless @user.orders.current_realm(@current_realm.id).empty?
-      @last_order = @user.orders.current_realm(@current_realm.id).last.order_items.last.delivery.product.title
+    unless @user.orders.current_realm(@current_user.current_realm_id).empty?
+      @last_order = @user.orders.current_realm(@current_user.current_realm_id).last.order_items.last.delivery.product.title
     else
       @last_order = t 'order_item.last_order_empty'
     end
@@ -22,7 +21,7 @@ class OrderItemsController < ApplicationController
     OrderItem.transaction do
       @order_item = OrderItem.new order_item_params
       @order = @order_item.build_order
-      @order.build_booking user: current_user, realm: @current_realm
+      @order.build_booking user: current_user
 
       if @order_item.save
         redirect_to :new_order_item, notice: "Consumo sagt, #{@order_item.delivery.product.name} gebucht. Hai!"

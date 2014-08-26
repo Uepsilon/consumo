@@ -30,7 +30,7 @@ de:
       email: E-Mail
       password: Passwort
       remember_me: Anmeldung merken
-      submit: anmelden
+      submit: Anmelden
       title: Anmeldung
   navbar:
     booking: Buchungen

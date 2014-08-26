@@ -36,7 +36,7 @@
   %li.list-group-item
     = link_to users_path(q: {id_eq: current_user.id}) do
       = t 'order_item.balance'
-      - balance = @user.balance
+      - balance = @user.balance(@current_user.current_realm_id)
       %span.label.pull-right{class: "label-#{balance > 0 ? 'success' : 'danger'}"}
         = number_to_currency balance, presicion: 2
 

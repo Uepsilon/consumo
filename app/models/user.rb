@@ -35,16 +35,16 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def ordered_products
+  def ordered_products(current_realm_id)
     products = {}
-    self.order_items.current_realm(self.current_realm_id).each do |item|
+    self.order_items.current_realm(current_realm_id).each do |item|
       products[item.delivery.product.id] = {amount: 0, product_title: item.delivery.product.title} unless products[item.delivery.product.id].is_a? Hash
       products[item.delivery.product.id][:amount] += item.amount
     end
     products
   end
 
-  def balance
+  def balance(current_realm_id)
     sumable_bookings = self.bookings
     sumable_bookings = sumable_bookings.current_realm(current_realm_id)
     sumable_bookings.sum(:amount)

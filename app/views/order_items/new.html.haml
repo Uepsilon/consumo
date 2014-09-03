@@ -44,7 +44,7 @@
 = form_for @order_item, url: @order_item, html:{ class:'form-horizontal' } do |f|
   = f.hidden_field :amount, class: 'form-control', value: 1
   = f.hidden_field :delivery_id, class: 'form-control'
-  - Category.by_position.all.each do |category|
+  - Category.products_for_realm(@current_user.current_realm_id).by_position.all.each do |category|
     - if category.products.current_realm(@current_user.current_realm_id).any?
       .panel.panel-info
         .panel-heading

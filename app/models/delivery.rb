@@ -15,11 +15,12 @@ class Delivery < ActiveRecord::Base
   belongs_to  :product
 
   has_one     :booking,  as: :bookable,       dependent: :destroy
-  has_one     :user,     through: :booking
   belongs_to  :realm
 
   has_many    :order_items, dependent: :destroy
   has_many    :orders,  through: :order_items, dependent: :destroy
+
+  delegate    :user, to: :booking
 
   validates   :product_id, presence: true
   validates   :quantity, presence: true, numericality: true
@@ -42,6 +43,6 @@ class Delivery < ActiveRecord::Base
   private
 
   def ensure_realm
-    self.realm = self.user.current_realm_id unless self.realm.present?
+    self.realm = self.user.current_realm unless self.realm.present?
   end
 end

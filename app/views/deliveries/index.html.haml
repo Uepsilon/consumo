@@ -16,13 +16,13 @@
       .row
         .col-xs-4
           .form-group
-            = f.select :user_id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @filters.user_id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
+            = f.select :booking_user_id_eq, options_from_collection_for_select(User.order(first_name: :asc).all,"id","name", @filters.booking_user_id_eq), {include_blank: "Benutzer..."}, {class: "form-control", onchange: "this.form.submit();"}
         .col-xs-4
           .form-group
             = f.select :created_at_eq, options_for_select(@periods, @period_value), {include_blank: "Zeitraum..."}, {class: "form-control", onchange: "this.form.submit();"}
         .col-xs-12
           .input-group
-            = f.text_field :user_first_name_or_user_last_name_cont, placeholder: 'Suche', class:'form-control'
+            = f.text_field :booking_user_first_name_or_booking_user_last_name_or_product_name_cont, placeholder: 'Suche', class:'form-control'
             %span.input-group-btn
               %button.btn.btn-default{type: "submit"}
                 %span.glyphicon.glyphicon-search

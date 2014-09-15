@@ -77,3 +77,16 @@ body {
     -webkit-transform:rotate(0deg);
     transform:rotate(0deg);
 }
+
+#order-items-overview {
+  form {
+    float: left;
+
+    button {
+      padding:0;
+      min-width:232px;
+    }
+  }
+
+
+}

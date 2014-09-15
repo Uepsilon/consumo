@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe  'authentication' do
+describe  'authentication' do
   it 'returns 503 if no Realm is created' do
     password = 'Test1234'
     user = create(:user, password: password)
@@ -15,19 +15,35 @@ RSpec.describe  'authentication' do
     expect(page.status_code).to eq 503
   end
 
-  it 'signs user in if registered' do
-    create(:realm)
+  context 'with existing realms' do
+    let!(:realm) { create(:realm) }
 
-    password = 'Test1234'
-    user = create(:user, password: password)
-    visit new_user_session_path
+    it 'does not sign user in if not valid' do
+      password = 'Test1234'
+      user = create(:user, password: 'Hallo Welt')
+      visit new_user_session_path
 
-    within('form#new_user') do
-      fill_in 'user_email',    with: user.email
-      fill_in 'user_password', with: password
+      within('form#new_user') do
+        fill_in 'user_email',    with: user.email
+        fill_in 'user_password', with: password
+      end
+      click_button 'Anmelden'
+
+      expect(page).to have_content 'E-Mail-Adresse oder Passwort ungültig.'
     end
-    click_button 'Anmelden'
 
-    expect(page).to have_content 'Abmelden'
+    it 'signs user in if valid' do
+      password = 'Test1234'
+      user = create(:user, password: password)
+      visit new_user_session_path
+
+      within('form#new_user') do
+        fill_in 'user_email',    with: user.email
+        fill_in 'user_password', with: password
+      end
+      click_button 'Anmelden'
+
+      expect(page).to have_content 'Abmelden'
+    end
   end
 end

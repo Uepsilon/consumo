@@ -29,6 +29,10 @@ class Product < ActiveRecord::Base
       path:  "/images/:rails_env/products/:id/:style.:extension",
       url:  ":s3_domain_url",
       styles:  { medium:  "200x200>", thumb:  "100x100>" }
+  elsif Rails.env.testing?
+    has_attached_file :picture,
+      styles:  { medium:  "200x200>", thumb:  "100x100>" },
+      path: "public/system/testing/products/:id/:style.:extension"
   else
     has_attached_file :picture,
       styles:  { medium:  "200x200>", thumb:  "100x100>" }
@@ -42,8 +46,7 @@ class Product < ActiveRecord::Base
 
   self.per_page = 10
 
-  validates_attachment_presence     :picture
-  validates_attachment_content_type :picture, content_type:  /\Aimage\/.*\Z/
+  validates_attachment :picture, presence: true, content_type: {content_type:  /\Aimage\/.*\Z/}
 
   validates :name,    presence: true
   validates :size,    presence: true, numericality: true

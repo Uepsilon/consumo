@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.1'
 
-gem 'rails'
+gem 'rails', '4.1.6'
 gem 'devise'
 gem 'paperclip'
 gem 'therubyracer'
@@ -59,6 +59,7 @@ group :test do
   gem 'capybara-screenshot'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'launchy'
 end
 
 group :development, :test do

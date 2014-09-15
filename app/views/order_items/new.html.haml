@@ -4,7 +4,7 @@
 
 %ul#dashboard.list-group{style: 'max-width:500px;'}
   %li.list-group-item.list-group-item-info
-    %strong= @user.name
+    %strong= @current_user.name
     %span.glyphicon.glyphicon-stats
   - if not @last_delivery.nil?
     %li.list-group-item
@@ -16,7 +16,7 @@
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.orders'
       %span.label.label-info.pull-right
-        = @user.orders.current_realm(@current_user.current_realm_id).today.count
+        = @current_user.orders.current_realm(@current_user.current_realm_id).today.count
   %li.list-group-item
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.last_order'

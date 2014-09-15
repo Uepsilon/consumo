@@ -4,17 +4,15 @@ class OrderItemsController < ApplicationController
 
   def new
     @order_item = OrderItem.new
-    @user = User.find(current_user.id)
+    @last_delivery = current_user.deliveries.current_realm(current_user.current_realm_id).order('created_at DESC').first.product.title unless current_user.deliveries.current_realm(current_user.current_realm_id).empty?
 
-    @last_delivery = @user.deliveries.current_realm(@current_user.current_realm_id).order('created_at DESC').first.product.title unless @user.deliveries.current_realm(@current_user.current_realm_id).empty?
-
-    unless @user.orders.current_realm(@current_user.current_realm_id).empty?
-      @last_order = @user.orders.current_realm(@current_user.current_realm_id).last.order_items.last.delivery.product.title
+    unless current_user.orders.current_realm(current_user.current_realm_id).empty?
+      @last_order = current_user.orders.current_realm(current_user.current_realm_id).last.order_items.last.delivery.product.title
     else
       @last_order = t 'order_item.last_order_empty'
     end
-    @bookings = @user.bookings.all
-    @bookings_today = @user.bookings.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @bookings = current_user.bookings.all
+    @bookings_today = current_user.bookings.where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
   def create

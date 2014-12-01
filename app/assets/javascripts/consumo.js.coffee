@@ -34,3 +34,28 @@ window.toggle_stats = ->
       $('#dashboard').find('.toggle_icon').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down')
   else
     $('#dashboard').find('.toggle_icon').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up')
+
+window.product_quicksearch = ->
+  $('.order_item_name').each (index,element) ->
+
+    keyword = $('#quicksearch')[0].value.trim();
+    sub_content = $(element).html().toLowerCase();
+
+    if(keyword == '')
+      $(element).parent().parent().show()
+    else 
+      if(sub_content.search(keyword) > -1 ) 
+        $(element).parent().parent().show()
+      else
+        $(element).parent().parent().hide()
+
+  $('.product_group').each (index,element) ->
+    if ($('#quicksearch')[0].value.trim() == '')
+      $(element).show()
+    else
+      if($(element).find('.inline-block:visible').length > 0)
+        $(element).show()
+      else
+        $(element).hide()
+
+

@@ -41,11 +41,14 @@
       - balance = @current_user.balance(@current_user.current_realm_id)
       %span.label.pull-right{class: "label-#{balance > 0 ? 'success' : 'danger'}"}
         = number_to_currency balance, presicion: 2
+  %li.list-group-item    
+    %input#quicksearch.form-control{placeholder: 'Produkt Schnellsuche', onkeyup: 'window.product_quicksearch(this.value)'}
+
 
 #order-items-overview
   - Category.products_for_realm(@current_user.current_realm_id).by_position.each do |category|
     - if category.products.current_realm(@current_user.current_realm_id).any?
-      .panel.panel-info
+      .panel.panel-info.product_group
         .panel-heading{style: "height:40px", onclick: "window.toggle_order_item(this)"}
           %h2.panel-title.pull-left= category.title
           %span.toggle_icon.glyphicon.glyphicon-chevron-up.pull-right
@@ -56,8 +59,8 @@
                 = f.hidden_field :amount, class: 'form-control', value: 1
                 = f.hidden_field :delivery_id, class: 'form-control', value: product.current_delivery(@current_user.current_realm_id).id
                 .inline-block{style: "margin: 15px"}
-                  %button.btn.btn-default.panel.panel-default
-                    .panel-heading
+                  %button.order_item.btn.btn-default.panel.panel-default
+                    .panel-heading.order_item_name
                       = product.name
                     .panel-body
                       = image_tag product.picture.url(:medium), style: "max-height:133px;", alt: product.name, title: product.name

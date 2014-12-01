@@ -3,37 +3,39 @@
     window.sumo_action();
 
 %ul#dashboard.list-group{style: 'max-width:500px;'}
-  %li.list-group-item.list-group-item-info
-    %strong= @current_user.name
-    %span.glyphicon.glyphicon-stats
+  %li.list-group-item.list-group-item-info{onclick: "window.toggle_stats()"}
+    %span
+      %strong= @current_user.name
+      %span.glyphicon.glyphicon-stats
+    %span.toggle_icon.glyphicon.glyphicon-chevron-up.pull-right
   - if not @last_delivery.nil?
-    %li.list-group-item
+    %li.list-group-item.stats
       = link_to deliveries_path(q: {user_id_eq: current_user.id}) do
         = t 'order_item.last_delivery'
         %span.label.label-info.pull-right
           = @last_delivery
-  %li.list-group-item
+  %li.list-group-item.stats
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.orders'
       %span.label.label-info.pull-right
         = @current_user.orders.current_realm(@current_user.current_realm_id).today.count
-  %li.list-group-item
+  %li.list-group-item.stats
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.last_order'
       %span.label.label-info.pull-right
         = @last_order
-  %li.list-group-item
+  %li.list-group-item.stats
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.calories_amount'
       %span.label.label-info.pull-right
         = current_user.todays_calories
         = t'products.calories_short'
-  %li.list-group-item
+  %li.list-group-item.stats
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.orders_amount'
       %span.label.label-warning.pull-right
         = number_to_currency @current_user.orders.current_realm(@current_user.current_realm_id).today.sum('bookings.amount'), presicion: 2
-  %li.list-group-item
+  %li.list-group-item.stats
     = link_to users_path(q: {id_eq: current_user.id}) do
       = t 'order_item.balance'
       - balance = @current_user.balance(@current_user.current_realm_id)
@@ -44,8 +46,9 @@
   - Category.products_for_realm(@current_user.current_realm_id).by_position.each do |category|
     - if category.products.current_realm(@current_user.current_realm_id).any?
       .panel.panel-info
-        .panel-heading
-          %h2.panel-title= category.title
+        .panel-heading{style: "height:40px", onclick: "window.toggle_order_item(this)"}
+          %h2.panel-title.pull-left= category.title
+          %span.toggle_icon.glyphicon.glyphicon-chevron-up.pull-right
         .panel-body
           - category.products.order('name ASC').each do |product|
             - if product.remaining(@current_user.current_realm_id) > 0

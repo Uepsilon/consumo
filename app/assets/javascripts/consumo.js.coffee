@@ -20,3 +20,17 @@ window.sumo_action = ->
       return
   return
 
+window.toggle_order_item = (element) ->
+  $(element).next().toggle null, ->
+    sub_element = $(element).children('.toggle_icon')
+    if $(sub_element).hasClass('glyphicon-chevron-up')
+      sub_element.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down')
+    else
+      sub_element.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up')
+
+window.toggle_stats = ->
+  $('#dashboard').children('.stats').toggle()
+  if $('#dashboard').find('.toggle_icon').hasClass('glyphicon-chevron-up')
+      $('#dashboard').find('.toggle_icon').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down')
+  else
+    $('#dashboard').find('.toggle_icon').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up')

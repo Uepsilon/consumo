@@ -24,6 +24,16 @@ body {
  display: inline-block;
 }
 
+#order-items-overview .new_order_item .panel-body {
+  height: 180px;
+}
+
+#order-items-overview .new_order_item .panel-heading {
+  width: 230px;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+}
+
 .login-form {
  max-width: 500px;
  margin-top: auto;

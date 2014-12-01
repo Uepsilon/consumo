@@ -36,12 +36,13 @@ window.toggle_stats = ->
     $('#dashboard').find('.toggle_icon').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up')
 
 window.product_quicksearch = ->
+
   $('.order_item_name').each (index,element) ->
 
-    keyword = $('#quicksearch')[0].value.trim();
+    keyword = $('#quicksearch').val().toLowerCase().trim();
     sub_content = $(element).html().toLowerCase();
 
-    if(keyword == '')
+    if(!keyword)
       $(element).parent().parent().show()
     else 
       if(sub_content.search(keyword) > -1 ) 
@@ -50,7 +51,7 @@ window.product_quicksearch = ->
         $(element).parent().parent().hide()
 
   $('.product_group').each (index,element) ->
-    if ($('#quicksearch')[0].value.trim() == '')
+    if (!$('#quicksearch').val().trim())
       $(element).show()
     else
       if($(element).find('.inline-block:visible').length > 0)

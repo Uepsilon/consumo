@@ -42,7 +42,7 @@
       %span.label.pull-right{class: "label-#{balance > 0 ? 'success' : 'danger'}"}
         = number_to_currency balance, presicion: 2
   %li.list-group-item    
-    %input#quicksearch.form-control{placeholder: 'Produkt Schnellsuche', onkeyup: 'window.product_quicksearch(this.value)'}
+    %input#quicksearch.form-control{type:'search', onblur: 'window.product_quicksearch()', onkeypress: 'window.product_quicksearch()', placeholder: 'Produkt Schnellsuche'}
 
 
 #order-items-overview

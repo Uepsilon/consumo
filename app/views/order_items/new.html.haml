@@ -55,11 +55,11 @@
                 .inline-block{style: "margin: 15px"}
                   %button.btn.btn-default.panel.panel-default
                     .panel-heading
-                      = product.title
+                      = product.name
                     .panel-body
                       = image_tag product.picture.url(:medium), style: "max-height:133px;", alt: product.name, title: product.name
                     .panel-footer
                       = remaining_label(product, @current_user.current_realm)
-                      .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery(@current_user.current_realm_id).unit_price, precision: 2}"
+                      .price= "#{t "delivery.price"}: #{number_to_currency product.current_delivery(@current_user.current_realm_id).unit_price, precision: 2} (#{product.size.to_s.gsub!('.', ',')}#{product.sku.short})"
                       .calories
                         = "#{t "products.calories"}: #{product.calories} #{t 'products.calories_short'}"

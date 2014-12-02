@@ -36,9 +36,7 @@ window.toggle_stats = ->
     $('#dashboard').find('.toggle_icon').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up')
 
 window.product_quicksearch = ->
-
   $('.order_item_name').each (index,element) ->
-
     keyword = $('#quicksearch').val().toLowerCase().trim();
     sub_content = $(element).html().toLowerCase();
 

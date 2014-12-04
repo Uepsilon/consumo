@@ -16,15 +16,22 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    OrderItem.transaction do
-      @order_item = OrderItem.new order_item_params
-      @order = @order_item.build_order
-      @order.build_booking user: current_user
+    # dispo limit of -5 €
+    current_budget = @current_user.balance(@current_user.current_realm_id)
 
-      if @order_item.save
-        redirect_to :new_order_item, notice: "Consumo sagt, #{@order_item.delivery.product.name} gebucht. Hai!"
-      else
-        redirect_to :new_order_item, alert: 'Consumo sagt, nix gut.'
+    if current_budget < -5
+      redirect_to :new_order_item, alert: 'Consumo sagt, dein Guthaben ist zu niedrig!'
+    else
+      OrderItem.transaction do
+        @order_item = OrderItem.new order_item_params
+        @order = @order_item.build_order
+        @order.build_booking user: current_user
+
+        if @order_item.save
+          redirect_to :new_order_item, notice: "Consumo sagt, #{@order_item.delivery.product.name} gebucht. Hai!"
+        else
+          redirect_to :new_order_item, alert: 'Consumo sagt, nix gut.'
+        end
       end
     end
   end

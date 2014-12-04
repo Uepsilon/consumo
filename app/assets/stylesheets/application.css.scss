@@ -68,6 +68,15 @@ body {
   font-size:60px;
 }
 
+#sumo_no {
+  display: none;
+  position:absolute;
+  width:300px;
+  height:300px;
+  font-size:60px;
+  border-color:white;
+}
+
 .go {
     -webkit-transition: 0.5s;
     -moz-transition: 0.5s;

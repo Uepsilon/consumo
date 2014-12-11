@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20141105102441) do
     t.integer  "quantity",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "price",      precision: 7, scale: 2
     t.integer  "realm_id"
+    t.decimal  "price",      precision: 7, scale: 2
   end
 
   create_table "order_items", force: true do |t|
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20141105102441) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active_flag", default: false
+    t.boolean  "active_flag", default: true
   end
 
   create_table "skus", force: true do |t|

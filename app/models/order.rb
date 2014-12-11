@@ -20,18 +20,11 @@ class Order < ActiveRecord::Base
 
   before_save :calculate_order_amount
 
-  def update_amount(amount)
-    self.booking.amount -= amount
-    self.booking.save!
-  end
-
   private
 
   def calculate_order_amount
-    order_item_prices = self.order_items.collect do |order_item|
-      order_item.amount.to_f * order_item.delivery.unit_price.to_f
-    end
+    order_items_total = order_items.collect(&:total).sum
 
-    self.booking.amount = 0 - order_item_prices.sum
+    self.booking.amount = 0 - order_items_total
   end
 end

@@ -1,18 +1,13 @@
 class OrderItemsController < ApplicationController
-
   rescue_from OrderItem::NotEnoughInventory, with: :not_enough_inventory
 
   def new
     @order_item = OrderItem.new
-    @last_delivery = current_user.deliveries.current_realm(current_user.current_realm_id).order('created_at DESC').first.product.title unless current_user.deliveries.current_realm(current_user.current_realm_id).empty?
+    @last_delivery = Delivery.last_delivery current_user
 
-    unless current_user.orders.current_realm(current_user.current_realm_id).empty?
-      @last_order = current_user.orders.current_realm(current_user.current_realm_id).last.order_items.last.delivery.product.title
-    else
-      @last_order = t 'order_item.last_order_empty'
-    end
+    @last_order = current_user.last_ordered_product
     @bookings = current_user.bookings.all
-    @bookings_today = current_user.bookings.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @bookings_today = current_user.bookings.where('created_at >= ?', Time.zone.now.beginning_of_day)
   end
 
   def create

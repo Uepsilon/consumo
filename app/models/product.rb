@@ -42,7 +42,7 @@ class Product < ActiveRecord::Base
   belongs_to :sku
   has_many :deliveries
 
-  scope :current_realm, -> (realm_id) { joins(:deliveries).where('deliveries.realm_id = ?', realm_id) }
+  scope :by_realm, -> (realm_id) { joins(:deliveries).where('deliveries.realm_id = ?', realm_id) }
 
   self.per_page = 10
 
@@ -61,11 +61,11 @@ class Product < ActiveRecord::Base
   end
 
   def remaining(realm_id)
-    self.deliveries.current_realm(realm_id).collect{|d| d.remaining}.sum
+    self.deliveries.by_realm(realm_id).collect{|d| d.remaining}.sum
   end
 
   def current_delivery(realm_id)
-    self.deliveries.current_realm(realm_id).order(:created_at).each do |delivery|
+    self.deliveries.by_realm(realm_id).order(:created_at).each do |delivery|
       return delivery if delivery.remaining > 0
     end
   end

@@ -18,7 +18,7 @@
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.orders'
       %span.label.label-info.pull-right
-        = @current_user.orders.current_realm(@current_user.current_realm_id).today.count
+        = @current_user.orders.by_realm(@current_user.current_realm_id).today.count
   %li.list-group-item.stats
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.last_order'
@@ -34,20 +34,20 @@
     = link_to orders_path(q: {user_id_eq: current_user.id}) do
       = t 'order_item.orders_amount'
       %span.label.label-warning.pull-right
-        = number_to_currency @current_user.orders.current_realm(@current_user.current_realm_id).today.sum('bookings.amount'), presicion: 2
+        = number_to_currency @current_user.orders.by_realm(@current_user.current_realm_id).today.sum('bookings.amount'), presicion: 2
   %li.list-group-item.stats
     = link_to users_path(q: {id_eq: current_user.id}) do
       = t 'order_item.balance'
       - balance = @current_user.balance(@current_user.current_realm_id)
       %span.label.pull-right{class: "label-#{balance > 0 ? 'success' : 'danger'}"}
         = number_to_currency balance, presicion: 2
-  %li.list-group-item    
+  %li.list-group-item
     %input#quicksearch.form-control{type:'search', onblur: 'window.product_quicksearch()', onkeyup: 'window.product_quicksearch()', placeholder: 'Produkt Schnellsuche'}
 
 
 #order-items-overview
   - Category.products_for_realm(@current_user.current_realm_id).by_position.each do |category|
-    - if category.products.current_realm(@current_user.current_realm_id).any?
+    - if category.products.by_realm(@current_user.current_realm_id).any?
       .panel.panel-info.product_group
         .panel-heading{style: "height:40px", onclick: "window.toggle_order_item(this)"}
           %h2.panel-title.pull-left= category.title

@@ -23,14 +23,14 @@ class OrderItem < ActiveRecord::Base
 
   scope :by_realm, -> (current_realm_id) { joins(order: :booking).where('bookings.realm_id = ?', current_realm_id) }
 
+  def total
+    amount * delivery.unit_price
+  end
+
   private
 
   def validate_order_item_amount
     fail NotEnoughInventory if amount > delivery.remaining
-  end
-
-  def total
-    amount * delivery.unit_price
   end
 
   def update_order_amount

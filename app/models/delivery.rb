@@ -30,11 +30,12 @@ class Delivery < ActiveRecord::Base
   before_validation :ensure_realm
   scope :current_realm, -> (realm_id) { where(realm_id: realm_id) }
 
-  self.per_page = 10
   before_save :correct_delivery_value
 
+  per_page = 10
+
   def remaining
-    quantity - self.orders.sum(:amount)
+    quantity - orders.sum(:amount)
   end
 
   def unit_price
@@ -47,7 +48,7 @@ class Delivery < ActiveRecord::Base
   private
 
   def ensure_realm
-    self.realm = self.user.current_realm unless self.realm.present?
+    self.realm = user.current_realm unless realm.present?
   end
 
   def correct_delivery_value

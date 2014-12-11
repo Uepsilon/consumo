@@ -38,16 +38,16 @@ class Booking < ActiveRecord::Base
   end
 
   def booking_relation
-    not self.receiver_id.nil?
+    receiver_id.present?
   end
 
   private
 
   def ensure_realm
-    self.realm = self.user.current_realm unless self.realm.present?
+    self.realm = user.current_realm unless realm.present?
   end
 
   def relate_booking
-    self.build_related_booking user: User.find(self.receiver_id), amount: (self.amount.to_f * -1.to_f), infotext: self.infotext
+    build_related_booking user: User.find(receiver_id), amount: (amount * -1), infotext: infotext
   end
 end

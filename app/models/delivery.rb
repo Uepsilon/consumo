@@ -45,15 +45,6 @@ class Delivery < ActiveRecord::Base
     (precise_price * 100).round(2).ceil.to_f / 100
   end
 
-  def self.last_delivery(user)
-    realm_id = user.current_realm_id
-    joins(booking: :user)
-      .where('users.id = ?', user.id)
-      .where(realm_id: realm_id)
-      .order(created_at: :desc)
-      .first.product.title
-  end
-
   private
 
   def ensure_realm

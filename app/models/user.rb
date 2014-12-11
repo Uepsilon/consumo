@@ -55,8 +55,13 @@ class User < ActiveRecord::Base
   end
 
   def last_ordered_product
-    I18n.t('order_item.last_order_empty') unless orders.present?
+    return I18n.t('order_item.last_order_empty') unless orders.present?
     last_order = orders.order(created_at: :desc).last
     last_order.order_items.order('RANDOM()').first.delivery.product.title
+  end
+
+  def last_delivery
+    return I18n.t('order_item.last_delivery_empty') unless deliveries.by_realm(current_realm_id).present?
+    deliveries.by_realm(current_realm_id).order(created_at: :desc).last.product.title
   end
 end

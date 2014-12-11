@@ -15,14 +15,14 @@
 #
 
 class Booking < ActiveRecord::Base
-  belongs_to  :user
-  belongs_to  :realm
-  belongs_to  :bookable, polymorphic: true
+  belongs_to :user
+  belongs_to :realm
+  belongs_to :bookable, polymorphic: true
 
-  has_one     :related_booking, class_name: "Booking", foreign_key: :booking_id, dependent: :destroy
-  belongs_to  :initial_booking, class_name: "Booking", foreign_key: :booking_id
+  has_one :related_booking, class_name: 'Booking', foreign_key: :booking_id, dependent: :destroy
+  belongs_to :initial_booking, class_name: 'Booking', foreign_key: :booking_id
 
-  scope :current_realm, -> (realm_id) { where(realm_id: realm_id) }
+  scope :by_realm, -> (realm_id) { where(realm_id: realm_id) }
 
   validates :amount, presence: true, numericality: true
 

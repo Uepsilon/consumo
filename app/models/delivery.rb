@@ -12,27 +12,27 @@
 #
 
 class Delivery < ActiveRecord::Base
-  belongs_to  :product
+  belongs_to :product
 
-  has_one     :booking,  as: :bookable,       dependent: :destroy
-  belongs_to  :realm
+  has_one :booking, as: :bookable, dependent: :destroy
+  belongs_to :realm
 
-  has_many    :order_items, dependent: :destroy
-  has_many    :orders,  through: :order_items
+  has_many :order_items, dependent: :destroy
+  has_many :orders,  through: :order_items
 
-  delegate    :user, to: :booking
+  delegate :user, to: :booking
 
-  validates   :product_id, presence: true
-  validates   :quantity, presence: true, numericality: true
-  validates   :price, presence: true, numericality: true
-  validates   :realm, presence: true
+  validates :product_id, presence: true
+  validates :quantity, presence: true, numericality: true
+  validates :price, presence: true, numericality: true
+  validates :realm, presence: true
 
   before_validation :ensure_realm
-  scope :current_realm, -> (realm_id) { where(realm_id: realm_id) }
+  scope :by_realm, -> (realm_id) { where(realm_id: realm_id) }
 
   before_save :correct_delivery_value
 
-  per_page = 10
+  self.per_page = 10
 
   def remaining
     quantity - orders.sum(:amount)
@@ -43,6 +43,15 @@ class Delivery < ActiveRecord::Base
 
     # now round to second position
     (precise_price * 100).round(2).ceil.to_f / 100
+  end
+
+  def self.last_delivery(user)
+    realm_id = user.current_realm_id
+    joins(booking: :user)
+      .where('users.id = ?', user.id)
+      .where(realm_id: realm_id)
+      .order(created_at: :desc)
+      .first.product.title
   end
 
   private

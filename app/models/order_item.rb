@@ -11,22 +11,22 @@
 #
 
 class OrderItem < ActiveRecord::Base
-  belongs_to  :order, dependent: :destroy
-  belongs_to  :delivery, dependent: :destroy
-  delegate    :user, to: :order
-  delegate    :booking, to: :order
+  belongs_to :order
+  belongs_to :delivery
+  delegate :user, to: :order
+  delegate :booking, to: :order
 
   validates :amount, presence: true, numericality: true
 
   before_validation :validate_order_item_amount
   before_save :update_order_amount
 
-  scope :current_realm, -> (current_realm_id) { joins(order: :booking).where('bookings.realm_id = ?', current_realm_id) }
+  scope :by_realm, -> (current_realm_id) { joins(order: :booking).where('bookings.realm_id = ?', current_realm_id) }
 
   private
 
   def validate_order_item_amount
-    raise NotEnoughInventory if amount > delivery.remaining
+    fail NotEnoughInventory if amount > delivery.remaining
   end
 
   def total
@@ -38,4 +38,4 @@ class OrderItem < ActiveRecord::Base
   end
 end
 
-class OrderItem::NotEnoughInventory < StandardError ; end
+class OrderItem::NotEnoughInventory < StandardError; end

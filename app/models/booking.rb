@@ -33,6 +33,10 @@ class Booking < ActiveRecord::Base
 
   self.per_page = 10
 
+  def update_amount(amount)
+    update amount: self.amount - amount
+  end
+
   def booking_relation
     not self.receiver_id.nil?
   end

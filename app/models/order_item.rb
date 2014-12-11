@@ -11,9 +11,10 @@
 #
 
 class OrderItem < ActiveRecord::Base
-  belongs_to  :order
-  belongs_to  :delivery
+  belongs_to  :order, dependent: :destroy
+  belongs_to  :delivery, dependent: :destroy
   delegate    :user, to: :order
+  delegate    :booking, to: :order
 
   validates :amount, presence: true, numericality: true
 
@@ -28,8 +29,12 @@ class OrderItem < ActiveRecord::Base
     raise NotEnoughInventory if amount > delivery.remaining
   end
 
+  def total
+    amount * delivery.unit_price
+  end
+
   def update_order_amount
-    self.order.update_amount self.amount.to_f * self.delivery.unit_price.to_f
+    booking.update_amount total
   end
 end
 

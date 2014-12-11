@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20141105102441) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active_flag", default: false
+    t.boolean  "active_flag", default: true
   end
 
   create_table "skus", force: true do |t|

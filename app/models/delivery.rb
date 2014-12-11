@@ -18,7 +18,7 @@ class Delivery < ActiveRecord::Base
   belongs_to  :realm
 
   has_many    :order_items, dependent: :destroy
-  has_many    :orders,  through: :order_items, dependent: :destroy
+  has_many    :orders,  through: :order_items
 
   delegate    :user, to: :booking
 
@@ -31,18 +31,26 @@ class Delivery < ActiveRecord::Base
   scope :current_realm, -> (realm_id) { where(realm_id: realm_id) }
 
   self.per_page = 10
+  before_save :correct_delivery_value
 
   def remaining
     quantity - self.orders.sum(:amount)
   end
 
   def unit_price
-    price.to_f / quantity
+    precise_price = (price.to_f / quantity)
+
+    # now round to second position
+    (precise_price * 100).round(2).ceil.to_f / 100
   end
 
   private
 
   def ensure_realm
     self.realm = self.user.current_realm unless self.realm.present?
+  end
+
+  def correct_delivery_value
+    self.price = unit_price * quantity
   end
 end

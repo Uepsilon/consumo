@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   private
 
   def filter_and_pagination(model_class)
-    @filters = model_class.order('created_at DESC').current_realm(current_user.current_realm_id).search(params[:q])
+    @filters = model_class.order('created_at DESC').by_realm(current_user.current_realm_id).search(params[:q])
     result = @filters.result(distinct: true).paginate(page: params[:page])
     result = result.send(created_at_eq) unless created_at_eq.blank?
 

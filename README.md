@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/Uepsilon/consumo.png)](https://codeclimate.com/github/Uepsilon/consumo)
+[![Dependency Status](https://gemnasium.com/Uepsilon/consumo.svg)](https://gemnasium.com/Uepsilon/consumo)
 # Consumo
 Productmanagement and -tracking-Tool.
 

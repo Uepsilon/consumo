@@ -59,6 +59,7 @@ de:
       title: Buchen
     last_delivery: Letzte Lieferung
     last_order: Letzte Bestellung
+    last_delivery_empty: n/a
     last_order_empty: n/a
     logged_in_as: 'Angemeldet: '
     orders: Heutige Bestellungen

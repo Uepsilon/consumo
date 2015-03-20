@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.1.1'
+ruby '2.1.5'
 
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.8'
 gem 'devise'
 gem 'paperclip'
 gem 'therubyracer'
@@ -50,6 +50,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'annotate'
+  gem 'rubocop'
 end
 
 group :test do

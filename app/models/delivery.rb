@@ -12,37 +12,46 @@
 #
 
 class Delivery < ActiveRecord::Base
-  belongs_to  :product
+  belongs_to :product
 
-  has_one     :booking,  as: :bookable,       dependent: :destroy
-  belongs_to  :realm
+  has_one :booking, as: :bookable, dependent: :destroy
+  belongs_to :realm
 
-  has_many    :order_items, dependent: :destroy
-  has_many    :orders,  through: :order_items, dependent: :destroy
+  has_many :order_items, dependent: :destroy
+  has_many :orders,  through: :order_items
 
-  delegate    :user, to: :booking
+  delegate :user, to: :booking
 
-  validates   :product_id, presence: true
-  validates   :quantity, presence: true, numericality: true
-  validates   :price, presence: true, numericality: true
-  validates   :realm, presence: true
+  validates :product_id, presence: true
+  validates :quantity, presence: true, numericality: true
+  validates :price, presence: true, numericality: true
+  validates :realm, presence: true
 
   before_validation :ensure_realm
-  scope :current_realm, -> (realm_id) { where(realm_id: realm_id) }
+  scope :by_realm, -> (realm_id) { where(realm_id: realm_id) }
+
+  before_save :correct_delivery_value
 
   self.per_page = 10
 
   def remaining
-    quantity - self.orders.sum(:amount)
+    quantity - orders.sum(:amount)
   end
 
   def unit_price
-    price.to_f / quantity
+    precise_price = (price.to_f / quantity)
+
+    # now round to second position
+    (precise_price * 100).round(2).ceil.to_f / 100
   end
 
   private
 
   def ensure_realm
-    self.realm = self.user.current_realm unless self.realm.present?
+    self.realm = user.current_realm unless realm.present?
+  end
+
+  def correct_delivery_value
+    self.price = unit_price * quantity
   end
 end
